@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel Admin — Nexo Music Roblox</title>
+<style>
+:root{--roxo:#7c3aed;--gradiente:linear-gradient(120deg,#7c3aed 0%,#c026d3 35%,#ec4899 65%,#f97316 100%);--bg:#f5f3ff;--texto:#1a1a2e;--texto-suave:#6b7280;--borda:#ede9fe;--radius:16px;--anim:0.2s ease}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter','Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--texto);min-height:100vh;line-height:1.5}
+.tela-login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:var(--gradiente)}
+.login-card{background:#fff;border-radius:24px;padding:40px;width:100%;max-width:420px;box-shadow:0 30px 60px rgba(0,0,0,0.25)}
+.login-logo{font-size:1.8rem;font-weight:900;text-align:center;margin-bottom:8px;letter-spacing:-0.5px}
+.login-logo span{background:var(--gradiente);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.login-sub{text-align:center;color:var(--texto-suave);font-size:0.9rem;margin-bottom:32px}
+.login-label{display:block;font-size:0.85rem;font-weight:700;margin-bottom:6px}
+.login-input{width:100%;padding:14px 16px;border:2px solid var(--borda);border-radius:12px;font-size:1rem;font-family:inherit;margin-bottom:16px;transition:all var(--anim)}
+.login-input:focus{outline:none;border-color:var(--roxo);box-shadow:0 0 0 4px rgba(124,58,237,0.1)}
+.login-btn{width:100%;padding:14px;background:var(--gradiente);color:#fff;border:none;border-radius:12px;font-size:1rem;font-weight:800;cursor:pointer;transition:all var(--anim);font-family:inherit}
+.login-btn:hover{opacity:0.92;transform:translateY(-2px)}
+.login-btn:disabled{opacity:0.6;cursor:not-allowed;transform:none}
+.login-msg{padding:12px;border-radius:10px;font-size:0.85rem;margin-top:16px;display:none}
+.login-msg.erro{background:#fee2e2;color:#991b1b;display:block}
+.login-msg.ok{background:#d1fae5;color:#065f46;display:block}
+.tela-painel{display:none;min-height:100vh}
+.tela-painel.ativa{display:block}
+.admin-topo{background:#fff;border-bottom:1px solid var(--borda);padding:16px 32px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100}
+.admin-logo{font-size:1.2rem;font-weight:900;letter-spacing:-0.3px}
+.admin-logo span{background:var(--gradiente);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.admin-user{display:flex;align-items:center;gap:12px;font-size:0.9rem;color:var(--texto-suave)}
+.btn-sair{padding:8px 16px;border-radius:10px;background:#fee2e2;color:#991b1b;border:none;font-weight:700;cursor:pointer;font-family:inherit;font-size:0.85rem;transition:all var(--anim)}
+.btn-sair:hover{background:#fecaca}
+.admin-layout{display:grid;grid-template-columns:240px 1fr;min-height:calc(100vh - 62px)}
+.admin-sidebar{background:#fff;border-right:1px solid var(--borda);padding:20px 12px}
+.menu-item{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:10px;font-weight:600;font-size:0.9rem;cursor:pointer;color:var(--texto-suave);transition:all var(--anim);margin-bottom:3px;border:none;background:none;width:100%;text-align:left;font-family:inherit}
+.menu-item:hover{background:#f5f3ff;color:var(--roxo)}
+.menu-item.ativo{background:var(--gradiente);color:#fff}
+.admin-content{padding:32px;overflow-y:auto}
+.content-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:12px}
+.content-titulo{font-size:1.6rem;font-weight:900;letter-spacing:-0.5px}
+.btn-novo{padding:10px 20px;background:var(--gradiente);color:#fff;border:none;border-radius:10px;font-weight:700;cursor:pointer;font-family:inherit;font-size:0.9rem;transition:all var(--anim)}
+.btn-novo:hover{opacity:0.92;transform:translateY(-2px)}
+.tabela{background:#fff;border-radius:var(--radius);border:1px solid var(--borda);overflow:hidden}
+.tabela-linha{display:grid;grid-template-columns:60px 2fr 2fr 1fr;gap:16px;padding:16px 20px;border-bottom:1px solid var(--borda);align-items:center}
+.tabela-linha:last-child{border-bottom:none}
+.tabela-cab{background:#faf5ff;font-weight:800;font-size:0.75rem;text-transform:uppercase;color:var(--roxo);letter-spacing:0.5px}
+.tabela-linha .emoji{font-size:1.5rem}
+.tabela-linha .nome{font-weight:700}
+.tabela-linha .info{color:var(--texto-suave);font-size:0.85rem}
+.acoes{display:flex;gap:6px;justify-content:flex-end}
+.btn-acao{padding:6px 12px;border-radius:8px;border:none;font-weight:700;font-size:0.75rem;cursor:pointer;font-family:inherit;transition:all var(--anim)}
+.btn-editar{background:#dbeafe;color:#1e40af}
+.btn-editar:hover{background:#bfdbfe}
+.btn-remover{background:#fee2e2;color:#991b1b}
+.btn-remover:hover{background:#fecaca}
+.vazio-admin{text-align:center;padding:60px 20px;color:var(--texto-suave)}
+.vazio-admin .emoji{font-size:3rem;display:block;margin-bottom:12px;opacity:0.5}
+.modal-fundo{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:none;align-items:center;justify-content:center;z-index:1000;padding:20px}
+.modal-fundo.ativo{display:flex}
+.modal{background:#fff;border-radius:20px;width:100%;max-width:600px;max-height:90vh;overflow-y:auto;padding:32px}
+.modal-titulo{font-size:1.4rem;font-weight:900;margin-bottom:24px;letter-spacing:-0.3px}
+.campo{margin-bottom:18px}
+.campo label{display:block;font-size:0.85rem;font-weight:700;margin-bottom:6px}
+.campo input,.campo textarea,.campo select{width:100%;padding:12px 14px;border:2px solid var(--borda);border-radius:10px;font-size:0.95rem;font-family:inherit;transition:all var(--anim)}
+.campo input:focus,.campo textarea:focus,.campo select:focus{outline:none;border-color:var(--roxo);box-shadow:0 0 0 4px rgba(124,58,237,0.1)}
+.campo textarea{resize:vertical;min-height:90px}
+.campo-linha{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.modal-acoes{display:flex;gap:10px;justify-content:flex-end;margin-top:24px;padding-top:20px;border-top:1px solid var(--borda)}
+.btn-cancelar{padding:12px 22px;border-radius:10px;background:#f3f4f6;color:var(--texto);border:none;font-weight:700;cursor:pointer;font-family:inherit}
+.btn-salvar{padding:12px 22px;border-radius:10px;background:var(--gradiente);color:#fff;border:none;font-weight:700;cursor:pointer;font-family:inherit}
+.btn-salvar:disabled{opacity:0.6;cursor:not-allowed}
+.msg-flutuante{position:fixed;top:20px;right:20px;padding:14px 20px;border-radius:12px;font-weight:700;font-size:0.9rem;box-shadow:0 10px 30px rgba(0,0,0,0.15);z-index:2000;opacity:0;transition:all 0.3s ease;transform:translateY(-20px)}
+.msg-flutuante.ativa{opacity:1;transform:translateY(0)}
+.msg-flutuante.ok{background:#10b981;color:#fff}
+.msg-flutuante.erro{background:#ef4444;color:#fff}
+.upload-area{border:2px dashed var(--borda);border-radius:12px;padding:20px;text-align:center;cursor:pointer;transition:all var(--anim);background:#faf5ff}
+.upload-area:hover{border-color:var(--roxo);background:#f5f3ff}
+.upload-area.tem-img{padding:12px}
+.upload-area .upload-icone{font-size:2rem;display:block;margin-bottom:8px}
+.upload-area .upload-txt{font-size:0.85rem;color:var(--texto-suave)}
+.upload-area input[type="file"]{display:none}
+.upload-preview{max-width:100%;max-height:200px;border-radius:8px;margin:0 auto}
+.upload-status{margin-top:8px;font-size:0.8rem;color:var(--roxo);font-weight:700}
+.btn-remover-img{margin-top:8px;padding:6px 12px;background:#fee2e2;color:#991b1b;border:none;border-radius:6px;font-weight:700;font-size:0.75rem;cursor:pointer;font-family:inherit}
+@media (max-width:800px){.admin-layout{grid-template-columns:1fr}.admin-sidebar{display:flex;overflow-x:auto;padding:10px;gap:6px;border-right:none;border-bottom:1px solid var(--borda)}.menu-item{white-space:nowrap;padding:8px 14px}.admin-content{padding:20px}.tabela-linha{grid-template-columns:1fr;gap:8px}.tabela-cab{display:none}.acoes{justify-content:flex-start}}
+</style>
+</head>
+<body>
+
+<div class="tela-login" id="telaLogin">
+  <div class="login-card">
+    <div class="login-logo"><span>NEXO ADMIN</span></div>
+    <p class="login-sub">Painel de administração Nexo Music Roblox</p>
+    <div id="etapaEmail">
+      <label class="login-label">Seu email de administrador</label>
+      <input type="email" id="inputEmail" class="login-input" placeholder="nexomusicroblox@gmail.com" autocomplete="email">
+      <button class="login-btn" id="btnEnviarCodigo" onclick="enviarCodigo()">Enviar código</button>
+      <div class="login-msg" id="msgLogin1"></div>
+    </div>
+    <div id="etapaCodigo" style="display:none;">
+      <label class="login-label">Digite o código recebido por email</label>
+      <input type="text" id="inputCodigo" class="login-input" placeholder="000000" maxlength="6" inputmode="numeric" autocomplete="one-time-code">
+      <button class="login-btn" id="btnVerificarCodigo" onclick="verificarCodigo()">Entrar no painel</button>
+      <button class="login-btn" style="background:#f3f4f6;color:#1a1a2e;margin-top:8px;" onclick="voltarEmail()">← Trocar email</button>
+      <div class="login-msg" id="msgLogin2"></div>
+    </div>
+  </div>
+</div>
+
+<div class="tela-painel" id="telaPainel">
+  <div class="admin-topo">
+    <div class="admin-logo"><span>NEXO ADMIN</span></div>
+    <div class="admin-user">
+      <span id="userEmail"></span>
+      <button class="btn-sair" onclick="sair()">Sair</button>
+    </div>
+  </div>
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <button class="menu-item ativo" onclick="mudarAba('dashboard', this)">📊 Dashboard</button>
+      <button class="menu-item" onclick="mudarAba('artistas', this)">🎤 Artistas</button>
+      <button class="menu-item" onclick="mudarAba('eventos', this)">🎪 Eventos</button>
+      <button class="menu-item" onclick="mudarAba('ingressos', this)">🎟️ Ingressos</button>
+      <button class="menu-item" onclick="mudarAba('nexotv', this)">📺 Nexo TV</button>
+      <button class="menu-item" onclick="mudarAba('funcionarios', this)">👥 Funcionários</button>
+      <button class="menu-item" onclick="mudarAba('redes', this)">📱 Redes Sociais</button>
+      <button class="menu-item" onclick="mudarAba('admins', this)">🔐 Administradores</button>
+    </aside>
+    <main class="admin-content">
+      <div class="content-header">
+        <h1 class="content-titulo" id="contentTitulo">Dashboard</h1>
+        <button class="btn-novo" id="btnNovo" style="display:none;" onclick="abrirNovo()">+ Novo</button>
+      </div>
+      <div id="contentArea">
+        <div class="vazio-admin"><span class="emoji">👋</span><p>Bem-vindo ao painel!</p></div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<div class="modal-fundo" id="modalFundo">
+  <div class="modal">
+    <h2 class="modal-titulo" id="modalTitulo">Novo</h2>
+    <div id="modalCampos"></div>
+    <div class="modal-acoes">
+      <button class="btn-cancelar" onclick="fecharModal()">Cancelar</button>
+      <button class="btn-salvar" id="btnSalvarModal" onclick="salvarModal()">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<div class="msg-flutuante" id="msgFlutuante"></div>
+
+<script>
+const API_URL = 'https://script.google.com/macros/s/AKfycbzZnvlJ6QVOdUyuFrHONxaksEBSiJuiTtZeJ6yUQqYkZCO1jEEok3UgoQc-ZG7sDbGg/exec';
+
+let token = localStorage.getItem('nexo_admin_token') || '';
+let emailLogado = localStorage.getItem('nexo_admin_email') || '';
+let abaAtual = 'dashboard';
+let dadosCache = {};
+let editandoId = null;
+let emailOriginal = null;
+let imagensCache = {};
+
+async function apiGet(acao, params = {}) {
+  const url = new URL(API_URL);
+  url.searchParams.set('acao', acao);
+  Object.entries(params).forEach(([k, v]) => url.searchParams.set(k, v));
+  const r = await fetch(url.toString());
+  const j = await r.json();
+  if (!j.ok) throw new Error(j.erro || 'Erro');
+  return j.dados;
+}
+async function apiPost(acao, dados = {}) {
+  const r = await fetch(API_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify({ acao, token, ...dados })
+  });
+  const j = await r.json();
+  if (!j.ok) throw new Error(j.erro || 'Erro');
+  return j.dados;
+}
+
+function htmlUpload(campoId, urlAtual) {
+  const temImg = urlAtual && urlAtual !== '';
+  imagensCache[campoId] = urlAtual || '';
+  return `
+    <div class="campo">
+      <label>Imagem</label>
+      <div class="upload-area ${temImg ? 'tem-img' : ''}" id="area_${campoId}" onclick="document.getElementById('file_${campoId}').click()">
+        <input type="file" id="file_${campoId}" accept="image/jpeg,image/png,image/webp,image/gif" onchange="processarImagem('${campoId}', this)">
+        <div id="preview_${campoId}">
+          ${temImg
+            ? `<img src="${urlAtual}" class="upload-preview"><p class="upload-txt" style="margin-top:8px;">Clique para trocar</p>`
+            : `<span class="upload-icone">📁</span><p class="upload-txt">Clique para escolher uma imagem<br><small>JPG, PNG, WEBP ou GIF · até 20MB</small></p>`}
+        </div>
+      </div>
+      <div class="upload-status" id="status_${campoId}"></div>
+      ${temImg ? `<button type="button" class="btn-remover-img" onclick="removerImagem('${campoId}', event)">Remover imagem</button>` : ''}
+    </div>`;
+}
+
+async function processarImagem(campoId, input) {
+  const file = input.files[0];
+  if (!file) return;
+  const statusEl = document.getElementById('status_' + campoId);
+  const previewEl = document.getElementById('preview_' + campoId);
+  const areaEl = document.getElementById('area_' + campoId);
+
+  if (file.size > 20 * 1024 * 1024) {
+    statusEl.textContent = '❌ Imagem muito grande (máx 20 MB)';
+    statusEl.style.color = '#991b1b';
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = e => {
+    previewEl.innerHTML = `<img src="${e.target.result}" class="upload-preview"><p class="upload-txt" style="margin-top:8px;">Enviando...</p>`;
+    areaEl.classList.add('tem-img');
+  };
+  reader.readAsDataURL(file);
+
+  statusEl.textContent = '⏳ Enviando pro Google Drive...';
+  statusEl.style.color = '#7c3aed';
+
+  try {
+    const base64 = await fileParaBase64(file);
+    const r = await apiPost('upload_imagem', { nome_arquivo: file.name, dados_base64: base64 });
+    imagensCache[campoId] = r.url;
+    statusEl.textContent = '✅ Imagem enviada!';
+    statusEl.style.color = '#10b981';
+    previewEl.innerHTML = `<img src="${r.url}" class="upload-preview"><p class="upload-txt" style="margin-top:8px;">Clique para trocar</p>`;
+  } catch(e) {
+    statusEl.textContent = '❌ Erro: ' + e.message;
+    statusEl.style.color = '#991b1b';
+    imagensCache[campoId] = '';
+  }
+}
+
+function fileParaBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = e => resolve(e.target.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+function removerImagem(campoId, event) {
+  event.stopPropagation();
+  imagensCache[campoId] = '';
+  const previewEl = document.getElementById('preview_' + campoId);
+  const areaEl = document.getElementById('area_' + campoId);
+  const statusEl = document.getElementById('status_' + campoId);
+  previewEl.innerHTML = `<span class="upload-icone">📁</span><p class="upload-txt">Clique para escolher uma imagem<br><small>JPG, PNG, WEBP ou GIF · até 20MB</small></p>`;
+  areaEl.classList.remove('tem-img');
+  statusEl.textContent = '';
+  event.target.remove();
+}
+function getImagem(campoId) { return imagensCache[campoId] || ''; }
+
+async function enviarCodigo() {
+  const email = document.getElementById('inputEmail').value.trim().toLowerCase();
+  const msg = document.getElementById('msgLogin1');
+  const btn = document.getElementById('btnEnviarCodigo');
+  msg.className = 'login-msg';
+  if (!email) { msg.className = 'login-msg erro'; msg.textContent = 'Digite seu email'; return; }
+  btn.disabled = true; btn.textContent = 'Enviando...';
+  try {
+    await apiPost('enviar_otp', { email });
+    document.getElementById('etapaEmail').style.display = 'none';
+    document.getElementById('etapaCodigo').style.display = 'block';
+    document.getElementById('inputCodigo').focus();
+    document.getElementById('msgLogin2').className = 'login-msg ok';
+    document.getElementById('msgLogin2').textContent = '✅ Código enviado! Verifique seu email.';
+  } catch(e) {
+    msg.className = 'login-msg erro';
+    msg.textContent = '❌ ' + e.message;
+  } finally {
+    btn.disabled = false; btn.textContent = 'Enviar código';
+  }
+}
+async function verificarCodigo() {
+  const email = document.getElementById('inputEmail').value.trim().toLowerCase();
+  const codigo = document.getElementById('inputCodigo').value.trim();
+  const msg = document.getElementById('msgLogin2');
+  const btn = document.getElementById('btnVerificarCodigo');
+  if (!codigo) { msg.className = 'login-msg erro'; msg.textContent = 'Digite o código'; return; }
+  btn.disabled = true; btn.textContent = 'Verificando...';
+  try {
+    const r = await apiPost('verificar_otp', { email, codigo });
+    token = r.token; emailLogado = r.email;
+    localStorage.setItem('nexo_admin_token', token);
+    localStorage.setItem('nexo_admin_email', emailLogado);
+    entrarPainel();
+  } catch(e) {
+    msg.className = 'login-msg erro';
+    msg.textContent = '❌ ' + e.message;
+  } finally {
+    btn.disabled = false; btn.textContent = 'Entrar no painel';
+  }
+}
+function voltarEmail() {
+  document.getElementById('etapaEmail').style.display = 'block';
+  document.getElementById('etapaCodigo').style.display = 'none';
+  document.getElementById('inputCodigo').value = '';
+}
+function sair() {
+  localStorage.removeItem('nexo_admin_token');
+  localStorage.removeItem('nexo_admin_email');
+  token = ''; emailLogado = '';
+  location.reload();
+}
+function entrarPainel() {
+  document.getElementById('telaLogin').style.display = 'none';
+  document.getElementById('telaPainel').classList.add('ativa');
+  document.getElementById('userEmail').textContent = emailLogado;
+  mudarAba('dashboard');
+}
+
+function mudarAba(aba, btn) {
+  abaAtual = aba;
+  document.querySelectorAll('.menu-item').forEach(b => b.classList.remove('ativo'));
+  if (btn) btn.classList.add('ativo');
+  const titulos = {dashboard:'Dashboard',artistas:'Artistas',eventos:'Eventos',ingressos:'Ingressos',nexotv:'Nexo TV',funcionarios:'Funcionários',redes:'Redes Sociais',admins:'Administradores'};
+  document.getElementById('contentTitulo').textContent = titulos[aba] || aba;
+  document.getElementById('btnNovo').style.display = (aba === 'dashboard') ? 'none' : 'block';
+  if (aba === 'dashboard') renderDashboard();
+  else carregarAba(aba);
+}
+
+function renderDashboard() {
+  document.getElementById('contentArea').innerHTML = `
+    <div class="vazio-admin">
+      <span class="emoji">👋</span>
+      <p>Bem-vindo ao painel, <strong>${emailLogado}</strong>!</p>
+      <p style="margin-top:12px;font-size:0.9rem;">Use o menu lateral para gerenciar o conteúdo.</p>
+      <p style="margin-top:20px;font-size:0.85rem;color:#9ca3af;">Versão 1.4 — Nexo Music Roblox</p>
+    </div>`;
+}
+function msgFlutuante(texto, tipo = 'ok') {
+  const el = document.getElementById('msgFlutuante');
+  el.textContent = texto;
+  el.className = 'msg-flutuante ativa ' + tipo;
+  setTimeout(() => el.className = 'msg-flutuante ' + tipo, 2500);
+}
+function abrirModal(titulo, camposHtml) {
+  document.getElementById('modalTitulo').textContent = titulo;
+  document.getElementById('modalCampos').innerHTML = camposHtml;
+  document.getElementById('modalFundo').classList.add('ativo');
+}
+function fecharModal() {
+  document.getElementById('modalFundo').classList.remove('ativo');
+  editandoId = null; emailOriginal = null; imagensCache = {};
+}
+document.getElementById('modalFundo').addEventListener('click', e => {
+  if (e.target.id === 'modalFundo') fecharModal();
+});
+
+async function carregarAba(aba) {
+  const area = document.getElementById('contentArea');
+  area.innerHTML = '<div class="vazio-admin"><span class="emoji">⏳</span><p>Carregando...</p></div>';
+  try {
+    if (aba === 'artistas') { const d = await apiGet('listar_artistas'); dadosCache.artistas = d; area.innerHTML = d.length ? renderListaArtistas(d) : vazioAdmin('Nenhum artista cadastrado', '🎤'); }
+    else if (aba === 'eventos') { const d = await apiGet('listar_eventos'); dadosCache.eventos = d; area.innerHTML = d.length ? renderListaEventos(d) : vazioAdmin('Nenhum evento cadastrado', '🎪'); }
+    else if (aba === 'ingressos') { const d = await apiGet('listar_ingressos'); dadosCache.ingressos = d; area.innerHTML = d.length ? renderListaIngressos(d) : vazioAdmin('Nenhum ingresso cadastrado', '🎟️'); }
+    else if (aba === 'nexotv') { const d = await apiGet('listar_nexotv'); dadosCache.nexotv = d; area.innerHTML = d.length ? renderListaNexoTV(d) : vazioAdmin('Sem publicações', '📺'); }
+    else if (aba === 'funcionarios') { const d = await apiGet('listar_funcionarios'); dadosCache.funcionarios = d; area.innerHTML = d.length ? renderListaFuncionarios(d) : vazioAdmin('Nenhum funcionário', '👥'); }
+    else if (aba === 'redes') { const d = await apiGet('listar_redes'); dadosCache.redes = d; area.innerHTML = d.length ? renderListaRedes(d) : vazioAdmin('Nenhuma rede cadastrada', '📱'); }
+    else if (aba === 'admins') { const d = await apiGet('listar_admins'); dadosCache.admins = d; area.innerHTML = d.length ? renderListaAdmins(d) : vazioAdmin('Nenhum administrador', '🔐'); }
+  } catch(e) {
+    area.innerHTML = `<div class="vazio-admin"><span class="emoji">⚠️</span><p>Erro: ${e.message}</p></div>`;
+  }
+}
+function vazioAdmin(msg, emoji) { return `<div class="vazio-admin"><span class="emoji">${emoji}</span><p>${msg}</p></div>`; }
+function tabelaWrap(linhasHtml) {
+  return `<div class="tabela"><div class="tabela-linha tabela-cab"><span>ID</span><span>Nome / Título</span><span>Info</span><span style="text-align:right;">Ações</span></div>${linhasHtml}</div>`;
+}
+
+function renderListaArtistas(lista) {
+  return tabelaWrap(lista.map(a => `
+    <div class="tabela-linha">
+      <span class="emoji">🎤</span>
+      <span class="nome">${a.nome}</span>
+      <span class="info">${(a.bio || '').substring(0, 60)}...</span>
+      <div class="acoes">
+        <button class="btn-acao btn-editar" onclick="editarArtista(${a.id})">Editar</button>
+        <button class="btn-acao btn-remover" onclick="removerItem('artista', ${a.id})">Remover</button>
+      </div>
+    </div>`).join(''));
+}
+function abrirNovoArtista() {
+  editandoId = null;
+  abrirModal('Novo Artista', `
+    <div class="campo"><label>Nome *</label><input id="f_nome"></div>
+    <div class="campo"><label>Bio</label><textarea id="f_bio"></textarea></div>
+    ${htmlUpload('foto', '')}
+    <div class="campo-linha">
+      <div class="campo"><label>Instagram</label><input id="f_instagram"></div>
+      <div class="campo"><label>YouTube</label><input id="f_youtube"></div>
+    </div>
+    <div class="campo"><label>TikTok</label><input id="f_tiktok"></div>
+  `);
+}
+function editarArtista(id) {
+  const a = (dadosCache.artistas || []).find(x => x.id == id); if (!a) return;
+  editandoId = id;
+  abrirModal('Editar Artista', `
+    <div class="campo"><label>Nome *</label><input id="f_nome" value="${(a.nome || '').replace(/"/g, '&quot;')}"></div>
+    <div class="campo"><label>Bio</label><textarea id="f_bio">${a.bio || ''}</textarea></div>
+    ${htmlUpload('foto', a.foto || '')}
+    <div class="campo-linha">
+      <div class="campo"><label>Instagram</label><input id="f_instagram" value="${a.instagram || ''}"></div>
+      <div class="campo"><label>YouTube</label><input id="f_youtube" value="${a.youtube || ''}"></div>
+    </div>
+    <div class="campo"><label>TikTok</label><input id="f_tiktok" value="${a.tiktok || ''}"></div>
+  `);
+}
+
+function renderListaEventos(lista) {
+  return tabelaWrap(lista.map(e => `
+    <div class="tabela-linha">
+      <span class="emoji">🎪</span>
+      <span class="nome">${e.nome}</span>
+      <span class="info">📅 ${e.data || '—'} · 📍 ${e.local || '—'}</span>
+      <div class="acoes">
+        <button class="btn-acao btn-editar" onclick="editarEvento(${e.id})">Editar</button>
+        <button class="btn-acao btn-remover" onclick="removerItem('evento', ${e.id})">Remover</button>
+      </div>
+    </div>`).join(''));
+}
+function abrirNovoEvento() {
+  editandoId = null;
+  abrirModal('Novo Evento', `
+    <div class="campo"><label>Nome *</label><input id="f_nome"></div>
+    <div class="campo-linha">
+      <div class="campo"><label>Data</label><input id="f_data" placeholder="2025-12-25"></div>
+      <div class="campo"><label>Hora</label><input id="f_hora" placeholder="20:00"></div>
+    </div>
+    <div class="campo"><label>Local</label><input id="f_local"></div>
+    <div class="campo"><label>Descrição</label><textarea id="f_descricao"></textarea></div>
+    ${htmlUpload('imagem', '')}
+    <div class="campo"><label>🎮 Link do Roblox</label><input id="f_link_roblox" placeholder="https://www.roblox.com/games/..."></div>
+  `);
+}
+function editarEvento(id) {
+  const e = (dadosCache.eventos || []).find(x => x.id == id); if (!e) return;
+  editandoId = id;
+  abrirModal('Editar Evento', `
+    <div class="campo"><label>Nome *</label><input id="f_nome" value="${(e.nome || '').replace(/"/g, '&quot;')}"></div>
+    <div class="campo-linha">
+      <div class="campo"><label>Data</label><input id="f_data" value="${e.data || ''}"></div>
+      <div class="campo"><label>Hora</label><input id="f_hora" value="${e.hora || ''}"></div>
+    </div>
+    <div class="campo"><label>Local</label><input id="f_local" value="${e.local || ''}"></div>
+    <div class="campo"><label>Descrição</label><textarea id="f_descricao">${e.descricao || ''}</textarea></div>
+    ${htmlUpload('imagem', e.imagem || '')}
+    <div class="campo"><label>🎮 Link do Roblox</label><input id="f_link_roblox" value="${e.link_roblox || ''}"></div>
+  `);
+}
+
+function renderListaIngressos(lista) {
+  return tabelaWrap(lista.map(i => `
+    <div class="tabela-linha">
+      <span class="emoji">🎟️</span>
+      <span class="nome">${i.nome}</span>
+      <span class="info">R$ ${Number(i.preco || 0).toFixed(2)} · ${i.categoria || '—'}</span>
+      <div class="acoes">
+        <button class="btn-acao btn-editar" onclick="editarIngresso(${i.id})">Editar</button>
+        <button class="btn-acao btn-remover" onclick="removerItem('ingresso', ${i.id})">Remover</button>
+      </div>
+    </div>`).join(''));
+}
+function abrirNovoIngresso() {
+  editandoId = null;
+  abrirModal('Novo Ingresso', `
+    <div class="campo"><label>Nome *</label><input id="f_nome"></div>
+    <div class="campo"><label>ID do Evento</label><input id="f_evento_id"></div>
+    <div class="campo-linha">
+      <div class="campo"><label>Categoria</label><input id="f_categoria"></div>
+      <div class="campo"><label>Preço (R$)</label><input id="f_preco" type="number" step="0.01"></div>
+    </div>
+    <div class="campo-linha">
+      <div class="campo"><label>Qtd Total</label><input id="f_qtd_total" type="number"></div>
+      <div class="campo"><label>Lote</label><input id="f_lote"></div>
+    </div>
+    <div class="campo"><label>Benefícios</label><textarea id="f_beneficios"></textarea></div>
+    <div class="campo"><label>Regras</label><textarea id="f_regras"></textarea></div>
+  `);
+}
+function editarIngresso(id) {
+  const i = (dadosCache.ingressos || []).find(x => x.id == id); if (!i) return;
+  editandoId = id;
+  abrirModal('Editar Ingresso', `
+    <div class="campo"><label>Nome *</label><input id="f_nome" value="${(i.nome || '').replace(/"/g, '&quot;')}"></div>
+    <div class="campo"><label>ID do Evento</label><input id="f_evento_id" value="${i.evento_id || ''}"></div>
+    <div class="campo-linha">
+      <div class="campo"><label>Categoria</label><input id="f_categoria" value="${i.categoria || ''}"></div>
+      <div class="campo"><label>Preço</label><input id="f_preco" type="number" step="0.01" value="${i.preco || 0}"></div>
+    </div>
+    <div class="campo-linha">
+      <div class="campo"><label>Qtd Total</label><input id="f_qtd_total" type="number" value="${i.qtd_total || 0}"></div>
+      <div class="campo"><label>Lote</label><input id="f_lote" value="${i.lote || ''}"></div>
+    </div>
+    <div class="campo"><label>Benefícios</label><textarea id="f_beneficios">${i.beneficios || ''}</textarea></div>
+    <div class="campo"><label>Regras</label><textarea id="f_regras">${i.regras || ''}</textarea></div>
+  `);
+}
+
+function renderListaNexoTV(lista) {
+  return tabelaWrap(lista.map(n => `
+    <div class="tabela-linha">
+      <span class="emoji">📺</span>
+      <span class="nome">${n.titulo}</span>
+      <span class="info">${n.tipo || '—'} · ${n.autor || ''}</span>
+      <div class="acoes">
+        <button class="btn-acao btn-editar" onclick="editarNexoTV(${n.id})">Editar</button>
+        <button class="btn-acao btn-remover" onclick="removerItem('nexotv', ${n.id})">Remover</button>
+      </div>
+    </div>`).join(''));
+}
+function abrirNovoNexoTV() {
+  editandoId = null;
+  abrirModal('Nova Publicação', `
+    <div class="campo"><label>Título *</label><input id="f_titulo"></div>
+    <div class="campo"><label>Tipo</label>
+      <select id="f_tipo">
+        <option value="noticia">Notícia</option>
+        <option value="entrevista">Entrevista</option>
+        <option value="bastidores">Bastidores</option>
+        <option value="lancamento">Lançamento</option>
+        <option value="evento">Evento</option>
+        <option value="video">Vídeo</option>
+      </select>
+    </div>
+    <div class="campo"><label>Descrição</label><textarea id="f_descricao"></textarea></div>
+    ${htmlUpload('imagem', '')}
+    <div class="campo"><label>URL do Vídeo</label><input id="f_video_url"></div>
+    <div class="campo"><label>Autor</label><input id="f_autor"></div>
+  `);
+}
+function editarNexoTV(id) {
+  const n = (dadosCache.nexotv || []).find(x => x.id == id); if (!n) return;
+  editandoId = id;
+  abrirModal('Editar Publicação', `
+    <div class="campo"><label>Título *</label><input id="f_titulo" value="${(n.titulo || '').replace(/"/g, '&quot;')}"></div>
+    <div class="campo"><label>Tipo</label>
+      <select id="f_tipo">
+        <option value="noticia" ${n.tipo === 'noticia' ? 'selected' : ''}>Notícia</option>
+        <option value="entrevista" ${n.tipo === 'entrevista' ? 'selected' : ''}>Entrevista</option>
+        <option value="bastidores" ${n.tipo === 'bastidores' ? 'selected' : ''}>Bastidores</option>
+        <option value="lancamento" ${n.tipo === 'lancamento' ? 'selected' : ''}>Lançamento</option>
+        <option value="evento" ${n.tipo === 'evento' ? 'selected' : ''}>Evento</option>
+        <option value="video" ${n.tipo === 'video' ? 'selected' : ''}>Vídeo</option>
+      </select>
+    </div>
+    <div class="campo"><label>Descrição</label><textarea id="f_descricao">${n.descricao || ''}</textarea></div>
+    ${htmlUpload('imagem', n.imagem || '')}
+    <div class="campo"><label>URL do Vídeo</label><input id="f_video_url" value="${n.video_url || ''}"></div>
+    <div class="campo"><label>Autor</label><input id="f_autor" value="${n.autor || ''}"></div>
+  `);
+}
+
+function renderListaFuncionarios(lista) {
+  return tabelaWrap(lista.map(f => `
+    <div class="tabela-linha">
+      <span class="emoji">👥</span>
+      <span class="nome">${f.nome}</span>
+      <span class="info">${f.cargo || ''} ${f.setor ? '· ' + f.setor : ''}</span>
+      <div class="acoes">
+        <button class="btn-acao btn-editar" onclick="editarFuncionario(${f.id})">Editar</button>
+        <button class="btn-acao btn-remover" onclick="removerItem('funcionario', ${f.id})">Remover</button>
+      </div>
+    </div>`).join(''));
+}
+function abrirNovoFuncionario() {
+  editandoId = null;
+  abrirModal('Novo Funcionário', `
+    <div class="campo"><label>Nome *</label><input id="f_nome"></div>
+    <div class="campo-linha">
+      <div class="campo"><label>Cargo</label><input id="f_cargo"></div>
+      <div class="campo"><label>Setor</label><input id="f_setor"></div>
+    </div>
+    ${htmlUpload('foto', '')}
+    <div class="campo"><label>Bio</label><textarea id="f_bio"></textarea></div>
+    <div class="campo"><label>Instagram</label><input id="f_instagram"></div>
+  `);
+}
+function editarFuncionario(id) {
+  const f = (dadosCache.funcionarios || []).find(x => x.id == id); if (!f) return;
+  editandoId = id;
+  abrirModal('Editar Funcionário', `
+    <div class="campo"><label>Nome *</label><input id="f_nome" value="${(f.nome || '').replace(/"/g, '&quot;')}"></div>
+    <div class="campo-linha">
+      <div class="campo"><label>Cargo</label><input id="f_cargo" value="${f.cargo || ''}"></div>
+      <div class="campo"><label>Setor</label><input id="f_setor" value="${f.setor || ''}"></div>
+    </div>
+    ${htmlUpload('foto', f.foto || '')}
+    <div class="campo"><label>Bio</label><textarea id="f_bio">${f.bio || ''}</textarea></div>
+    <div class="campo"><label>Instagram</label><input id="f_instagram" value="${f.instagram || ''}"></div>
+  `);
+}
+
+function renderListaRedes(lista) {
+  return tabelaWrap(lista.map(r => `
+    <div class="tabela-linha">
+      <span class="emoji">📱</span>
+      <span class="nome">${r.nome}</span>
+      <span class="info">${r.url}</span>
+      <div class="acoes">
+        <button class="btn-acao btn-editar" onclick="editarRede(${r.id})">Editar</button>
+        <button class="btn-acao btn-remover" onclick="removerItem('rede', ${r.id})">Remover</button>
+      </div>
+    </div>`).join(''));
+}
+function abrirNovaRede() {
+  editandoId = null;
+  abrirModal('Nova Rede Social', `
+    <div class="campo"><label>Nome *</label><input id="f_nome"></div>
+    <div class="campo"><label>URL *</label><input id="f_url"></div>
+  `);
+}
+function editarRede(id) {
+  const r = (dadosCache.redes || []).find(x => x.id == id); if (!r) return;
+  editandoId = id;
+  abrirModal('Editar Rede Social', `
+    <div class="campo"><label>Nome *</label><input id="f_nome" value="${(r.nome || '').replace(/"/g, '&quot;')}"></div>
+    <div class="campo"><label>URL *</label><input id="f_url" value="${r.url || ''}"></div>
+  `);
+}
+
+function renderListaAdmins(lista) {
+  return tabelaWrap(lista.map(a => `
+    <div class="tabela-linha">
+      <span class="emoji">🔐</span>
+      <span class="nome">${a.nome || 'Admin'}</span>
+      <span class="info">${a.email} · ${String(a.ativo).toUpperCase() === 'SIM' ? '🟢 Ativo' : '🔴 Inativo'}</span>
+      <div class="acoes">
+        <button class="btn-acao btn-editar" onclick="editarAdmin('${a.email}')">Editar</button>
+        ${a.email === 'nexomusicroblox@gmail.com'
+          ? '<button class="btn-acao" style="background:#f3f4f6;color:#9ca3af;cursor:not-allowed;" disabled>Raiz</button>'
+          : `<button class="btn-acao btn-remover" onclick="removerItem('admin', '${a.email}')">Remover</button>`}
+      </div>
+    </div>`).join(''));
+}
+function abrirNovoAdmin() {
+  editandoId = null;
+  abrirModal('Novo Administrador', `
+    <div class="campo"><label>Email *</label><input id="f_email" type="email"></div>
+    <div class="campo"><label>Nome</label><input id="f_nome"></div>
+    <div class="campo"><label>Status</label>
+      <select id="f_ativo">
+        <option value="SIM">🟢 Ativo (pode fazer login)</option>
+        <option value="NAO">🔴 Inativo (bloqueado)</option>
+      </select>
+    </div>
+  `);
+}
+function editarAdmin(email) {
+  const a = (dadosCache.admins || []).find(x => x.email === email); if (!a) return;
+  editandoId = email;
+  emailOriginal = email;
+  abrirModal('Editar Administrador', `
+    <div class="campo"><label>Email *</label><input id="f_email" type="email" value="${a.email}"></div>
+    <div class="campo"><label>Nome</label><input id="f_nome" value="${(a.nome || '').replace(/"/g, '&quot;')}"></div>
+    <div class="campo"><label>Status</label>
+      <select id="f_ativo">
+        <option value="SIM" ${String(a.ativo).toUpperCase() === 'SIM' ? 'selected' : ''}>🟢 Ativo</option>
+        <option value="NAO" ${String(a.ativo).toUpperCase() !== 'SIM' ? 'selected' : ''}>🔴 Inativo</option>
+      </select>
+    </div>
+  `);
+}
+
+function abrirNovo() {
+  if (abaAtual === 'artistas') abrirNovoArtista();
+  else if (abaAtual === 'eventos') abrirNovoEvento();
+  else if (abaAtual === 'ingressos') abrirNovoIngresso();
+  else if (abaAtual === 'nexotv') abrirNovoNexoTV();
+  else if (abaAtual === 'funcionarios') abrirNovoFuncionario();
+  else if (abaAtual === 'redes') abrirNovaRede();
+  else if (abaAtual === 'admins') abrirNovoAdmin();
+}
+
+async function salvarModal() {
+  const btn = document.getElementById('btnSalvarModal');
+  btn.disabled = true; btn.textContent = 'Salvando...';
+  try {
+    const get = id => (document.getElementById(id)?.value || '').trim();
+    let acao, dados;
+
+    if (abaAtual === 'artistas') {
+      dados = { id: editandoId, nome: get('f_nome'), bio: get('f_bio'), foto: getImagem('foto'), instagram: get('f_instagram'), youtube: get('f_youtube'), tiktok: get('f_tiktok') };
+      if (!dados.nome) throw new Error('Nome obrigatório');
+      acao = editandoId ? 'editar_artista' : 'criar_artista';
+    } else if (abaAtual === 'eventos') {
+      dados = { id: editandoId, nome: get('f_nome'), data: get('f_data'), hora: get('f_hora'), local: get('f_local'), descricao: get('f_descricao'), imagem: getImagem('imagem'), link_roblox: get('f_link_roblox') };
+      if (!dados.nome) throw new Error('Nome obrigatório');
+      acao = editandoId ? 'editar_evento' : 'criar_evento';
+    } else if (abaAtual === 'ingressos') {
+      dados = { id: editandoId, nome: get('f_nome'), evento_id: get('f_evento_id'), categoria: get('f_categoria'), preco: get('f_preco'), qtd_total: get('f_qtd_total'), lote: get('f_lote'), beneficios: get('f_beneficios'), regras: get('f_regras') };
+      if (!dados.nome) throw new Error('Nome obrigatório');
+      acao = editandoId ? 'editar_ingresso' : 'criar_ingresso';
+    } else if (abaAtual === 'nexotv') {
+      dados = { id: editandoId, titulo: get('f_titulo'), tipo: get('f_tipo'), descricao: get('f_descricao'), imagem: getImagem('imagem'), video_url: get('f_video_url'), autor: get('f_autor') };
+      if (!dados.titulo) throw new Error('Título obrigatório');
+      acao = editandoId ? 'editar_nexotv' : 'criar_nexotv';
+    } else if (abaAtual === 'funcionarios') {
+      dados = { id: editandoId, nome: get('f_nome'), cargo: get('f_cargo'), setor: get('f_setor'), foto: getImagem('foto'), bio: get('f_bio'), instagram: get('f_instagram') };
+      if (!dados.nome) throw new Error('Nome obrigatório');
+      acao = editandoId ? 'editar_funcionario' : 'criar_funcionario';
+    } else if (abaAtual === 'redes') {
+      dados = { id: editandoId, nome: get('f_nome'), url: get('f_url') };
+      if (!dados.nome || !dados.url) throw new Error('Nome e URL obrigatórios');
+      acao = editandoId ? 'editar_rede' : 'criar_rede';
+    } else if (abaAtual === 'admins') {
+      dados = { email: get('f_email'), nome: get('f_nome'), ativo: get('f_ativo') };
+      if (!dados.email) throw new Error('Email obrigatório');
+      if (editandoId) { dados.email_original = emailOriginal; acao = 'editar_admin'; }
+      else { acao = 'criar_admin'; }
+    }
+
+    await apiPost(acao, dados);
+    fecharModal();
+    msgFlutuante(editandoId ? '✅ Atualizado!' : '✅ Criado!', 'ok');
+    await carregarAba(abaAtual);
+  } catch(e) {
+    msgFlutuante('❌ ' + e.message, 'erro');
+  } finally {
+    btn.disabled = false; btn.textContent = 'Salvar';
+  }
+}
+
+async function removerItem(tipo, id) {
+  if (!confirm('Tem certeza que quer remover?')) return;
+  try {
+    let acao, payload;
+    if (tipo === 'admin') { acao = 'remover_admin'; payload = { email: id }; }
+    else { acao = 'remover_' + tipo; payload = { id }; }
+    await apiPost(acao, payload);
+    msgFlutuante('✅ Removido!', 'ok');
+    await carregarAba(abaAtual);
+  } catch(e) {
+    msgFlutuante('❌ ' + e.message, 'erro');
+  }
+}
+
+(async function init() {
+  if (token && emailLogado) {
+    try {
+      const r = await apiPost('validar_sessao', {});
+      if (r.valido) entrarPainel();
+      else sair();
+    } catch(e) { sair(); }
+  }
+})();
+</script>
+</body>
+</html>
