@@ -1,4 +1,359 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-tema="nexo">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexo Music Roblox</title>
+<style>
+:root{--roxo:#7c3aed;--rosa:#ec4899;--laranja:#f97316;--gradiente:linear-gradient(120deg,#7c3aed 0%,#c026d3 35%,#ec4899 65%,#f97316 100%);--gradiente-suave:linear-gradient(135deg,#fce7f3 0%,#fed7aa 100%);--bg:#f5f3ff;--texto:#1a1a2e;--texto-suave:#6b7280;--card-bg:#ffffff;--borda:#ede9fe;--sombra-card:0 10px 30px rgba(124,58,237,0.08);--radius:22px;--anim:0.25s ease}
+html[data-tema="preto"]{--bg:#0a0a0a;--texto:#f5f5f5;--texto-suave:#aaa;--card-bg:#1a1a1a;--borda:#2a2a2a;--sombra-card:0 10px 30px rgba(0,0,0,0.6)}
+html[data-tema="branco"]{--bg:#fff;--texto:#1a1a1a;--texto-suave:#666;--card-bg:#fafafa;--borda:#e5e5e5}
+html[data-tema="pb"]{--roxo:#000;--rosa:#333;--laranja:#666;--gradiente:linear-gradient(120deg,#000 0%,#666 100%);--gradiente-suave:linear-gradient(135deg,#f0f0f0 0%,#e0e0e0 100%);--bg:#f5f5f5;--card-bg:#fff}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter','Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--texto);line-height:1.55;min-height:100vh;transition:background var(--anim),color var(--anim);font-weight:500}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.nexo-header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--borda)}
+html[data-tema="preto"] .nexo-header{background:rgba(20,20,20,0.85)}
+.nexo-header-inner{max-width:1320px;margin:0 auto;padding:18px 32px;display:flex;align-items:center;gap:32px;justify-content:space-between;position:relative}
+.nexo-logo{display:flex;align-items:baseline;gap:6px;font-weight:900;font-size:1.35rem;letter-spacing:-0.5px}
+.logo-nexo{background:linear-gradient(120deg,#7c3aed 0%,#c026d3 50%,#ec4899 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.logo-music{background:linear-gradient(120deg,#ec4899 0%,#f97316 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nexo-nav{display:flex;gap:4px;align-items:center;flex-wrap:wrap}
+.nexo-nav a{padding:9px 14px;border-radius:12px;font-weight:600;font-size:0.9rem;color:var(--texto-suave);transition:all var(--anim);cursor:pointer}
+.nexo-nav a:hover{color:var(--roxo)}
+.nexo-nav a.ativo{background:#ede9fe;color:#6d28d9}
+html[data-tema="preto"] .nexo-nav a.ativo{background:#2a1a4a;color:#c4b5fd}
+.nexo-nav a.btn-seletivo{background:var(--gradiente);color:#fff;font-weight:700}
+.menu-toggle{display:none;background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--texto)}
+.hero-wrap{max-width:1320px;margin:24px auto 0;padding:0 32px}
+.hero{position:relative;background:var(--gradiente);color:#fff;padding:80px 60px;border-radius:32px;overflow:hidden;min-height:440px;display:flex;flex-direction:column;justify-content:center;isolation:isolate}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 85% 30%,rgba(255,255,255,0.18) 0%,transparent 45%),radial-gradient(circle at 15% 90%,rgba(255,255,255,0.12) 0%,transparent 40%);z-index:-1}
+.hero::after{content:'';position:absolute;top:-60px;right:-60px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,0.15) 0%,transparent 65%);z-index:-1}
+.hero-badge{display:inline-block;padding:8px 18px;background:rgba(255,255,255,0.18);border:1px solid rgba(255,255,255,0.3);border-radius:100px;font-size:0.72rem;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:26px;width:fit-content;backdrop-filter:blur(8px)}
+.hero h1{font-size:clamp(2.5rem,6vw,5.2rem);font-weight:900;line-height:1.02;letter-spacing:-2px;margin-bottom:26px;max-width:700px}
+.hero p{font-size:1.15rem;opacity:0.95;max-width:580px;margin-bottom:34px;line-height:1.55}
+.hero-acoes{display:flex;gap:12px;flex-wrap:wrap}
+.hero-marca{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-8deg);font-size:clamp(3rem,12vw,10rem);font-weight:900;color:rgba(255,255,255,0.09);white-space:nowrap;letter-spacing:-3px;pointer-events:none;z-index:-1}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:14px;font-weight:800;font-size:0.95rem;cursor:pointer;border:none;transition:all var(--anim);font-family:inherit}
+.btn:hover{transform:translateY(-2px)}
+.btn-branco{background:#fff;color:#6d28d9;box-shadow:0 8px 20px rgba(0,0,0,0.15)}
+.btn-vidro{background:rgba(255,255,255,0.15);color:#fff;border:1.5px solid rgba(255,255,255,0.4);backdrop-filter:blur(10px)}
+.btn-primario{background:var(--gradiente);color:#fff}
+.btn-sec{background:var(--card-bg);color:var(--texto);border:2px solid var(--borda)}
+.btn-roblox{background:#00b06f;color:#fff}
+.btn-roblox:hover{background:#009a60}
+.btn-calendario{background:#3b82f6;color:#fff}
+.btn-calendario:hover{background:#2563eb}
+.container{max-width:1320px;margin:0 auto;padding:0 32px 80px}
+.secao{margin-top:60px}
+.secao-cabecalho{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:26px;gap:20px;flex-wrap:wrap}
+.secao-titulo{font-size:2rem;font-weight:900;letter-spacing:-0.8px}
+.secao-sub{color:var(--texto-suave);font-size:0.9rem}
+a.secao-sub{color:var(--roxo);font-weight:700;cursor:pointer}
+.grid{display:grid;gap:22px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.grid-4{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+.grid-anuncios{display:grid;gap:22px;grid-template-columns:1fr 1fr}
+.card-evento,.card-artista,.card-nexotv,.card-funcionario,.card-ingresso,.card-destaque{background:var(--card-bg);border-radius:var(--radius);overflow:hidden;box-shadow:var(--sombra-card);transition:all var(--anim);border:1px solid var(--borda)}
+.card-evento,.card-artista,.card-nexotv,.card-funcionario,.card-ingresso{cursor:pointer}
+.card-evento:hover,.card-artista:hover,.card-nexotv:hover,.card-funcionario:hover,.card-ingresso:hover,.card-destaque:hover{transform:translateY(-6px);box-shadow:0 22px 45px rgba(124,58,237,0.15);border-color:rgba(124,58,237,0.2)}
+.card-evento img,.card-artista img,.card-nexotv img,.card-funcionario img{width:100%;height:180px;object-fit:cover}
+.card-sem-img{height:180px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;background:var(--gradiente-suave);color:#c084fc}
+.card-body{padding:20px}
+.card-body h3{font-size:1.1rem;margin-bottom:8px;font-weight:800;letter-spacing:-0.3px}
+.card-body p{color:var(--texto-suave);font-size:0.9rem;margin-bottom:8px}
+.card-meta{font-size:0.85rem !important;color:var(--texto-suave)}
+.card-acoes{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.card-acoes .btn{padding:9px 16px;font-size:0.82rem}
+.card-artista .ver-perfil,.card-evento .ver-perfil,.card-nexotv .ver-perfil,.card-funcionario .ver-perfil,.card-ingresso .ver-perfil{color:var(--roxo);font-weight:800;font-size:0.85rem;margin-top:10px;display:inline-block}
+.card-destaque{padding:20px}
+.destaque-img{width:100%;height:130px;border-radius:16px;background:var(--gradiente-suave);display:flex;align-items:center;justify-content:center;color:#c084fc;font-size:0.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-align:center;padding:10px;margin-bottom:16px;overflow:hidden}
+.destaque-img img{width:100%;height:100%;object-fit:cover}
+.card-destaque h3{font-size:1.15rem;font-weight:900;margin-bottom:8px}
+.card-destaque p{color:var(--texto-suave);font-size:0.88rem}
 
+/* ============ ANÚNCIOS (VÍDEOS) ============ */
+.card-anuncio{background:var(--card-bg);border-radius:var(--radius);overflow:hidden;box-shadow:var(--sombra-card);border:1px solid var(--borda);transition:all var(--anim)}
+.card-anuncio:hover{box-shadow:0 22px 45px rgba(124,58,237,0.15)}
+.anuncio-video{position:relative;width:100%;aspect-ratio:16/9;background:#000;overflow:hidden}
+.anuncio-video iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none}
+.anuncio-info{padding:16px 20px}
+.anuncio-info-topo{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.anuncio-info-topo h3{font-size:1rem;font-weight:800;letter-spacing:-0.3px;margin:0;flex:1;line-height:1.3}
+.btn-som{width:38px;height:38px;border-radius:50%;background:var(--gradiente);color:#fff;border:none;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:all var(--anim);flex-shrink:0;font-family:inherit}
+.btn-som:hover{transform:scale(1.1)}
+.btn-som.mudo{background:var(--borda);color:var(--texto-suave)}
+.anuncio-link{margin-top:14px;display:inline-flex;align-items:center;gap:6px;padding:10px 18px;background:var(--gradiente);color:#fff;border-radius:10px;font-weight:800;font-size:0.85rem;transition:all var(--anim)}
+.anuncio-link:hover{transform:translateY(-2px);opacity:0.92}
+
+.acesso-grid{display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.acesso-card{background:var(--card-bg);padding:28px;border-radius:var(--radius);border:1px solid var(--borda);box-shadow:var(--sombra-card);cursor:pointer;transition:all var(--anim)}
+.acesso-card:hover{transform:translateY(-6px);box-shadow:0 22px 45px rgba(124,58,237,0.18)}
+.acesso-emoji{font-size:2.4rem;margin-bottom:20px;display:block}
+.acesso-card h3{font-size:1.3rem;font-weight:900;margin-bottom:8px}
+.acesso-card p{color:var(--texto-suave);font-size:0.92rem}
+.badge{display:inline-block;padding:5px 12px;background:linear-gradient(120deg,#ede9fe,#fce7f3);color:#7c3aed;border-radius:8px;font-size:0.72rem;font-weight:800;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px}
+.preco{font-size:1.8rem !important;font-weight:900 !important;background:var(--gradiente);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.cargo{font-weight:800;color:var(--roxo) !important;font-size:0.9rem !important}
+.nexo-footer{background:var(--card-bg);margin-top:80px;border-top:1px solid var(--borda);padding:60px 32px 30px}
+.nexo-footer-inner{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:40px}
+.nexo-footer h4{margin-bottom:16px;font-size:1.05rem;font-weight:900}
+.nexo-footer p,.nexo-footer a{color:var(--texto-suave);font-size:0.9rem;margin-bottom:8px;display:block;cursor:pointer}
+.nexo-footer a:hover{color:var(--roxo)}
+.footer-base{max-width:1320px;margin:40px auto 0;padding-top:24px;border-top:1px solid var(--borda);text-align:center;color:var(--texto-suave);font-size:0.85rem}
+.tema-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px}
+.tema-card{padding:24px;border-radius:var(--radius);border:3px solid var(--borda);cursor:pointer;text-align:center;transition:all var(--anim);background:var(--card-bg)}
+.tema-card:hover{border-color:var(--roxo);transform:translateY(-3px)}
+.tema-card.selecionado{border-color:var(--roxo);box-shadow:0 0 0 4px rgba(124,58,237,0.15)}
+.tema-card .emoji{font-size:2rem;display:block;margin-bottom:8px}
+.tema-card .nome{font-weight:800;font-size:0.9rem}
+.vazio{text-align:center;padding:60px 20px;color:var(--texto-suave);grid-column:1/-1}
+.vazio .emoji{font-size:3rem;display:block;margin-bottom:12px;opacity:0.5}
+.pagina{display:none}
+.pagina.ativa{display:block;animation:fadeIn 0.4s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes skeletonPulse{0%{opacity:1}50%{opacity:0.5}100%{opacity:1}}
+.skeleton{background:linear-gradient(90deg,var(--borda) 0%,var(--bg) 50%,var(--borda) 100%);background-size:200% 100%;animation:skeletonPulse 1.5s ease-in-out infinite;border-radius:12px}
+.skeleton-card{background:var(--card-bg);border-radius:var(--radius);overflow:hidden;border:1px solid var(--borda);box-shadow:var(--sombra-card)}
+.skeleton-img{width:100%;height:180px}
+.skeleton-body{padding:20px}
+.skeleton-line{height:14px;margin-bottom:10px;border-radius:6px}
+.skeleton-line.titulo{height:20px;width:70%}
+.skeleton-line.curta{width:50%}
+.skeleton-line.media{width:85%}
+.skeleton-destaque{padding:20px}
+.skeleton-destaque .skeleton-img{height:130px;border-radius:16px;margin-bottom:16px}
+.seletor-modo{display:flex;gap:10px;margin-bottom:28px;padding:8px;background:var(--card-bg);border:1px solid var(--borda);border-radius:16px;width:fit-content;box-shadow:var(--sombra-card)}
+.modo-btn{padding:12px 24px;border-radius:12px;border:none;background:transparent;color:var(--texto-suave);font-weight:800;font-size:0.9rem;cursor:pointer;transition:all var(--anim);font-family:inherit}
+.modo-btn:hover{color:var(--roxo)}
+.modo-btn.ativo{background:var(--gradiente);color:#fff}
+.modal-fundo{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:1000;padding:20px;backdrop-filter:blur(4px);overflow-y:auto}
+.modal-fundo.ativo{display:flex;animation:modalFundoIn 0.25s ease}
+@keyframes modalFundoIn{from{opacity:0}to{opacity:1}}
+.modal-box{background:var(--card-bg);border-radius:24px;width:100%;max-width:760px;max-height:90vh;overflow-y:auto;padding:36px;position:relative;margin:auto;animation:modalBoxIn 0.35s cubic-bezier(0.16,1,0.3,1)}
+@keyframes modalBoxIn{from{opacity:0;transform:translateY(30px) scale(0.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+.modal-fechar{position:absolute;top:16px;right:20px;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--texto-suave);font-family:inherit;z-index:2;transition:all var(--anim)}
+.modal-fechar:hover{color:var(--roxo);transform:rotate(90deg)}
+.modal-img-grande{width:100%;height:280px;object-fit:cover;border-radius:18px;margin-bottom:22px;background:var(--gradiente-suave)}
+.modal-img-sem{width:100%;height:280px;border-radius:18px;margin-bottom:22px;background:var(--gradiente-suave);display:flex;align-items:center;justify-content:center;font-size:5rem;color:#c084fc}
+.modal-titulo-grande{font-size:1.9rem;font-weight:900;letter-spacing:-0.7px;margin-bottom:12px}
+.modal-meta-linha{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:18px}
+.modal-meta-item{background:var(--gradiente-suave);padding:8px 14px;border-radius:10px;font-size:0.85rem;font-weight:700;color:var(--roxo)}
+.modal-descricao{color:var(--texto-suave);font-size:0.95rem;line-height:1.7;white-space:pre-wrap;margin-bottom:20px}
+.modal-section{margin-top:22px;padding-top:22px;border-top:1px solid var(--borda)}
+.modal-section h4{font-size:0.85rem;text-transform:uppercase;letter-spacing:1px;color:var(--roxo);margin-bottom:12px}
+.modal-section .info{color:var(--texto-suave);font-size:0.9rem;white-space:pre-wrap}
+.modal-redes{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.modal-redes a{padding:8px 14px;background:var(--gradiente-suave);border-radius:10px;font-size:0.82rem;font-weight:700;color:var(--roxo);transition:all var(--anim)}
+.modal-redes a:hover{background:var(--gradiente);color:#fff}
+.modal-acoes{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.modal-acoes .btn{flex:1;min-width:180px;justify-content:center}
+.modal-video{width:100%;aspect-ratio:16/9;border-radius:14px;overflow:hidden;margin-bottom:20px;background:#000}
+.modal-video iframe{width:100%;height:100%;border:none}
+.form-campo{margin-bottom:16px}
+.form-campo label{display:block;font-size:0.82rem;font-weight:800;margin-bottom:6px}
+.form-campo input,.form-campo textarea{width:100%;padding:12px 14px;border:2px solid var(--borda);border-radius:10px;font-size:0.95rem;font-family:inherit;background:var(--bg);color:var(--texto);transition:all var(--anim)}
+.form-campo input:focus,.form-campo textarea:focus{outline:none;border-color:var(--roxo);box-shadow:0 0 0 4px rgba(124,58,237,0.1)}
+.form-campo textarea{resize:vertical;min-height:90px}
+.form-linha{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.msg-sucesso{background:#d1fae5;color:#065f46;padding:16px;border-radius:12px;font-weight:700;text-align:center;margin-top:16px}
+.msg-erro-form{background:#fee2e2;color:#991b1b;padding:16px;border-radius:12px;font-weight:700;text-align:center;margin-top:16px}
+.btn-topo{position:fixed;bottom:24px;right:24px;width:52px;height:52px;border-radius:50%;background:var(--gradiente);color:#fff;border:none;font-size:1.4rem;cursor:pointer;box-shadow:0 10px 30px rgba(124,58,237,0.4);opacity:0;pointer-events:none;transition:all var(--anim);z-index:99}
+.btn-topo.visivel{opacity:1;pointer-events:auto}
+.btn-topo:hover{transform:translateY(-4px)}
+.animar{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease}
+.animar.visivel{opacity:1;transform:translateY(0)}
+@media (max-width:900px){.nexo-header-inner{padding:14px 20px}.menu-toggle{display:block}.nexo-nav{display:none;width:100%;flex-direction:column;align-items:stretch;margin-top:12px;position:absolute;top:100%;left:0;right:0;background:var(--card-bg);padding:12px;border-bottom:1px solid var(--borda);box-shadow:0 10px 30px rgba(0,0,0,0.08)}.nexo-nav.aberto{display:flex}.nexo-nav a{text-align:center;padding:12px}.hero{padding:50px 28px;border-radius:24px;min-height:380px}.hero-wrap,.container{padding-left:20px;padding-right:20px}.secao-titulo{font-size:1.5rem}.form-linha{grid-template-columns:1fr}.seletor-modo{width:100%}.modo-btn{flex:1;text-align:center}.nexo-footer{padding:40px 20px 20px}.modal-box{padding:24px}.modal-img-grande,.modal-img-sem{height:200px}.modal-titulo-grande{font-size:1.5rem}.btn-topo{bottom:16px;right:16px}.grid-anuncios{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="nexo-header">
+  <div class="nexo-header-inner">
+    <a onclick="mostrarPagina('home')" class="nexo-logo">
+      <span class="logo-nexo">NEXO</span>
+      <span class="logo-music">MUSIC</span>
+    </a>
+    <button class="menu-toggle" onclick="document.querySelector('.nexo-nav').classList.toggle('aberto')">☰</button>
+    <nav class="nexo-nav">
+      <a onclick="mostrarPagina('home')" data-pag="home" class="ativo">Início</a>
+      <a onclick="mostrarPagina('artistas')" data-pag="artistas">Artistas</a>
+      <a onclick="mostrarPagina('funcionarios')" data-pag="funcionarios">Funcionários</a>
+      <a onclick="mostrarPagina('nexotv')" data-pag="nexotv">Nexo TV</a>
+      <a onclick="mostrarPagina('eventos')" data-pag="eventos">Eventos</a>
+      <a onclick="mostrarPagina('ingressos')" data-pag="ingressos">Ingressos</a>
+      <a onclick="mostrarPagina('config')" data-pag="config">⚙️ Configurações</a>
+      <a href="https://nexomusicroblox-dev.github.io/nexo-processo-seletivo/" target="_blank" class="btn-seletivo">📝 Trabalhe Conosco</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="pagina ativa" id="pag-home">
+  <div class="hero-wrap">
+    <div class="hero">
+      <span class="hero-marca">NEXO MUSIC</span>
+      <span class="hero-badge">NEXO MUSIC • EM CONSTRUÇÃO</span>
+      <h1>Conectando música.</h1>
+      <p>Uma nova experiência para artistas, público, contratantes e toda a equipe Nexo.</p>
+      <div class="hero-acoes">
+        <button class="btn btn-branco" onclick="mostrarPagina('artistas')">🎤 Conhecer artistas</button>
+        <button class="btn btn-vidro" onclick="mostrarPagina('nexotv')">📺 Nexo TV</button>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="secao" id="secao-destaques">
+      <div class="secao-cabecalho"><h2 class="secao-titulo">Destaques</h2><span class="secao-sub">Conteúdo editável pelo administrador</span></div>
+      <div id="home-destaques" class="grid grid-4"><div class="skeleton-card skeleton-destaque"><div class="skeleton skeleton-img"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div><div class="skeleton-card skeleton-destaque"><div class="skeleton skeleton-img"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div><div class="skeleton-card skeleton-destaque"><div class="skeleton skeleton-img"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div><div class="skeleton-card skeleton-destaque"><div class="skeleton skeleton-img"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div>
+    </div>
+    <div class="secao" id="secao-anuncios" style="display:none;">
+      <div class="secao-cabecalho"><h2 class="secao-titulo">📹 Anúncios</h2><span class="secao-sub">Novidades e promoções</span></div>
+      <div id="home-anuncios" class="grid-anuncios"></div>
+    </div>
+    <div class="secao">
+      <div class="secao-cabecalho"><h2 class="secao-titulo">Acesso rápido</h2></div>
+      <div class="acesso-grid">
+        <div class="acesso-card animar" onclick="mostrarPagina('artistas')"><span class="acesso-emoji">🎤</span><h3>Artistas</h3><p>Conheça artistas ou solicite uma contratação.</p></div>
+        <div class="acesso-card animar" onclick="window.open('https://nexomusicroblox-dev.github.io/nexo-processo-seletivo/','_blank')"><span class="acesso-emoji">💼</span><h3>Trabalhe Conosco</h3><p>Acesse os processos seletivos.</p></div>
+        <div class="acesso-card animar" onclick="mostrarPagina('config')"><span class="acesso-emoji">📱</span><h3>Redes Sociais</h3><p>Acompanhe a Nexo nas plataformas oficiais.</p></div>
+      </div>
+    </div>
+    <div class="secao">
+      <div class="secao-cabecalho"><h2 class="secao-titulo">🎤 Artistas</h2><a class="secao-sub" onclick="mostrarPagina('artistas')">Ver todos →</a></div>
+      <div id="home-artistas" class="grid"><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div><div class="skeleton skeleton-line curta"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div><div class="skeleton skeleton-line curta"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div><div class="skeleton skeleton-line curta"></div></div></div></div>
+    </div>
+    <div class="secao">
+      <div class="secao-cabecalho"><h2 class="secao-titulo">🎪 Próximos Eventos</h2><a class="secao-sub" onclick="mostrarPagina('eventos')">Ver todos →</a></div>
+      <div id="home-eventos" class="grid"><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div><div class="skeleton skeleton-line curta"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div><div class="skeleton skeleton-line curta"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div><div class="skeleton skeleton-line curta"></div></div></div></div>
+    </div>
+    <div class="secao">
+      <div class="secao-cabecalho"><h2 class="secao-titulo">📺 Nexo TV</h2><a class="secao-sub" onclick="mostrarPagina('nexotv')">Ver tudo →</a></div>
+      <div id="home-nexotv" class="grid"><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="pagina" id="pag-artistas">
+  <div class="hero-wrap">
+    <div class="hero" style="min-height:280px;">
+      <span class="hero-marca">ARTISTAS</span>
+      <span class="hero-badge">NEXO MUSIC</span>
+      <h1 style="font-size:clamp(2rem,5vw,3.5rem);">Artistas</h1>
+      <p>Conheça os artistas da Nexo Music Roblox.</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="seletor-modo">
+      <button class="modo-btn ativo" id="btnVisitante" onclick="mudarModo('visitante')">👀 Visitante</button>
+      <button class="modo-btn" id="btnContratante" onclick="mudarModo('contratante')">🎤 Contratante</button>
+    </div>
+    <div id="aviso-modo" class="secao-sub" style="margin-bottom:20px;"></div>
+    <div id="lista-artistas" class="grid"><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div><div class="skeleton skeleton-line curta"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div><div class="skeleton skeleton-line curta"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div><div class="skeleton skeleton-line curta"></div></div></div></div>
+  </div>
+</section>
+
+<section class="pagina" id="pag-eventos">
+  <div class="hero-wrap">
+    <div class="hero" style="min-height:280px;">
+      <span class="hero-marca">EVENTOS</span>
+      <span class="hero-badge">AGENDA</span>
+      <h1 style="font-size:clamp(2rem,5vw,3.5rem);">Eventos</h1>
+      <p>Próximos eventos no Roblox.</p>
+    </div>
+  </div>
+  <div class="container"><div id="lista-eventos" class="grid"><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div></div></div>
+</section>
+
+<section class="pagina" id="pag-ingressos">
+  <div class="hero-wrap">
+    <div class="hero" style="min-height:280px;">
+      <span class="hero-marca">INGRESSOS</span>
+      <span class="hero-badge">GARANTA SEU LUGAR</span>
+      <h1 style="font-size:clamp(2rem,5vw,3.5rem);">Ingressos</h1>
+      <p>Escolha seu ingresso pros próximos eventos.</p>
+    </div>
+  </div>
+  <div class="container"><div id="lista-ingressos" class="grid"><div class="skeleton-card"><div class="skeleton-body"><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div><div class="skeleton-card"><div class="skeleton-body"><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div></div></div>
+</section>
+
+<section class="pagina" id="pag-nexotv">
+  <div class="hero-wrap">
+    <div class="hero" style="min-height:280px;">
+      <span class="hero-marca">NEXO TV</span>
+      <span class="hero-badge">CONTEÚDO</span>
+      <h1 style="font-size:clamp(2rem,5vw,3.5rem);">Nexo TV</h1>
+      <p>Notícias, bastidores e conteúdos especiais.</p>
+    </div>
+  </div>
+  <div class="container"><div id="lista-nexotv" class="grid"><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div></div></div>
+</section>
+
+<section class="pagina" id="pag-funcionarios">
+  <div class="hero-wrap">
+    <div class="hero" style="min-height:280px;">
+      <span class="hero-marca">EQUIPE</span>
+      <span class="hero-badge">EQUIPE</span>
+      <h1 style="font-size:clamp(2rem,5vw,3.5rem);">Funcionários</h1>
+      <p>A equipe por trás da Nexo.</p>
+    </div>
+  </div>
+  <div class="container"><div id="lista-funcionarios" class="grid"><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line curta"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line curta"></div></div></div></div></div>
+</section>
+
+<section class="pagina" id="pag-config">
+  <div class="hero-wrap">
+    <div class="hero" style="min-height:280px;">
+      <span class="hero-marca">CONFIG</span>
+      <span class="hero-badge">PERSONALIZE</span>
+      <h1 style="font-size:clamp(2rem,5vw,3.5rem);">Configurações</h1>
+      <p>Ajuste tema, redes e preferências.</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="secao">
+      <div class="secao-cabecalho"><h2 class="secao-titulo">🎨 Tema</h2><span class="secao-sub">Salvo no seu dispositivo</span></div>
+      <div class="tema-grid">
+        <div class="tema-card" data-tema="nexo" onclick="trocarTema('nexo')"><span class="emoji">💜</span><span class="nome">Padrão Nexo</span></div>
+        <div class="tema-card" data-tema="preto" onclick="trocarTema('preto')"><span class="emoji">🖤</span><span class="nome">Preto</span></div>
+        <div class="tema-card" data-tema="branco" onclick="trocarTema('branco')"><span class="emoji">🤍</span><span class="nome">Branco</span></div>
+        <div class="tema-card" data-tema="pb" onclick="trocarTema('pb')"><span class="emoji">⚫⚪</span><span class="nome">Preto e Branco</span></div>
+      </div>
+    </div>
+    <div class="secao">
+      <div class="secao-cabecalho"><h2 class="secao-titulo">📱 Nossas redes</h2><span class="secao-sub">Editável pelo administrador</span></div>
+      <div id="lista-redes" class="grid grid-4"><div class="skeleton-card skeleton-destaque"><div class="skeleton skeleton-img"></div><div class="skeleton skeleton-line titulo"></div></div><div class="skeleton-card skeleton-destaque"><div class="skeleton skeleton-img"></div><div class="skeleton skeleton-line titulo"></div></div><div class="skeleton-card skeleton-destaque"><div class="skeleton skeleton-img"></div><div class="skeleton skeleton-line titulo"></div></div></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="nexo-footer">
+  <div class="nexo-footer-inner">
+    <div><h4>Nexo Music Roblox</h4><p>Música, eventos e Roblox num só lugar. 🎶</p></div>
+    <div><h4>Redes Sociais</h4><div id="footer-redes"><span>Carregando...</span></div></div>
+    <div>
+      <h4>Links</h4>
+      <a onclick="mostrarPagina('artistas')">Artistas</a>
+      <a onclick="mostrarPagina('eventos')">Eventos</a>
+      <a onclick="mostrarPagina('ingressos')">Ingressos</a>
+      <a href="https://nexomusicroblox-dev.github.io/nexo-processo-seletivo/" target="_blank">Trabalhe Conosco</a>
+    </div>
+  </div>
+  <div class="footer-base">© <span id="ano"></span> Nexo Music Roblox — Todos os direitos reservados</div>
+</footer>
+
+<div class="modal-fundo" id="modalFundo">
+  <div class="modal-box">
+    <button class="modal-fechar" onclick="fecharModal()">✕</button>
+    <div id="modalConteudo"></div>
+  </div>
+</div>
+
+<button class="btn-topo" id="btnTopo" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 <script>
 const API_URL = 'https://script.google.com/macros/s/AKfycbzZnvlJ6QVOdUyuFrHONxaksEBSiJuiTtZeJ6yUQqYkZCO1jEEok3UgoQc-ZG7sDbGg/exec';
 const CACHE_TTL = 5 * 60 * 1000;
