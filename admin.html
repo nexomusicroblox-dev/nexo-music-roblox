@@ -22,6 +22,10 @@ body{font-family:'Inter','Segoe UI',system-ui,sans-serif;background:var(--bg);co
 .login-msg{padding:12px;border-radius:10px;font-size:0.85rem;margin-top:16px;display:none}
 .login-msg.erro{background:#fee2e2;color:#991b1b;display:block}
 .login-msg.ok{background:#d1fae5;color:#065f46;display:block}
+.lembrar{display:flex;align-items:center;gap:10px;margin:16px 0;font-size:0.9rem;color:var(--texto-suave);cursor:pointer;user-select:none;padding:12px 14px;background:#faf5ff;border:2px solid var(--borda);border-radius:12px;transition:all var(--anim)}
+.lembrar:hover{border-color:var(--roxo)}
+.lembrar input{width:18px;height:18px;cursor:pointer;accent-color:var(--roxo)}
+.lembrar.ativo{background:#f5f3ff;border-color:var(--roxo);color:var(--roxo);font-weight:700}
 .tela-painel{display:none;min-height:100vh}
 .tela-painel.ativa{display:block}
 .admin-topo{background:#fff;border-bottom:1px solid var(--borda);padding:16px 32px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100}
@@ -82,6 +86,16 @@ body{font-family:'Inter','Segoe UI',system-ui,sans-serif;background:var(--bg);co
 .upload-preview{max-width:100%;max-height:200px;border-radius:8px;margin:0 auto}
 .upload-status{margin-top:8px;font-size:0.8rem;color:var(--roxo);font-weight:700}
 .btn-remover-img{margin-top:8px;padding:6px 12px;background:#fee2e2;color:#991b1b;border:none;border-radius:6px;font-weight:700;font-size:0.75rem;cursor:pointer;font-family:inherit}
+.config-card{background:#fff;border-radius:16px;padding:24px;border:1px solid var(--borda);margin-bottom:18px}
+.config-card h3{font-size:1.1rem;font-weight:900;margin-bottom:10px;color:var(--roxo)}
+.config-card p{color:var(--texto-suave);font-size:0.9rem;margin-bottom:16px}
+.btn-perigo{padding:12px 20px;background:#fee2e2;color:#991b1b;border:2px solid #fecaca;border-radius:10px;font-weight:700;cursor:pointer;font-family:inherit;font-size:0.9rem;transition:all var(--anim)}
+.btn-perigo:hover{background:#fecaca}
+/* SKELETON ADMIN */
+@keyframes skeletonPulse{0%{opacity:1}50%{opacity:0.5}100%{opacity:1}}
+.skeleton{background:linear-gradient(90deg,var(--borda) 0%,var(--bg) 50%,var(--borda) 100%);background-size:200% 100%;animation:skeletonPulse 1.5s ease-in-out infinite;border-radius:8px}
+.skeleton-linha{height:56px;border-radius:10px;margin-bottom:8px}
+.skeleton-header{height:24px;width:40%;margin-bottom:24px}
 @media (max-width:800px){.admin-layout{grid-template-columns:1fr}.admin-sidebar{display:flex;overflow-x:auto;padding:10px;gap:6px;border-right:none;border-bottom:1px solid var(--borda)}.menu-item{white-space:nowrap;padding:8px 14px}.admin-content{padding:20px}.tabela-linha{grid-template-columns:1fr;gap:8px}.tabela-cab{display:none}.acoes{justify-content:flex-start}}
 </style>
 </head>
@@ -100,6 +114,10 @@ body{font-family:'Inter','Segoe UI',system-ui,sans-serif;background:var(--bg);co
     <div id="etapaCodigo" style="display:none;">
       <label class="login-label">Digite o código recebido por email</label>
       <input type="text" id="inputCodigo" class="login-input" placeholder="000000" maxlength="6" inputmode="numeric" autocomplete="one-time-code">
+      <label class="lembrar" id="labelLembrar" onclick="toggleLembrar()">
+        <input type="checkbox" id="inputLembrar" onclick="event.stopPropagation();toggleLembrar();">
+        <span>🤝 Confiar neste dispositivo por 30 dias</span>
+      </label>
       <button class="login-btn" id="btnVerificarCodigo" onclick="verificarCodigo()">Entrar no painel</button>
       <button class="login-btn" style="background:#f3f4f6;color:#1a1a2e;margin-top:8px;" onclick="voltarEmail()">← Trocar email</button>
       <div class="login-msg" id="msgLogin2"></div>
@@ -126,6 +144,7 @@ body{font-family:'Inter','Segoe UI',system-ui,sans-serif;background:var(--bg);co
       <button class="menu-item" onclick="mudarAba('funcionarios', this)">👥 Funcionários</button>
       <button class="menu-item" onclick="mudarAba('redes', this)">📱 Redes Sociais</button>
       <button class="menu-item" onclick="mudarAba('admins', this)">🔐 Administradores</button>
+      <button class="menu-item" onclick="mudarAba('config', this)">⚙️ Configurações</button>
     </aside>
     <main class="admin-content">
       <div class="content-header">
@@ -154,21 +173,37 @@ body{font-family:'Inter','Segoe UI',system-ui,sans-serif;background:var(--bg);co
 
 <script>
 const API_URL = 'https://script.google.com/macros/s/AKfycbzZnvlJ6QVOdUyuFrHONxaksEBSiJuiTtZeJ6yUQqYkZCO1jEEok3UgoQc-ZG7sDbGg/exec';
+const CACHE_TTL = 5 * 60 * 1000;
+const LEMBRAR_TTL = 30 * 24 * 60 * 60 * 1000;
 
 let token = localStorage.getItem('nexo_admin_token') || '';
 let emailLogado = localStorage.getItem('nexo_admin_email') || '';
+let lembrarExpira = parseInt(localStorage.getItem('nexo_lembrar_expira') || '0');
 let abaAtual = 'dashboard';
 let dadosCache = {};
 let editandoId = null;
 let emailOriginal = null;
 let imagensCache = {};
+let lembrarMarcado = false;
+/* ============ API COM CACHE ============ */
 async function apiGet(acao, params = {}) {
+  const chave = 'nexo_admin_cache_' + acao + '_' + JSON.stringify(params);
+  try {
+    const salvo = localStorage.getItem(chave);
+    if (salvo) {
+      const parsed = JSON.parse(salvo);
+      if (Date.now() - parsed.ts < CACHE_TTL) return parsed.dados;
+    }
+  } catch(e) {}
+
   const url = new URL(API_URL);
   url.searchParams.set('acao', acao);
   Object.entries(params).forEach(([k, v]) => url.searchParams.set(k, v));
   const r = await fetch(url.toString());
   const j = await r.json();
   if (!j.ok) throw new Error(j.erro || 'Erro');
+
+  try { localStorage.setItem(chave, JSON.stringify({ ts: Date.now(), dados: j.dados })); } catch(e) {}
   return j.dados;
 }
 async function apiPost(acao, dados = {}) {
@@ -181,7 +216,13 @@ async function apiPost(acao, dados = {}) {
   if (!j.ok) throw new Error(j.erro || 'Erro');
   return j.dados;
 }
+function limparCacheAdmin() {
+  try {
+    Object.keys(localStorage).forEach(k => { if (k.startsWith('nexo_admin_cache_')) localStorage.removeItem(k); });
+  } catch(e) {}
+}
 
+/* ============ UPLOAD ============ */
 function htmlUpload(campoId, urlAtual) {
   const temImg = urlAtual && urlAtual !== '';
   imagensCache[campoId] = urlAtual || '';
@@ -250,15 +291,19 @@ function fileParaBase64(file) {
 function removerImagem(campoId, event) {
   event.stopPropagation();
   imagensCache[campoId] = '';
-  const previewEl = document.getElementById('preview_' + campoId);
-  const areaEl = document.getElementById('area_' + campoId);
-  const statusEl = document.getElementById('status_' + campoId);
-  previewEl.innerHTML = `<span class="upload-icone">📁</span><p class="upload-txt">Clique para escolher uma imagem<br><small>JPG, PNG, WEBP ou GIF · até 20MB</small></p>`;
-  areaEl.classList.remove('tem-img');
-  statusEl.textContent = '';
+  document.getElementById('preview_' + campoId).innerHTML = `<span class="upload-icone">📁</span><p class="upload-txt">Clique para escolher uma imagem<br><small>JPG, PNG, WEBP ou GIF · até 20MB</small></p>`;
+  document.getElementById('area_' + campoId).classList.remove('tem-img');
+  document.getElementById('status_' + campoId).textContent = '';
   event.target.remove();
 }
 function getImagem(campoId) { return imagensCache[campoId] || ''; }
+
+/* ============ LOGIN ============ */
+function toggleLembrar() {
+  lembrarMarcado = !lembrarMarcado;
+  document.getElementById('inputLembrar').checked = lembrarMarcado;
+  document.getElementById('labelLembrar').classList.toggle('ativo', lembrarMarcado);
+}
 
 async function enviarCodigo() {
   const email = document.getElementById('inputEmail').value.trim().toLowerCase();
@@ -281,6 +326,7 @@ async function enviarCodigo() {
     btn.disabled = false; btn.textContent = 'Enviar código';
   }
 }
+
 async function verificarCodigo() {
   const email = document.getElementById('inputEmail').value.trim().toLowerCase();
   const codigo = document.getElementById('inputCodigo').value.trim();
@@ -293,6 +339,14 @@ async function verificarCodigo() {
     token = r.token; emailLogado = r.email;
     localStorage.setItem('nexo_admin_token', token);
     localStorage.setItem('nexo_admin_email', emailLogado);
+    if (lembrarMarcado) {
+      const expira = Date.now() + LEMBRAR_TTL;
+      localStorage.setItem('nexo_lembrar_expira', expira.toString());
+      lembrarExpira = expira;
+    } else {
+      localStorage.removeItem('nexo_lembrar_expira');
+      lembrarExpira = 0;
+    }
     entrarPainel();
   } catch(e) {
     msg.className = 'login-msg erro';
@@ -301,17 +355,34 @@ async function verificarCodigo() {
     btn.disabled = false; btn.textContent = 'Entrar no painel';
   }
 }
+
 function voltarEmail() {
   document.getElementById('etapaEmail').style.display = 'block';
   document.getElementById('etapaCodigo').style.display = 'none';
   document.getElementById('inputCodigo').value = '';
+  lembrarMarcado = false;
+  document.getElementById('inputLembrar').checked = false;
+  document.getElementById('labelLembrar').classList.remove('ativo');
 }
+
 function sair() {
   localStorage.removeItem('nexo_admin_token');
   localStorage.removeItem('nexo_admin_email');
-  token = ''; emailLogado = '';
+  localStorage.removeItem('nexo_lembrar_expira');
+  limparCacheAdmin();
+  token = ''; emailLogado = ''; lembrarExpira = 0;
   location.reload();
 }
+
+function esquecerDispositivo() {
+  if (!confirm('Isso vai fazer com que este dispositivo peça código novamente na próxima vez. Continuar?')) return;
+  localStorage.removeItem('nexo_lembrar_expira');
+  msgFlutuante('✅ Dispositivo esquecido!', 'ok');
+  setTimeout(() => {
+    sair();
+  }, 1500);
+}
+
 function entrarPainel() {
   document.getElementById('telaLogin').style.display = 'none';
   document.getElementById('telaPainel').classList.add('ativa');
@@ -319,14 +390,16 @@ function entrarPainel() {
   mudarAba('dashboard');
 }
 
+/* ============ NAVEGAÇÃO ============ */
 function mudarAba(aba, btn) {
   abaAtual = aba;
   document.querySelectorAll('.menu-item').forEach(b => b.classList.remove('ativo'));
   if (btn) btn.classList.add('ativo');
-  const titulos = {dashboard:'Dashboard',artistas:'Artistas',eventos:'Eventos',ingressos:'Ingressos',nexotv:'Nexo TV',funcionarios:'Funcionários',redes:'Redes Sociais',admins:'Administradores',destaques:'Destaques'};
+  const titulos = {dashboard:'Dashboard',artistas:'Artistas',eventos:'Eventos',ingressos:'Ingressos',nexotv:'Nexo TV',funcionarios:'Funcionários',redes:'Redes Sociais',admins:'Administradores',destaques:'Destaques',config:'Configurações'};
   document.getElementById('contentTitulo').textContent = titulos[aba] || aba;
-  document.getElementById('btnNovo').style.display = (aba === 'dashboard') ? 'none' : 'block';
+  document.getElementById('btnNovo').style.display = (aba === 'dashboard' || aba === 'config') ? 'none' : 'block';
   if (aba === 'dashboard') renderDashboard();
+  else if (aba === 'config') renderConfig();
   else carregarAba(aba);
 }
 
@@ -336,9 +409,32 @@ function renderDashboard() {
       <span class="emoji">👋</span>
       <p>Bem-vindo ao painel, <strong>${emailLogado}</strong>!</p>
       <p style="margin-top:12px;font-size:0.9rem;">Use o menu lateral para gerenciar o conteúdo.</p>
-      <p style="margin-top:20px;font-size:0.85rem;color:#9ca3af;">Versão 1.5 — Nexo Music Roblox</p>
+      <p style="margin-top:20px;font-size:0.85rem;color:#9ca3af;">Versão 1.6 — Nexo Music Roblox</p>
     </div>`;
 }
+
+function renderConfig() {
+  const lembrar = lembrarExpira > 0 && lembrarExpira > Date.now();
+  const diasRestantes = lembrar ? Math.ceil((lembrarExpira - Date.now()) / (24*60*60*1000)) : 0;
+  document.getElementById('contentArea').innerHTML = `
+    <div class="config-card">
+      <h3>🔐 Segurança</h3>
+      <p>Este dispositivo ${lembrar ? `<strong>está confiável</strong> por mais <strong>${diasRestantes} dia(s)</strong>. Você não vai precisar digitar o código até lá.` : 'não está marcado como confiável. Você vai precisar digitar o código na próxima vez.'}</p>
+      ${lembrar ? `<button class="btn-perigo" onclick="esquecerDispositivo()">🚫 Esquecer este dispositivo</button>` : ''}
+    </div>
+    <div class="config-card">
+      <h3>🗑️ Cache</h3>
+      <p>Os dados das abas ficam salvos no navegador por 5 minutos pra carregar mais rápido. Se você fez alterações que não aparecem, limpe o cache.</p>
+      <button class="btn-perigo" onclick="limparCacheAdmin();msgFlutuante('✅ Cache limpo!','ok')">🧹 Limpar cache agora</button>
+    </div>
+    <div class="config-card">
+      <h3>📧 Notificações por email</h3>
+      <p>Você recebe email em <strong>todos os admins ativos</strong> quando alguém solicita uma contratação. Pra parar de receber, peça pro admin principal marcar você como <strong>inativo</strong>.</p>
+    </div>
+  `;
+}
+
+/* ============ MENSAGENS ============ */
 function msgFlutuante(texto, tipo = 'ok') {
   const el = document.getElementById('msgFlutuante');
   el.textContent = texto;
@@ -358,9 +454,14 @@ document.getElementById('modalFundo').addEventListener('click', e => {
   if (e.target.id === 'modalFundo') fecharModal();
 });
 
+/* ============ CARREGAR ABAS COM SKELETON ============ */
+function skeletonLista() {
+  return `<div class="skeleton skeleton-header"></div>${Array(5).fill('<div class="skeleton skeleton-linha"></div>').join('')}`;
+}
+
 async function carregarAba(aba) {
   const area = document.getElementById('contentArea');
-  area.innerHTML = '<div class="vazio-admin"><span class="emoji">⏳</span><p>Carregando...</p></div>';
+  area.innerHTML = skeletonLista();
   try {
     if (aba === 'destaques') { const d = await apiGet('listar_destaques'); dadosCache.destaques = d; area.innerHTML = d.length ? renderListaDestaques(d) : vazioAdmin('Nenhum destaque cadastrado', '✨'); }
     else if (aba === 'artistas') { const d = await apiGet('listar_artistas'); dadosCache.artistas = d; area.innerHTML = d.length ? renderListaArtistas(d) : vazioAdmin('Nenhum artista cadastrado', '🎤'); }
@@ -379,6 +480,7 @@ function tabelaWrap(linhasHtml) {
   return `<div class="tabela"><div class="tabela-linha tabela-cab"><span>ID</span><span>Nome / Título</span><span>Info</span><span style="text-align:right;">Ações</span></div>${linhasHtml}</div>`;
 }
 
+/* ============ RENDER LISTAS ============ */
 function renderListaDestaques(lista) {
   return tabelaWrap(lista.map(d => `
     <div class="tabela-linha">
@@ -398,10 +500,10 @@ function abrirNovoDestaque() {
     <div class="campo"><label>Subtítulo / Descrição</label><textarea id="f_subtitulo" placeholder="Ex: Perfis, biografias e informações dos artistas."></textarea></div>
     ${htmlUpload('imagem', '')}
     <div class="campo-linha">
-      <div class="campo"><label>Texto do botão (opcional)</label><input id="f_texto_botao" placeholder="Ex: Saiba mais"></div>
-      <div class="campo"><label>Link do botão (opcional)</label><input id="f_link_botao" placeholder="Ex: artistas"></div>
+      <div class="campo"><label>Texto do botão</label><input id="f_texto_botao" placeholder="Ex: Saiba mais"></div>
+      <div class="campo"><label>Link do botão</label><input id="f_link_botao" placeholder="Ex: artistas"></div>
     </div>
-    <div class="campo"><label>Ordem</label><input id="f_ordem" type="number" placeholder="1, 2, 3..." value="1"></div>
+    <div class="campo"><label>Ordem</label><input id="f_ordem" type="number" value="1"></div>
   `);
 }
 function editarDestaque(id) {
@@ -412,8 +514,8 @@ function editarDestaque(id) {
     <div class="campo"><label>Subtítulo / Descrição</label><textarea id="f_subtitulo">${d.subtitulo || ''}</textarea></div>
     ${htmlUpload('imagem', d.imagem || '')}
     <div class="campo-linha">
-      <div class="campo"><label>Texto do botão (opcional)</label><input id="f_texto_botao" value="${(d.texto_botao || '').replace(/"/g, '&quot;')}"></div>
-      <div class="campo"><label>Link do botão (opcional)</label><input id="f_link_botao" value="${d.link_botao || ''}"></div>
+      <div class="campo"><label>Texto do botão</label><input id="f_texto_botao" value="${(d.texto_botao || '').replace(/"/g, '&quot;')}"></div>
+      <div class="campo"><label>Link do botão</label><input id="f_link_botao" value="${d.link_botao || ''}"></div>
     </div>
     <div class="campo"><label>Ordem</label><input id="f_ordem" type="number" value="${d.ordem || 1}"></div>
   `);
@@ -736,38 +838,31 @@ async function salvarModal() {
       dados = { id: editandoId, titulo: get('f_titulo'), subtitulo: get('f_subtitulo'), imagem: getImagem('imagem'), texto_botao: get('f_texto_botao'), link_botao: get('f_link_botao'), ordem: get('f_ordem') };
       if (!dados.titulo) throw new Error('Título obrigatório');
       acao = editandoId ? 'editar_destaque' : 'criar_destaque';
-    }
-    else if (abaAtual === 'artistas') {
+    } else if (abaAtual === 'artistas') {
       dados = { id: editandoId, nome: get('f_nome'), bio: get('f_bio'), foto: getImagem('foto'), instagram: get('f_instagram'), youtube: get('f_youtube'), tiktok: get('f_tiktok') };
       if (!dados.nome) throw new Error('Nome obrigatório');
       acao = editandoId ? 'editar_artista' : 'criar_artista';
-    }
-    else if (abaAtual === 'eventos') {
+    } else if (abaAtual === 'eventos') {
       dados = { id: editandoId, nome: get('f_nome'), data: get('f_data'), hora: get('f_hora'), local: get('f_local'), descricao: get('f_descricao'), imagem: getImagem('imagem'), link_roblox: get('f_link_roblox') };
       if (!dados.nome) throw new Error('Nome obrigatório');
       acao = editandoId ? 'editar_evento' : 'criar_evento';
-    }
-    else if (abaAtual === 'ingressos') {
+    } else if (abaAtual === 'ingressos') {
       dados = { id: editandoId, nome: get('f_nome'), evento_id: get('f_evento_id'), categoria: get('f_categoria'), preco: get('f_preco'), qtd_total: get('f_qtd_total'), lote: get('f_lote'), beneficios: get('f_beneficios'), regras: get('f_regras') };
       if (!dados.nome) throw new Error('Nome obrigatório');
       acao = editandoId ? 'editar_ingresso' : 'criar_ingresso';
-    }
-    else if (abaAtual === 'nexotv') {
+    } else if (abaAtual === 'nexotv') {
       dados = { id: editandoId, titulo: get('f_titulo'), tipo: get('f_tipo'), descricao: get('f_descricao'), imagem: getImagem('imagem'), video_url: get('f_video_url'), autor: get('f_autor') };
       if (!dados.titulo) throw new Error('Título obrigatório');
       acao = editandoId ? 'editar_nexotv' : 'criar_nexotv';
-    }
-    else if (abaAtual === 'funcionarios') {
+    } else if (abaAtual === 'funcionarios') {
       dados = { id: editandoId, nome: get('f_nome'), cargo: get('f_cargo'), setor: get('f_setor'), foto: getImagem('foto'), bio: get('f_bio'), instagram: get('f_instagram') };
       if (!dados.nome) throw new Error('Nome obrigatório');
       acao = editandoId ? 'editar_funcionario' : 'criar_funcionario';
-    }
-    else if (abaAtual === 'redes') {
+    } else if (abaAtual === 'redes') {
       dados = { id: editandoId, nome: get('f_nome'), url: get('f_url') };
       if (!dados.nome || !dados.url) throw new Error('Nome e URL obrigatórios');
       acao = editandoId ? 'editar_rede' : 'criar_rede';
-    }
-    else if (abaAtual === 'admins') {
+    } else if (abaAtual === 'admins') {
       dados = { email: get('f_email'), nome: get('f_nome'), ativo: get('f_ativo') };
       if (!dados.email) throw new Error('Email obrigatório');
       if (editandoId) { dados.email_original = emailOriginal; acao = 'editar_admin'; }
@@ -775,6 +870,7 @@ async function salvarModal() {
     }
 
     await apiPost(acao, dados);
+    limparCacheAdmin();
     fecharModal();
     msgFlutuante(editandoId ? '✅ Atualizado!' : '✅ Criado!', 'ok');
     await carregarAba(abaAtual);
@@ -792,6 +888,7 @@ async function removerItem(tipo, id) {
     if (tipo === 'admin') { acao = 'remover_admin'; payload = { email: id }; }
     else { acao = 'remover_' + tipo; payload = { id }; }
     await apiPost(acao, payload);
+    limparCacheAdmin();
     msgFlutuante('✅ Removido!', 'ok');
     await carregarAba(abaAtual);
   } catch(e) {
@@ -799,8 +896,18 @@ async function removerItem(tipo, id) {
   }
 }
 
+/* ============ INICIALIZAÇÃO COM LEMBRAR ============ */
 (async function init() {
+  const agora = Date.now();
+  const temLembrar = lembrarExpira > 0 && lembrarExpira > agora;
+
   if (token && emailLogado) {
+    // Se tem "lembrar" ativo, entra direto sem validar com o servidor
+    if (temLembrar) {
+      entrarPainel();
+      return;
+    }
+    // Senão, valida a sessão normal (24h)
     try {
       const r = await apiPost('validar_sessao', {});
       if (r.valido) entrarPainel();
