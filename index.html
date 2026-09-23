@@ -94,10 +94,23 @@ a.secao-sub{color:var(--roxo);font-weight:700;cursor:pointer}
 .tema-card .nome{font-weight:800;font-size:0.9rem}
 .vazio{text-align:center;padding:60px 20px;color:var(--texto-suave);grid-column:1/-1}
 .vazio .emoji{font-size:3rem;display:block;margin-bottom:12px;opacity:0.5}
-.loading{text-align:center;padding:40px;color:var(--texto-suave);grid-column:1/-1}
 .pagina{display:none}
 .pagina.ativa{display:block;animation:fadeIn 0.4s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* ============ SKELETON LOADING ============ */
+@keyframes skeletonPulse{0%{opacity:1}50%{opacity:0.5}100%{opacity:1}}
+.skeleton{background:linear-gradient(90deg,var(--borda) 0%,var(--bg) 50%,var(--borda) 100%);background-size:200% 100%;animation:skeletonPulse 1.5s ease-in-out infinite;border-radius:12px}
+.skeleton-card{background:var(--card-bg);border-radius:var(--radius);overflow:hidden;border:1px solid var(--borda);box-shadow:var(--sombra-card)}
+.skeleton-img{width:100%;height:180px}
+.skeleton-body{padding:20px}
+.skeleton-line{height:14px;margin-bottom:10px;border-radius:6px}
+.skeleton-line.titulo{height:20px;width:70%}
+.skeleton-line.curta{width:50%}
+.skeleton-line.media{width:85%}
+.skeleton-destaque{padding:20px}
+.skeleton-destaque .skeleton-img{height:130px;border-radius:16px;margin-bottom:16px}
+
 .seletor-modo{display:flex;gap:10px;margin-bottom:28px;padding:8px;background:var(--card-bg);border:1px solid var(--borda);border-radius:16px;width:fit-content;box-shadow:var(--sombra-card)}
 .modo-btn{padding:12px 24px;border-radius:12px;border:none;background:transparent;color:var(--texto-suave);font-weight:800;font-size:0.9rem;cursor:pointer;transition:all var(--anim);font-family:inherit}
 .modo-btn:hover{color:var(--roxo)}
@@ -181,7 +194,7 @@ a.secao-sub{color:var(--roxo);font-weight:700;cursor:pointer}
   <div class="container">
     <div class="secao">
       <div class="secao-cabecalho"><h2 class="secao-titulo">Destaques</h2><span class="secao-sub">Conteúdo editável pelo administrador</span></div>
-      <div id="home-destaques" class="grid grid-4"><div class="loading">Carregando...</div></div>
+      <div id="home-destaques" class="grid grid-4"><div class="skeleton-card skeleton-destaque"><div class="skeleton skeleton-img"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div><div class="skeleton-card skeleton-destaque"><div class="skeleton skeleton-img"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div><div class="skeleton-card skeleton-destaque"><div class="skeleton skeleton-img"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div><div class="skeleton-card skeleton-destaque"><div class="skeleton skeleton-img"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div>
     </div>
     <div class="secao">
       <div class="secao-cabecalho"><h2 class="secao-titulo">Acesso rápido</h2></div>
@@ -193,15 +206,15 @@ a.secao-sub{color:var(--roxo);font-weight:700;cursor:pointer}
     </div>
     <div class="secao">
       <div class="secao-cabecalho"><h2 class="secao-titulo">🎤 Artistas</h2><a class="secao-sub" onclick="mostrarPagina('artistas')">Ver todos →</a></div>
-      <div id="home-artistas" class="grid"><div class="loading">Carregando...</div></div>
+      <div id="home-artistas" class="grid"><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div><div class="skeleton skeleton-line curta"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div><div class="skeleton skeleton-line curta"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div><div class="skeleton skeleton-line curta"></div></div></div></div>
     </div>
     <div class="secao">
       <div class="secao-cabecalho"><h2 class="secao-titulo">🎪 Próximos Eventos</h2><a class="secao-sub" onclick="mostrarPagina('eventos')">Ver todos →</a></div>
-      <div id="home-eventos" class="grid"><div class="loading">Carregando...</div></div>
+      <div id="home-eventos" class="grid"><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div><div class="skeleton skeleton-line curta"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div><div class="skeleton skeleton-line curta"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div><div class="skeleton skeleton-line curta"></div></div></div></div>
     </div>
     <div class="secao">
       <div class="secao-cabecalho"><h2 class="secao-titulo">📺 Nexo TV</h2><a class="secao-sub" onclick="mostrarPagina('nexotv')">Ver tudo →</a></div>
-      <div id="home-nexotv" class="grid"><div class="loading">Carregando...</div></div>
+      <div id="home-nexotv" class="grid"><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div></div>
     </div>
   </div>
 </section>
@@ -221,7 +234,7 @@ a.secao-sub{color:var(--roxo);font-weight:700;cursor:pointer}
       <button class="modo-btn" id="btnContratante" onclick="mudarModo('contratante')">🎤 Contratante</button>
     </div>
     <div id="aviso-modo" class="secao-sub" style="margin-bottom:20px;"></div>
-    <div id="lista-artistas" class="grid"><div class="loading">Carregando...</div></div>
+    <div id="lista-artistas" class="grid"><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div><div class="skeleton skeleton-line curta"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div><div class="skeleton skeleton-line curta"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div><div class="skeleton skeleton-line curta"></div></div></div></div>
   </div>
 </section>
 
@@ -234,7 +247,7 @@ a.secao-sub{color:var(--roxo);font-weight:700;cursor:pointer}
       <p>Próximos eventos no Roblox.</p>
     </div>
   </div>
-  <div class="container"><div id="lista-eventos" class="grid"><div class="loading">Carregando...</div></div></div>
+  <div class="container"><div id="lista-eventos" class="grid"><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div><div class="skeleton skeleton-line curta"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div><div class="skeleton skeleton-line curta"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div><div class="skeleton skeleton-line curta"></div></div></div></div></div>
 </section>
 
 <section class="pagina" id="pag-ingressos">
@@ -246,7 +259,7 @@ a.secao-sub{color:var(--roxo);font-weight:700;cursor:pointer}
       <p>Escolha seu ingresso pros próximos eventos.</p>
     </div>
   </div>
-  <div class="container"><div id="lista-ingressos" class="grid"><div class="loading">Carregando...</div></div></div>
+  <div class="container"><div id="lista-ingressos" class="grid"><div class="skeleton-card"><div class="skeleton-body"><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div><div class="skeleton-card"><div class="skeleton-body"><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div><div class="skeleton-card"><div class="skeleton-body"><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div></div></div>
 </section>
 
 <section class="pagina" id="pag-nexotv">
@@ -258,7 +271,7 @@ a.secao-sub{color:var(--roxo);font-weight:700;cursor:pointer}
       <p>Notícias, bastidores e conteúdos especiais.</p>
     </div>
   </div>
-  <div class="container"><div id="lista-nexotv" class="grid"><div class="loading">Carregando...</div></div></div>
+  <div class="container"><div id="lista-nexotv" class="grid"><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div></div></div>
 </section>
 
 <section class="pagina" id="pag-funcionarios">
@@ -270,7 +283,7 @@ a.secao-sub{color:var(--roxo);font-weight:700;cursor:pointer}
       <p>A equipe por trás da Nexo.</p>
     </div>
   </div>
-  <div class="container"><div id="lista-funcionarios" class="grid"><div class="loading">Carregando...</div></div></div>
+  <div class="container"><div id="lista-funcionarios" class="grid"><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line media"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line media"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line media"></div></div></div></div></div>
 </section>
 
 <section class="pagina" id="pag-config">
@@ -294,7 +307,7 @@ a.secao-sub{color:var(--roxo);font-weight:700;cursor:pointer}
     </div>
     <div class="secao">
       <div class="secao-cabecalho"><h2 class="secao-titulo">📱 Nossas redes</h2><span class="secao-sub">Editável pelo administrador</span></div>
-      <div id="lista-redes" class="grid grid-4"><div class="loading">Carregando...</div></div>
+      <div id="lista-redes" class="grid grid-4"><div class="skeleton-card skeleton-destaque"><div class="skeleton skeleton-img"></div><div class="skeleton skeleton-line titulo"></div></div><div class="skeleton-card skeleton-destaque"><div class="skeleton skeleton-img"></div><div class="skeleton skeleton-line titulo"></div></div><div class="skeleton-card skeleton-destaque"><div class="skeleton skeleton-img"></div><div class="skeleton skeleton-line titulo"></div></div></div>
     </div>
   </div>
 </section>
@@ -326,6 +339,7 @@ a.secao-sub{color:var(--roxo);font-weight:700;cursor:pointer}
 <button class="btn-topo" id="btnTopo" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 <script>
 const API_URL = 'https://script.google.com/macros/s/AKfycbzZnvlJ6QVOdUyuFrHONxaksEBSiJuiTtZeJ6yUQqYkZCO1jEEok3UgoQc-ZG7sDbGg/exec';
+const CACHE_TTL = 5 * 60 * 1000;
 
 let modoAtual = 'visitante';
 let artistasCache = [];
@@ -348,13 +362,29 @@ function mostrarPagina(nome){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
+/* ============ API COM CACHE ============ */
 async function apiGet(acao,params={}){
+  const chave = 'nexo_cache_' + acao + '_' + JSON.stringify(params);
+  try{
+    const salvo = localStorage.getItem(chave);
+    if(salvo){
+      const parsed = JSON.parse(salvo);
+      if(Date.now() - parsed.ts < CACHE_TTL){
+        return parsed.dados;
+      }
+    }
+  }catch(e){}
+
   const url=new URL(API_URL);
   url.searchParams.set('acao',acao);
   Object.entries(params).forEach(([k,v])=>url.searchParams.set(k,v));
   const r=await fetch(url.toString());
   const j=await r.json();
   if(!j.ok)throw new Error(j.erro||'Erro');
+
+  try{
+    localStorage.setItem(chave, JSON.stringify({ ts: Date.now(), dados: j.dados }));
+  }catch(e){}
   return j.dados;
 }
 async function apiPost(acao,dados={}){
@@ -408,7 +438,7 @@ function gerarLinkCalendario(ev){
 
 const cardDestaque=d=>`
   <article class="card-destaque animar">
-    ${d.imagem?`<div class="destaque-img"><img src="${d.imagem}" alt="${escapar(d.titulo||'')}"></div>`:`<div class="destaque-img">ESPAÇO PARA BANNER / FOTO</div>`}
+    ${d.imagem?`<div class="destaque-img"><img src="${d.imagem}" alt="${escapar(d.titulo||'')}" loading="lazy"></div>`:`<div class="destaque-img">ESPAÇO PARA BANNER / FOTO</div>`}
     <h3>${d.titulo||'Destaque'}</h3>
     ${d.subtitulo?`<p>${d.subtitulo}</p>`:''}
     ${d.texto_botao&&d.link_botao?`<a href="${d.link_botao}" class="btn btn-primario" style="margin-top:12px;font-size:0.8rem;padding:9px 16px;">${d.texto_botao}</a>`:''}
@@ -416,7 +446,7 @@ const cardDestaque=d=>`
 
 const cardEvento=e=>`
   <article class="card-evento animar" onclick="abrirEvento(${e.id})">
-    ${e.imagem?`<img src="${e.imagem}" alt="${escapar(e.nome)}">`:`<div class="card-sem-img">🎪</div>`}
+    ${e.imagem?`<img src="${e.imagem}" alt="${escapar(e.nome)}" loading="lazy">`:`<div class="card-sem-img">🎪</div>`}
     <div class="card-body">
       <h3>${e.nome}</h3>
       <p class="card-meta">📅 ${e.data||'—'} · ⏰ ${e.hora||'—'}</p>
@@ -428,7 +458,7 @@ const cardEvento=e=>`
 
 const cardArtista=a=>`
   <article class="card-artista animar" onclick="abrirArtista(${a.id})">
-    ${a.foto?`<img src="${a.foto}" alt="${escapar(a.nome)}">`:`<div class="card-sem-img">🎤</div>`}
+    ${a.foto?`<img src="${a.foto}" alt="${escapar(a.nome)}" loading="lazy">`:`<div class="card-sem-img">🎤</div>`}
     <div class="card-body">
       <h3>${a.nome}</h3>
       <p>${(a.bio||'').substring(0,120)}${(a.bio||'').length>120?'...':''}</p>
@@ -438,7 +468,7 @@ const cardArtista=a=>`
 
 const cardNexoTV=n=>`
   <article class="card-nexotv animar" onclick="abrirNexoTV(${n.id})">
-    ${n.imagem?`<img src="${n.imagem}" alt="${escapar(n.titulo)}">`:`<div class="card-sem-img">📺</div>`}
+    ${n.imagem?`<img src="${n.imagem}" alt="${escapar(n.titulo)}" loading="lazy">`:`<div class="card-sem-img">📺</div>`}
     <div class="card-body">
       <span class="badge">${n.tipo||'notícia'}</span>
       <h3>${n.titulo}</h3>
@@ -449,7 +479,7 @@ const cardNexoTV=n=>`
 
 const cardFuncionario=f=>`
   <article class="card-funcionario animar" onclick="abrirFuncionario(${f.id})">
-    ${f.foto?`<img src="${f.foto}" alt="${escapar(f.nome)}">`:`<div class="card-sem-img">👤</div>`}
+    ${f.foto?`<img src="${f.foto}" alt="${escapar(f.nome)}" loading="lazy">`:`<div class="card-sem-img">👤</div>`}
     <div class="card-body">
       <h3>${f.nome}</h3>
       <p class="cargo">${f.cargo||''} ${f.setor?'· '+f.setor:''}</p>
@@ -665,73 +695,95 @@ window.addEventListener('scroll',()=>{
   document.getElementById('btnTopo').classList.toggle('visivel',window.scrollY>400);
 });
 
+/* ============ CARREGAMENTO PARALELO (NOVO) ============ */
 async function carregarTudo(){
   document.getElementById('ano').textContent=new Date().getFullYear();
   mudarModo('visitante');
 
-  try{
-    const redes=await apiGet('listar_redes');
-    const html=redes.length?redes.map(r=>`<a href="${r.url}" target="_blank">${iconeRede(r.nome)} ${r.nome}</a>`).join(''):'<span>Em breve</span>';
-    document.getElementById('footer-redes').innerHTML=html;
-    document.getElementById('lista-redes').innerHTML=redes.length?redes.map(cardRede).join(''):vazio('Nenhuma rede cadastrada','🔗');
-  }catch(e){
+  // Dispara TODAS as chamadas ao mesmo tempo
+  const promessas = {
+    redes:        apiGet('listar_redes').catch(e => ({ erro: e.message })),
+    destaques:    apiGet('listar_destaques').catch(e => ({ erro: e.message })),
+    artistas:     apiGet('listar_artistas').catch(e => ({ erro: e.message })),
+    eventos:      apiGet('listar_eventos').catch(e => ({ erro: e.message })),
+    nexotv:       apiGet('listar_nexotv').catch(e => ({ erro: e.message })),
+    ingressos:    apiGet('listar_ingressos').catch(e => ({ erro: e.message })),
+    funcionarios: apiGet('listar_funcionarios').catch(e => ({ erro: e.message }))
+  };
+
+  // Espera TODAS terminarem
+  const r = await Promise.all(Object.values(promessas));
+  const dados = {};
+  Object.keys(promessas).forEach((k, i) => dados[k] = r[i]);
+
+  // ---- Redes ----
+  if(dados.redes.erro){
     document.getElementById('footer-redes').innerHTML='<span>Erro</span>';
-    document.getElementById('lista-redes').innerHTML=vazio('Erro: '+e.message,'⚠️');
+    document.getElementById('lista-redes').innerHTML=vazio('Erro: '+dados.redes.erro,'⚠️');
+  } else {
+    const redes = dados.redes;
+    const html = redes.length ? redes.map(rd=>`<a href="${rd.url}" target="_blank">${iconeRede(rd.nome)} ${rd.nome}</a>`).join('') : '<span>Em breve</span>';
+    document.getElementById('footer-redes').innerHTML = html;
+    document.getElementById('lista-redes').innerHTML = redes.length ? redes.map(cardRede).join('') : vazio('Nenhuma rede cadastrada','🔗');
   }
 
-  try{
-    const destaques=await apiGet('listar_destaques');
-    document.getElementById('home-destaques').innerHTML=destaques.length
-      ? destaques.map(cardDestaque).join('')
-      : vazio('Nenhum destaque cadastrado ainda. Adicione em ✨ Destaques no admin.','✨');
-  }catch(e){
-    document.getElementById('home-destaques').innerHTML=vazio('Erro: '+e.message,'⚠️');
+  // ---- Destaques ----
+  if(dados.destaques.erro){
+    document.getElementById('home-destaques').innerHTML = vazio('Erro: '+dados.destaques.erro,'⚠️');
+  } else {
+    const d = dados.destaques;
+    document.getElementById('home-destaques').innerHTML = d.length ? d.map(cardDestaque).join('') : vazio('Nenhum destaque cadastrado ainda. Adicione em ✨ Destaques no admin.','✨');
   }
 
-  try{
-    const artistas=await apiGet('listar_artistas');
-    artistasCache=artistas;
-    document.getElementById('home-artistas').innerHTML=artistas.length?artistas.slice(0,3).map(cardArtista).join(''):vazio('Nenhum artista cadastrado ainda','🎤');
+  // ---- Artistas ----
+  if(dados.artistas.erro){
+    document.getElementById('home-artistas').innerHTML=vazio('Erro: '+dados.artistas.erro,'⚠️');
+    document.getElementById('lista-artistas').innerHTML=vazio('Erro: '+dados.artistas.erro,'⚠️');
+  } else {
+    const artistas = dados.artistas;
+    artistasCache = artistas;
+    document.getElementById('home-artistas').innerHTML = artistas.length ? artistas.slice(0,3).map(cardArtista).join('') : vazio('Nenhum artista cadastrado ainda','🎤');
     renderizarArtistas();
-  }catch(e){
-    document.getElementById('home-artistas').innerHTML=vazio('Erro: '+e.message,'⚠️');
-    document.getElementById('lista-artistas').innerHTML=vazio('Erro: '+e.message,'⚠️');
   }
 
-  try{
-    const eventos=await apiGet('listar_eventos');
-    eventosCache=eventos;
-    document.getElementById('home-eventos').innerHTML=eventos.length?eventos.slice(0,3).map(cardEvento).join(''):vazio('Nenhum evento cadastrado ainda','🎪');
-    document.getElementById('lista-eventos').innerHTML=eventos.length?eventos.map(cardEvento).join(''):vazio('Nenhum evento cadastrado ainda','🎪');
-  }catch(e){
-    document.getElementById('home-eventos').innerHTML=vazio('Erro: '+e.message,'⚠️');
-    document.getElementById('lista-eventos').innerHTML=vazio('Erro: '+e.message,'⚠️');
+  // ---- Eventos ----
+  if(dados.eventos.erro){
+    document.getElementById('home-eventos').innerHTML=vazio('Erro: '+dados.eventos.erro,'⚠️');
+    document.getElementById('lista-eventos').innerHTML=vazio('Erro: '+dados.eventos.erro,'⚠️');
+  } else {
+    const eventos = dados.eventos;
+    eventosCache = eventos;
+    document.getElementById('home-eventos').innerHTML = eventos.length ? eventos.slice(0,3).map(cardEvento).join('') : vazio('Nenhum evento cadastrado ainda','🎪');
+    document.getElementById('lista-eventos').innerHTML = eventos.length ? eventos.map(cardEvento).join('') : vazio('Nenhum evento cadastrado ainda','🎪');
   }
 
-  try{
-    const tv=await apiGet('listar_nexotv');
-    nexotvCache=tv;
-    document.getElementById('home-nexotv').innerHTML=tv.length?tv.slice(0,3).map(cardNexoTV).join(''):vazio('Sem publicações ainda','📺');
-    document.getElementById('lista-nexotv').innerHTML=tv.length?tv.map(cardNexoTV).join(''):vazio('Sem publicações ainda','📺');
-  }catch(e){
-    document.getElementById('home-nexotv').innerHTML=vazio('Erro: '+e.message,'⚠️');
-    document.getElementById('lista-nexotv').innerHTML=vazio('Erro: '+e.message,'⚠️');
+  // ---- Nexo TV ----
+  if(dados.nexotv.erro){
+    document.getElementById('home-nexotv').innerHTML=vazio('Erro: '+dados.nexotv.erro,'⚠️');
+    document.getElementById('lista-nexotv').innerHTML=vazio('Erro: '+dados.nexotv.erro,'⚠️');
+  } else {
+    const tv = dados.nexotv;
+    nexotvCache = tv;
+    document.getElementById('home-nexotv').innerHTML = tv.length ? tv.slice(0,3).map(cardNexoTV).join('') : vazio('Sem publicações ainda','📺');
+    document.getElementById('lista-nexotv').innerHTML = tv.length ? tv.map(cardNexoTV).join('') : vazio('Sem publicações ainda','📺');
   }
 
-  try{
-    const ing=await apiGet('listar_ingressos');
-    ingressosCache=ing;
-    document.getElementById('lista-ingressos').innerHTML=ing.length?ing.map(cardIngresso).join(''):vazio('Nenhum ingresso cadastrado','🎟️');
-  }catch(e){
-    document.getElementById('lista-ingressos').innerHTML=vazio('Erro: '+e.message,'⚠️');
+  // ---- Ingressos ----
+  if(dados.ingressos.erro){
+    document.getElementById('lista-ingressos').innerHTML=vazio('Erro: '+dados.ingressos.erro,'⚠️');
+  } else {
+    const ing = dados.ingressos;
+    ingressosCache = ing;
+    document.getElementById('lista-ingressos').innerHTML = ing.length ? ing.map(cardIngresso).join('') : vazio('Nenhum ingresso cadastrado','🎟️');
   }
 
-  try{
-    const func=await apiGet('listar_funcionarios');
-    funcionariosCache=func;
-    document.getElementById('lista-funcionarios').innerHTML=func.length?func.map(cardFuncionario).join(''):vazio('Nenhum funcionário cadastrado','👥');
-  }catch(e){
-    document.getElementById('lista-funcionarios').innerHTML=vazio('Erro: '+e.message,'⚠️');
+  // ---- Funcionários ----
+  if(dados.funcionarios.erro){
+    document.getElementById('lista-funcionarios').innerHTML=vazio('Erro: '+dados.funcionarios.erro,'⚠️');
+  } else {
+    const func = dados.funcionarios;
+    funcionariosCache = func;
+    document.getElementById('lista-funcionarios').innerHTML = func.length ? func.map(cardFuncionario).join('') : vazio('Nenhum funcionário cadastrado','👥');
   }
 
   ativarAnimacoes();
