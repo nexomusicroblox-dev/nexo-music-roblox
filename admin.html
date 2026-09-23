@@ -118,6 +118,7 @@ body{font-family:'Inter','Segoe UI',system-ui,sans-serif;background:var(--bg);co
   <div class="admin-layout">
     <aside class="admin-sidebar">
       <button class="menu-item ativo" onclick="mudarAba('dashboard', this)">📊 Dashboard</button>
+      <button class="menu-item" onclick="mudarAba('destaques', this)">✨ Destaques</button>
       <button class="menu-item" onclick="mudarAba('artistas', this)">🎤 Artistas</button>
       <button class="menu-item" onclick="mudarAba('eventos', this)">🎪 Eventos</button>
       <button class="menu-item" onclick="mudarAba('ingressos', this)">🎟️ Ingressos</button>
@@ -161,7 +162,6 @@ let dadosCache = {};
 let editandoId = null;
 let emailOriginal = null;
 let imagensCache = {};
-
 async function apiGet(acao, params = {}) {
   const url = new URL(API_URL);
   url.searchParams.set('acao', acao);
@@ -323,7 +323,7 @@ function mudarAba(aba, btn) {
   abaAtual = aba;
   document.querySelectorAll('.menu-item').forEach(b => b.classList.remove('ativo'));
   if (btn) btn.classList.add('ativo');
-  const titulos = {dashboard:'Dashboard',artistas:'Artistas',eventos:'Eventos',ingressos:'Ingressos',nexotv:'Nexo TV',funcionarios:'Funcionários',redes:'Redes Sociais',admins:'Administradores'};
+  const titulos = {dashboard:'Dashboard',artistas:'Artistas',eventos:'Eventos',ingressos:'Ingressos',nexotv:'Nexo TV',funcionarios:'Funcionários',redes:'Redes Sociais',admins:'Administradores',destaques:'Destaques'};
   document.getElementById('contentTitulo').textContent = titulos[aba] || aba;
   document.getElementById('btnNovo').style.display = (aba === 'dashboard') ? 'none' : 'block';
   if (aba === 'dashboard') renderDashboard();
@@ -336,7 +336,7 @@ function renderDashboard() {
       <span class="emoji">👋</span>
       <p>Bem-vindo ao painel, <strong>${emailLogado}</strong>!</p>
       <p style="margin-top:12px;font-size:0.9rem;">Use o menu lateral para gerenciar o conteúdo.</p>
-      <p style="margin-top:20px;font-size:0.85rem;color:#9ca3af;">Versão 1.4 — Nexo Music Roblox</p>
+      <p style="margin-top:20px;font-size:0.85rem;color:#9ca3af;">Versão 1.5 — Nexo Music Roblox</p>
     </div>`;
 }
 function msgFlutuante(texto, tipo = 'ok') {
@@ -362,7 +362,8 @@ async function carregarAba(aba) {
   const area = document.getElementById('contentArea');
   area.innerHTML = '<div class="vazio-admin"><span class="emoji">⏳</span><p>Carregando...</p></div>';
   try {
-    if (aba === 'artistas') { const d = await apiGet('listar_artistas'); dadosCache.artistas = d; area.innerHTML = d.length ? renderListaArtistas(d) : vazioAdmin('Nenhum artista cadastrado', '🎤'); }
+    if (aba === 'destaques') { const d = await apiGet('listar_destaques'); dadosCache.destaques = d; area.innerHTML = d.length ? renderListaDestaques(d) : vazioAdmin('Nenhum destaque cadastrado', '✨'); }
+    else if (aba === 'artistas') { const d = await apiGet('listar_artistas'); dadosCache.artistas = d; area.innerHTML = d.length ? renderListaArtistas(d) : vazioAdmin('Nenhum artista cadastrado', '🎤'); }
     else if (aba === 'eventos') { const d = await apiGet('listar_eventos'); dadosCache.eventos = d; area.innerHTML = d.length ? renderListaEventos(d) : vazioAdmin('Nenhum evento cadastrado', '🎪'); }
     else if (aba === 'ingressos') { const d = await apiGet('listar_ingressos'); dadosCache.ingressos = d; area.innerHTML = d.length ? renderListaIngressos(d) : vazioAdmin('Nenhum ingresso cadastrado', '🎟️'); }
     else if (aba === 'nexotv') { const d = await apiGet('listar_nexotv'); dadosCache.nexotv = d; area.innerHTML = d.length ? renderListaNexoTV(d) : vazioAdmin('Sem publicações', '📺'); }
@@ -376,6 +377,46 @@ async function carregarAba(aba) {
 function vazioAdmin(msg, emoji) { return `<div class="vazio-admin"><span class="emoji">${emoji}</span><p>${msg}</p></div>`; }
 function tabelaWrap(linhasHtml) {
   return `<div class="tabela"><div class="tabela-linha tabela-cab"><span>ID</span><span>Nome / Título</span><span>Info</span><span style="text-align:right;">Ações</span></div>${linhasHtml}</div>`;
+}
+
+function renderListaDestaques(lista) {
+  return tabelaWrap(lista.map(d => `
+    <div class="tabela-linha">
+      <span class="emoji">✨</span>
+      <span class="nome">${d.titulo || 'Sem título'}</span>
+      <span class="info">${(d.subtitulo || '').substring(0, 60)} · Ordem ${d.ordem || 0}</span>
+      <div class="acoes">
+        <button class="btn-acao btn-editar" onclick="editarDestaque(${d.id})">Editar</button>
+        <button class="btn-acao btn-remover" onclick="removerItem('destaque', ${d.id})">Remover</button>
+      </div>
+    </div>`).join(''));
+}
+function abrirNovoDestaque() {
+  editandoId = null;
+  abrirModal('Novo Destaque', `
+    <div class="campo"><label>Título *</label><input id="f_titulo" placeholder="Ex: Artistas Nexo"></div>
+    <div class="campo"><label>Subtítulo / Descrição</label><textarea id="f_subtitulo" placeholder="Ex: Perfis, biografias e informações dos artistas."></textarea></div>
+    ${htmlUpload('imagem', '')}
+    <div class="campo-linha">
+      <div class="campo"><label>Texto do botão (opcional)</label><input id="f_texto_botao" placeholder="Ex: Saiba mais"></div>
+      <div class="campo"><label>Link do botão (opcional)</label><input id="f_link_botao" placeholder="Ex: artistas"></div>
+    </div>
+    <div class="campo"><label>Ordem</label><input id="f_ordem" type="number" placeholder="1, 2, 3..." value="1"></div>
+  `);
+}
+function editarDestaque(id) {
+  const d = (dadosCache.destaques || []).find(x => x.id == id); if (!d) return;
+  editandoId = id;
+  abrirModal('Editar Destaque', `
+    <div class="campo"><label>Título *</label><input id="f_titulo" value="${(d.titulo || '').replace(/"/g, '&quot;')}"></div>
+    <div class="campo"><label>Subtítulo / Descrição</label><textarea id="f_subtitulo">${d.subtitulo || ''}</textarea></div>
+    ${htmlUpload('imagem', d.imagem || '')}
+    <div class="campo-linha">
+      <div class="campo"><label>Texto do botão (opcional)</label><input id="f_texto_botao" value="${(d.texto_botao || '').replace(/"/g, '&quot;')}"></div>
+      <div class="campo"><label>Link do botão (opcional)</label><input id="f_link_botao" value="${d.link_botao || ''}"></div>
+    </div>
+    <div class="campo"><label>Ordem</label><input id="f_ordem" type="number" value="${d.ordem || 1}"></div>
+  `);
 }
 
 function renderListaArtistas(lista) {
@@ -435,8 +476,8 @@ function abrirNovoEvento() {
   abrirModal('Novo Evento', `
     <div class="campo"><label>Nome *</label><input id="f_nome"></div>
     <div class="campo-linha">
-      <div class="campo"><label>Data</label><input id="f_data" placeholder="2025-12-25"></div>
-      <div class="campo"><label>Hora</label><input id="f_hora" placeholder="20:00"></div>
+      <div class="campo"><label>Data</label><input id="f_data" type="date"></div>
+      <div class="campo"><label>Hora</label><input id="f_hora" type="time"></div>
     </div>
     <div class="campo"><label>Local</label><input id="f_local"></div>
     <div class="campo"><label>Descrição</label><textarea id="f_descricao"></textarea></div>
@@ -450,8 +491,8 @@ function editarEvento(id) {
   abrirModal('Editar Evento', `
     <div class="campo"><label>Nome *</label><input id="f_nome" value="${(e.nome || '').replace(/"/g, '&quot;')}"></div>
     <div class="campo-linha">
-      <div class="campo"><label>Data</label><input id="f_data" value="${e.data || ''}"></div>
-      <div class="campo"><label>Hora</label><input id="f_hora" value="${e.hora || ''}"></div>
+      <div class="campo"><label>Data</label><input id="f_data" type="date" value="${e.data || ''}"></div>
+      <div class="campo"><label>Hora</label><input id="f_hora" type="time" value="${e.hora || ''}"></div>
     </div>
     <div class="campo"><label>Local</label><input id="f_local" value="${e.local || ''}"></div>
     <div class="campo"><label>Descrição</label><textarea id="f_descricao">${e.descricao || ''}</textarea></div>
@@ -536,7 +577,7 @@ function abrirNovoNexoTV() {
     </div>
     <div class="campo"><label>Descrição</label><textarea id="f_descricao"></textarea></div>
     ${htmlUpload('imagem', '')}
-    <div class="campo"><label>URL do Vídeo</label><input id="f_video_url"></div>
+    <div class="campo"><label>URL do Vídeo (YouTube)</label><input id="f_video_url"></div>
     <div class="campo"><label>Autor</label><input id="f_autor"></div>
   `);
 }
@@ -617,8 +658,8 @@ function renderListaRedes(lista) {
 function abrirNovaRede() {
   editandoId = null;
   abrirModal('Nova Rede Social', `
-    <div class="campo"><label>Nome *</label><input id="f_nome"></div>
-    <div class="campo"><label>URL *</label><input id="f_url"></div>
+    <div class="campo"><label>Nome *</label><input id="f_nome" placeholder="Instagram"></div>
+    <div class="campo"><label>URL *</label><input id="f_url" placeholder="https://instagram.com/..."></div>
   `);
 }
 function editarRede(id) {
@@ -674,7 +715,8 @@ function editarAdmin(email) {
 }
 
 function abrirNovo() {
-  if (abaAtual === 'artistas') abrirNovoArtista();
+  if (abaAtual === 'destaques') abrirNovoDestaque();
+  else if (abaAtual === 'artistas') abrirNovoArtista();
   else if (abaAtual === 'eventos') abrirNovoEvento();
   else if (abaAtual === 'ingressos') abrirNovoIngresso();
   else if (abaAtual === 'nexotv') abrirNovoNexoTV();
@@ -690,31 +732,42 @@ async function salvarModal() {
     const get = id => (document.getElementById(id)?.value || '').trim();
     let acao, dados;
 
-    if (abaAtual === 'artistas') {
+    if (abaAtual === 'destaques') {
+      dados = { id: editandoId, titulo: get('f_titulo'), subtitulo: get('f_subtitulo'), imagem: getImagem('imagem'), texto_botao: get('f_texto_botao'), link_botao: get('f_link_botao'), ordem: get('f_ordem') };
+      if (!dados.titulo) throw new Error('Título obrigatório');
+      acao = editandoId ? 'editar_destaque' : 'criar_destaque';
+    }
+    else if (abaAtual === 'artistas') {
       dados = { id: editandoId, nome: get('f_nome'), bio: get('f_bio'), foto: getImagem('foto'), instagram: get('f_instagram'), youtube: get('f_youtube'), tiktok: get('f_tiktok') };
       if (!dados.nome) throw new Error('Nome obrigatório');
       acao = editandoId ? 'editar_artista' : 'criar_artista';
-    } else if (abaAtual === 'eventos') {
+    }
+    else if (abaAtual === 'eventos') {
       dados = { id: editandoId, nome: get('f_nome'), data: get('f_data'), hora: get('f_hora'), local: get('f_local'), descricao: get('f_descricao'), imagem: getImagem('imagem'), link_roblox: get('f_link_roblox') };
       if (!dados.nome) throw new Error('Nome obrigatório');
       acao = editandoId ? 'editar_evento' : 'criar_evento';
-    } else if (abaAtual === 'ingressos') {
+    }
+    else if (abaAtual === 'ingressos') {
       dados = { id: editandoId, nome: get('f_nome'), evento_id: get('f_evento_id'), categoria: get('f_categoria'), preco: get('f_preco'), qtd_total: get('f_qtd_total'), lote: get('f_lote'), beneficios: get('f_beneficios'), regras: get('f_regras') };
       if (!dados.nome) throw new Error('Nome obrigatório');
       acao = editandoId ? 'editar_ingresso' : 'criar_ingresso';
-    } else if (abaAtual === 'nexotv') {
+    }
+    else if (abaAtual === 'nexotv') {
       dados = { id: editandoId, titulo: get('f_titulo'), tipo: get('f_tipo'), descricao: get('f_descricao'), imagem: getImagem('imagem'), video_url: get('f_video_url'), autor: get('f_autor') };
       if (!dados.titulo) throw new Error('Título obrigatório');
       acao = editandoId ? 'editar_nexotv' : 'criar_nexotv';
-    } else if (abaAtual === 'funcionarios') {
+    }
+    else if (abaAtual === 'funcionarios') {
       dados = { id: editandoId, nome: get('f_nome'), cargo: get('f_cargo'), setor: get('f_setor'), foto: getImagem('foto'), bio: get('f_bio'), instagram: get('f_instagram') };
       if (!dados.nome) throw new Error('Nome obrigatório');
       acao = editandoId ? 'editar_funcionario' : 'criar_funcionario';
-    } else if (abaAtual === 'redes') {
+    }
+    else if (abaAtual === 'redes') {
       dados = { id: editandoId, nome: get('f_nome'), url: get('f_url') };
       if (!dados.nome || !dados.url) throw new Error('Nome e URL obrigatórios');
       acao = editandoId ? 'editar_rede' : 'criar_rede';
-    } else if (abaAtual === 'admins') {
+    }
+    else if (abaAtual === 'admins') {
       dados = { email: get('f_email'), nome: get('f_nome'), ativo: get('f_ativo') };
       if (!dados.email) throw new Error('Email obrigatório');
       if (editandoId) { dados.email_original = emailOriginal; acao = 'editar_admin'; }
