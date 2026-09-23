@@ -54,6 +54,7 @@ html[data-tema="preto"] .nexo-nav a.ativo{background:#2a1a4a;color:#c4b5fd}
 a.secao-sub{color:var(--roxo);font-weight:700;cursor:pointer}
 .grid{display:grid;gap:22px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
 .grid-4{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+.grid-anuncios{display:grid;gap:22px;grid-template-columns:1fr 1fr}
 .card-evento,.card-artista,.card-nexotv,.card-funcionario,.card-ingresso,.card-destaque{background:var(--card-bg);border-radius:var(--radius);overflow:hidden;box-shadow:var(--sombra-card);transition:all var(--anim);border:1px solid var(--borda)}
 .card-evento,.card-artista,.card-nexotv,.card-funcionario,.card-ingresso{cursor:pointer}
 .card-evento:hover,.card-artista:hover,.card-nexotv:hover,.card-funcionario:hover,.card-ingresso:hover,.card-destaque:hover{transform:translateY(-6px);box-shadow:0 22px 45px rgba(124,58,237,0.15);border-color:rgba(124,58,237,0.2)}
@@ -71,6 +72,20 @@ a.secao-sub{color:var(--roxo);font-weight:700;cursor:pointer}
 .destaque-img img{width:100%;height:100%;object-fit:cover}
 .card-destaque h3{font-size:1.15rem;font-weight:900;margin-bottom:8px}
 .card-destaque p{color:var(--texto-suave);font-size:0.88rem}
+
+/* ============ ANÚNCIOS (VÍDEOS) ============ */
+.card-anuncio{background:var(--card-bg);border-radius:var(--radius);overflow:hidden;box-shadow:var(--sombra-card);border:1px solid var(--borda);transition:all var(--anim);position:relative}
+.card-anuncio:hover{box-shadow:0 22px 45px rgba(124,58,237,0.15)}
+.anuncio-video{position:relative;width:100%;aspect-ratio:16/9;background:#000;overflow:hidden}
+.anuncio-video iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;pointer-events:auto}
+.anuncio-video .overlay-clique{position:absolute;inset:0;background:transparent;cursor:pointer;z-index:2;display:none}
+.card-anuncio.tem-link .anuncio-video .overlay-clique{display:block}
+.anuncio-info{padding:16px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.anuncio-info h3{font-size:1rem;font-weight:800;letter-spacing:-0.3px;margin:0;flex:1}
+.btn-som{width:38px;height:38px;border-radius:50%;background:var(--gradiente);color:#fff;border:none;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:all var(--anim);flex-shrink:0;font-family:inherit}
+.btn-som:hover{transform:scale(1.1)}
+.btn-som.mudo{background:var(--borda);color:var(--texto-suave)}
+
 .acesso-grid{display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
 .acesso-card{background:var(--card-bg);padding:28px;border-radius:var(--radius);border:1px solid var(--borda);box-shadow:var(--sombra-card);cursor:pointer;transition:all var(--anim)}
 .acesso-card:hover{transform:translateY(-6px);box-shadow:0 22px 45px rgba(124,58,237,0.18)}
@@ -97,8 +112,6 @@ a.secao-sub{color:var(--roxo);font-weight:700;cursor:pointer}
 .pagina{display:none}
 .pagina.ativa{display:block;animation:fadeIn 0.4s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-
-/* ============ SKELETON LOADING ============ */
 @keyframes skeletonPulse{0%{opacity:1}50%{opacity:0.5}100%{opacity:1}}
 .skeleton{background:linear-gradient(90deg,var(--borda) 0%,var(--bg) 50%,var(--borda) 100%);background-size:200% 100%;animation:skeletonPulse 1.5s ease-in-out infinite;border-radius:12px}
 .skeleton-card{background:var(--card-bg);border-radius:var(--radius);overflow:hidden;border:1px solid var(--borda);box-shadow:var(--sombra-card)}
@@ -110,7 +123,7 @@ a.secao-sub{color:var(--roxo);font-weight:700;cursor:pointer}
 .skeleton-line.media{width:85%}
 .skeleton-destaque{padding:20px}
 .skeleton-destaque .skeleton-img{height:130px;border-radius:16px;margin-bottom:16px}
-
+.skeleton-video{width:100%;aspect-ratio:16/9;border-radius:0}
 .seletor-modo{display:flex;gap:10px;margin-bottom:28px;padding:8px;background:var(--card-bg);border:1px solid var(--borda);border-radius:16px;width:fit-content;box-shadow:var(--sombra-card)}
 .modo-btn{padding:12px 24px;border-radius:12px;border:none;background:transparent;color:var(--texto-suave);font-weight:800;font-size:0.9rem;cursor:pointer;transition:all var(--anim);font-family:inherit}
 .modo-btn:hover{color:var(--roxo)}
@@ -151,7 +164,7 @@ a.secao-sub{color:var(--roxo);font-weight:700;cursor:pointer}
 .btn-topo:hover{transform:translateY(-4px)}
 .animar{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease}
 .animar.visivel{opacity:1;transform:translateY(0)}
-@media (max-width:900px){.nexo-header-inner{padding:14px 20px}.menu-toggle{display:block}.nexo-nav{display:none;width:100%;flex-direction:column;align-items:stretch;margin-top:12px;position:absolute;top:100%;left:0;right:0;background:var(--card-bg);padding:12px;border-bottom:1px solid var(--borda);box-shadow:0 10px 30px rgba(0,0,0,0.08)}.nexo-nav.aberto{display:flex}.nexo-nav a{text-align:center;padding:12px}.hero{padding:50px 28px;border-radius:24px;min-height:380px}.hero-wrap,.container{padding-left:20px;padding-right:20px}.secao-titulo{font-size:1.5rem}.form-linha{grid-template-columns:1fr}.seletor-modo{width:100%}.modo-btn{flex:1;text-align:center}.nexo-footer{padding:40px 20px 20px}.modal-box{padding:24px}.modal-img-grande,.modal-img-sem{height:200px}.modal-titulo-grande{font-size:1.5rem}.btn-topo{bottom:16px;right:16px}}
+@media (max-width:900px){.nexo-header-inner{padding:14px 20px}.menu-toggle{display:block}.nexo-nav{display:none;width:100%;flex-direction:column;align-items:stretch;margin-top:12px;position:absolute;top:100%;left:0;right:0;background:var(--card-bg);padding:12px;border-bottom:1px solid var(--borda);box-shadow:0 10px 30px rgba(0,0,0,0.08)}.nexo-nav.aberto{display:flex}.nexo-nav a{text-align:center;padding:12px}.hero{padding:50px 28px;border-radius:24px;min-height:380px}.hero-wrap,.container{padding-left:20px;padding-right:20px}.secao-titulo{font-size:1.5rem}.form-linha{grid-template-columns:1fr}.seletor-modo{width:100%}.modo-btn{flex:1;text-align:center}.nexo-footer{padding:40px 20px 20px}.modal-box{padding:24px}.modal-img-grande,.modal-img-sem{height:200px}.modal-titulo-grande{font-size:1.5rem}.btn-topo{bottom:16px;right:16px}.grid-anuncios{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -192,9 +205,13 @@ a.secao-sub{color:var(--roxo);font-weight:700;cursor:pointer}
     </div>
   </div>
   <div class="container">
-    <div class="secao">
+    <div class="secao" id="secao-destaques">
       <div class="secao-cabecalho"><h2 class="secao-titulo">Destaques</h2><span class="secao-sub">Conteúdo editável pelo administrador</span></div>
       <div id="home-destaques" class="grid grid-4"><div class="skeleton-card skeleton-destaque"><div class="skeleton skeleton-img"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div><div class="skeleton-card skeleton-destaque"><div class="skeleton skeleton-img"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div><div class="skeleton-card skeleton-destaque"><div class="skeleton skeleton-img"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div><div class="skeleton-card skeleton-destaque"><div class="skeleton skeleton-img"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div>
+    </div>
+    <div class="secao" id="secao-anuncios" style="display:none;">
+      <div class="secao-cabecalho"><h2 class="secao-titulo">📹 Anúncios</h2><span class="secao-sub">Novidades e promoções</span></div>
+      <div id="home-anuncios" class="grid-anuncios"></div>
     </div>
     <div class="secao">
       <div class="secao-cabecalho"><h2 class="secao-titulo">Acesso rápido</h2></div>
@@ -247,7 +264,7 @@ a.secao-sub{color:var(--roxo);font-weight:700;cursor:pointer}
       <p>Próximos eventos no Roblox.</p>
     </div>
   </div>
-  <div class="container"><div id="lista-eventos" class="grid"><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div><div class="skeleton skeleton-line curta"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div><div class="skeleton skeleton-line curta"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div><div class="skeleton skeleton-line curta"></div></div></div></div></div>
+  <div class="container"><div id="lista-eventos" class="grid"><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div></div></div>
 </section>
 
 <section class="pagina" id="pag-ingressos">
@@ -259,7 +276,7 @@ a.secao-sub{color:var(--roxo);font-weight:700;cursor:pointer}
       <p>Escolha seu ingresso pros próximos eventos.</p>
     </div>
   </div>
-  <div class="container"><div id="lista-ingressos" class="grid"><div class="skeleton-card"><div class="skeleton-body"><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div><div class="skeleton-card"><div class="skeleton-body"><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div><div class="skeleton-card"><div class="skeleton-body"><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div></div></div>
+  <div class="container"><div id="lista-ingressos" class="grid"><div class="skeleton-card"><div class="skeleton-body"><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div><div class="skeleton-card"><div class="skeleton-body"><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div></div></div>
 </section>
 
 <section class="pagina" id="pag-nexotv">
@@ -271,7 +288,7 @@ a.secao-sub{color:var(--roxo);font-weight:700;cursor:pointer}
       <p>Notícias, bastidores e conteúdos especiais.</p>
     </div>
   </div>
-  <div class="container"><div id="lista-nexotv" class="grid"><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div></div></div>
+  <div class="container"><div id="lista-nexotv" class="grid"><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div></div></div>
 </section>
 
 <section class="pagina" id="pag-funcionarios">
@@ -283,7 +300,7 @@ a.secao-sub{color:var(--roxo);font-weight:700;cursor:pointer}
       <p>A equipe por trás da Nexo.</p>
     </div>
   </div>
-  <div class="container"><div id="lista-funcionarios" class="grid"><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line media"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line media"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line media"></div></div></div></div></div>
+  <div class="container"><div id="lista-funcionarios" class="grid"><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line curta"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line curta"></div></div></div></div></div>
 </section>
 
 <section class="pagina" id="pag-config">
@@ -369,9 +386,7 @@ async function apiGet(acao,params={}){
     const salvo = localStorage.getItem(chave);
     if(salvo){
       const parsed = JSON.parse(salvo);
-      if(Date.now() - parsed.ts < CACHE_TTL){
-        return parsed.dados;
-      }
+      if(Date.now() - parsed.ts < CACHE_TTL) return parsed.dados;
     }
   }catch(e){}
 
@@ -382,9 +397,7 @@ async function apiGet(acao,params={}){
   const j=await r.json();
   if(!j.ok)throw new Error(j.erro||'Erro');
 
-  try{
-    localStorage.setItem(chave, JSON.stringify({ ts: Date.now(), dados: j.dados }));
-  }catch(e){}
+  try{ localStorage.setItem(chave, JSON.stringify({ ts: Date.now(), dados: j.dados })); }catch(e){}
   return j.dados;
 }
 async function apiPost(acao,dados={}){
@@ -397,11 +410,26 @@ async function apiPost(acao,dados={}){
 const vazio=(msg,emoji='📭')=>`<div class="vazio"><span class="emoji">${emoji}</span><p>${msg}</p></div>`;
 function escapar(s){return String(s||'').replace(/"/g,'&quot;').replace(/</g,'&lt;');}
 
-function youtubeEmbed(url){
+function youtubeEmbed(url, opts){
   if(!url)return '';
-  const m=url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]+)/);
-  if(m)return `https://www.youtube.com/embed/${m[1]}`;
-  return '';
+  const m=url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/shorts\/)([a-zA-Z0-9_-]{11})/);
+  if(!m)return '';
+  const id = m[1];
+  const loop = opts && opts.loop ? '&loop=1&playlist=' + id : '';
+  const mute = opts && opts.mute !== false ? '&mute=1' : '';
+  const auto = opts && opts.autoplay !== false ? '&autoplay=1' : '';
+  const controls = opts && opts.controls === false ? '&controls=0' : '';
+  const rel = '&rel=0';
+  return `https://www.youtube.com/embed/${id}?enablejsapi=1${auto}${mute}${loop}${controls}${rel}`;
+}
+function youtubeEmbedId(id, opts){
+  if(!id)return '';
+  const loop = opts && opts.loop ? '&loop=1&playlist=' + id : '';
+  const mute = opts && opts.mute !== false ? '&mute=1' : '';
+  const auto = opts && opts.autoplay !== false ? '&autoplay=1' : '';
+  const controls = opts && opts.controls === false ? '&controls=0' : '';
+  const rel = '&rel=0';
+  return `https://www.youtube.com/embed/${id}?enablejsapi=1${auto}${mute}${loop}${controls}${rel}`;
 }
 
 function normalizarData(data){
@@ -436,12 +464,30 @@ function gerarLinkCalendario(ev){
   return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${titulo}&dates=${inicio}/${fimStr}&details=${desc}&location=${local}`;
 }
 
+/* ============ CARDS ============ */
 const cardDestaque=d=>`
   <article class="card-destaque animar">
     ${d.imagem?`<div class="destaque-img"><img src="${d.imagem}" alt="${escapar(d.titulo||'')}" loading="lazy"></div>`:`<div class="destaque-img">ESPAÇO PARA BANNER / FOTO</div>`}
     <h3>${d.titulo||'Destaque'}</h3>
     ${d.subtitulo?`<p>${d.subtitulo}</p>`:''}
     ${d.texto_botao&&d.link_botao?`<a href="${d.link_botao}" class="btn btn-primario" style="margin-top:12px;font-size:0.8rem;padding:9px 16px;">${d.texto_botao}</a>`:''}
+  </article>`;
+
+const cardAnuncio=(a, idx)=>`
+  <article class="card-anuncio ${a.link_destino?'tem-link':''}">
+    <div class="anuncio-video">
+      <iframe
+        id="iframe-anuncio-${idx}"
+        src="${youtubeEmbedId(a.youtube_id, { autoplay: true, mute: true, loop: true, controls: false })}"
+        allow="autoplay; encrypted-media; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+      ${a.link_destino?`<div class="overlay-clique" onclick="window.open('${a.link_destino}','_blank')"></div>`:''}
+    </div>
+    <div class="anuncio-info">
+      <h3>${a.titulo||'Anúncio'}</h3>
+      <button class="btn-som mudo" id="btn-som-${idx}" onclick="toggleSomAnuncio(${idx}, this)" title="Ativar som">🔇</button>
+    </div>
   </article>`;
 
 const cardEvento=e=>`
@@ -503,6 +549,21 @@ const cardRede=r=>{
   const handle=r.url.replace(/^https?:\/\/(www\.)?/,'').replace(/\/$/,'');
   return `<div class="acesso-card animar" onclick="window.open('${r.url}','_blank')"><span class="acesso-emoji">${iconeRede(r.nome)}</span><h3>${r.nome}</h3><p>${handle}</p></div>`;
 };
+
+/* ============ SOM DOS ANÚNCIOS ============ */
+function toggleSomAnuncio(idx, btn){
+  const iframe = document.getElementById('iframe-anuncio-' + idx);
+  if(!iframe) return;
+  const estaMudo = btn.classList.contains('mudo');
+  iframe.contentWindow.postMessage(JSON.stringify({
+    event: 'command',
+    func: estaMudo ? 'unMute' : 'mute',
+    args: []
+  }), '*');
+  btn.classList.toggle('mudo');
+  btn.textContent = estaMudo ? '🔊' : '🔇';
+  btn.title = estaMudo ? 'Mutar' : 'Ativar som';
+}
 
 function mudarModo(modo){
   modoAtual=modo;
@@ -579,9 +640,9 @@ function abrirEvento(id){
 function abrirNexoTV(id){
   const n=nexotvCache.find(x=>x.id==id);
   if(!n)return;
-  const embed=youtubeEmbed(n.video_url);
+  const embed=youtubeEmbed(n.video_url, { autoplay: false, mute: false, loop: false, controls: true });
   const html=`
-    ${embed?`<div class="modal-video"><iframe src="${embed}" allowfullscreen></iframe></div>`:''}
+    ${embed?`<div class="modal-video"><iframe src="${embed}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>`:''}
     ${!embed&&n.imagem?`<img src="${n.imagem}" class="modal-img-grande" alt="${escapar(n.titulo)}">`:''}
     ${!embed&&!n.imagem?`<div class="modal-img-sem">📺</div>`:''}
     <span class="badge">${n.tipo||'notícia'}</span>
@@ -695,15 +756,35 @@ window.addEventListener('scroll',()=>{
   document.getElementById('btnTopo').classList.toggle('visivel',window.scrollY>400);
 });
 
-/* ============ CARREGAMENTO PARALELO (NOVO) ============ */
+/* ============ RENDER ANÚNCIOS NA HOME ============ */
+function renderizarAnuncios(lista){
+  const secao = document.getElementById('secao-anuncios');
+  const grid = document.getElementById('home-anuncios');
+  if(!lista || !lista.length){
+    secao.style.display = 'none';
+    return;
+  }
+  // Pega 1 do slot 1 e 1 do slot 2
+  const slot1 = lista.find(a => String(a.slot) === '1' && String(a.ativo).toUpperCase() === 'SIM');
+  const slot2 = lista.find(a => String(a.slot) === '2' && String(a.ativo).toUpperCase() === 'SIM');
+  const ativos = [slot1, slot2].filter(x => x);
+  if(ativos.length === 0){
+    secao.style.display = 'none';
+    return;
+  }
+  secao.style.display = '';
+  grid.innerHTML = ativos.map((a, i) => cardAnuncio(a, i)).join('');
+}
+
+/* ============ CARREGAMENTO PARALELO ============ */
 async function carregarTudo(){
   document.getElementById('ano').textContent=new Date().getFullYear();
   mudarModo('visitante');
 
-  // Dispara TODAS as chamadas ao mesmo tempo
   const promessas = {
     redes:        apiGet('listar_redes').catch(e => ({ erro: e.message })),
     destaques:    apiGet('listar_destaques').catch(e => ({ erro: e.message })),
+    anuncios:     apiGet('listar_anuncios').catch(e => ({ erro: e.message })),
     artistas:     apiGet('listar_artistas').catch(e => ({ erro: e.message })),
     eventos:      apiGet('listar_eventos').catch(e => ({ erro: e.message })),
     nexotv:       apiGet('listar_nexotv').catch(e => ({ erro: e.message })),
@@ -711,7 +792,6 @@ async function carregarTudo(){
     funcionarios: apiGet('listar_funcionarios').catch(e => ({ erro: e.message }))
   };
 
-  // Espera TODAS terminarem
   const r = await Promise.all(Object.values(promessas));
   const dados = {};
   Object.keys(promessas).forEach((k, i) => dados[k] = r[i]);
@@ -734,6 +814,10 @@ async function carregarTudo(){
     const d = dados.destaques;
     document.getElementById('home-destaques').innerHTML = d.length ? d.map(cardDestaque).join('') : vazio('Nenhum destaque cadastrado ainda. Adicione em ✨ Destaques no admin.','✨');
   }
+
+  // ---- Anúncios ----
+  if(!dados.anuncios.erro) renderizarAnuncios(dados.anuncios);
+  else document.getElementById('secao-anuncios').style.display = 'none';
 
   // ---- Artistas ----
   if(dados.artistas.erro){
