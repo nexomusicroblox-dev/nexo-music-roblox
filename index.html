@@ -181,12 +181,7 @@ a.secao-sub{color:var(--roxo);font-weight:700;cursor:pointer}
   <div class="container">
     <div class="secao">
       <div class="secao-cabecalho"><h2 class="secao-titulo">Destaques</h2><span class="secao-sub">Conteúdo editável pelo administrador</span></div>
-      <div class="grid grid-4">
-        <div class="card-destaque animar"><div class="destaque-img">ESPAÇO PARA BANNER / FOTO</div><h3>Em breve</h3><p>Imagem e conteúdo poderão ser trocados pelo Admin.</p></div>
-        <div class="card-destaque animar"><div class="destaque-img">FOTO DE ARTISTA</div><h3>Artistas Nexo</h3><p>Perfis, biografias e informações dos artistas.</p></div>
-        <div class="card-destaque animar"><div class="destaque-img">IMAGEM DE NOTÍCIA</div><h3>Nexo TV</h3><p>Notícias, entrevistas e novidades.</p></div>
-        <div class="card-destaque animar"><div class="destaque-img">IMAGEM DE EVENTO</div><h3>Eventos</h3><p>Agenda e informações dos eventos.</p></div>
-      </div>
+      <div id="home-destaques" class="grid grid-4"><div class="loading">Carregando...</div></div>
     </div>
     <div class="secao">
       <div class="secao-cabecalho"><h2 class="secao-titulo">Acesso rápido</h2></div>
@@ -328,7 +323,8 @@ a.secao-sub{color:var(--roxo);font-weight:700;cursor:pointer}
   </div>
 </div>
 
-<button class="btn-topo" id="btnTopo" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button><script>
+<button class="btn-topo" id="btnTopo" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<script>
 const API_URL = 'https://script.google.com/macros/s/AKfycbzZnvlJ6QVOdUyuFrHONxaksEBSiJuiTtZeJ6yUQqYkZCO1jEEok3UgoQc-ZG7sDbGg/exec';
 
 let modoAtual = 'visitante';
@@ -410,6 +406,14 @@ function gerarLinkCalendario(ev){
   return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${titulo}&dates=${inicio}/${fimStr}&details=${desc}&location=${local}`;
 }
 
+const cardDestaque=d=>`
+  <article class="card-destaque animar">
+    ${d.imagem?`<div class="destaque-img"><img src="${d.imagem}" alt="${escapar(d.titulo||'')}"></div>`:`<div class="destaque-img">ESPAÇO PARA BANNER / FOTO</div>`}
+    <h3>${d.titulo||'Destaque'}</h3>
+    ${d.subtitulo?`<p>${d.subtitulo}</p>`:''}
+    ${d.texto_botao&&d.link_botao?`<a href="${d.link_botao}" class="btn btn-primario" style="margin-top:12px;font-size:0.8rem;padding:9px 16px;">${d.texto_botao}</a>`:''}
+  </article>`;
+
 const cardEvento=e=>`
   <article class="card-evento animar" onclick="abrirEvento(${e.id})">
     ${e.imagem?`<img src="${e.imagem}" alt="${escapar(e.nome)}">`:`<div class="card-sem-img">🎪</div>`}
@@ -479,6 +483,7 @@ function mudarModo(modo){
   else{aviso.innerHTML='🎤 Você está no modo <strong>Contratante</strong>. Clique em um artista para solicitar uma contratação.';}
   renderizarArtistas();
 }
+
 function abrirModal(html){
   document.getElementById('modalConteudo').innerHTML=html;
   document.getElementById('modalFundo').classList.add('ativo');
@@ -597,7 +602,6 @@ function abrirIngresso(id){
   `;
   abrirModal(html);
 }
-
 function abrirFormContratacao(idArtista){
   const a=artistasCache.find(x=>x.id==idArtista);
   if(!a)return;
@@ -673,6 +677,15 @@ async function carregarTudo(){
   }catch(e){
     document.getElementById('footer-redes').innerHTML='<span>Erro</span>';
     document.getElementById('lista-redes').innerHTML=vazio('Erro: '+e.message,'⚠️');
+  }
+
+  try{
+    const destaques=await apiGet('listar_destaques');
+    document.getElementById('home-destaques').innerHTML=destaques.length
+      ? destaques.map(cardDestaque).join('')
+      : vazio('Nenhum destaque cadastrado ainda. Adicione em ✨ Destaques no admin.','✨');
+  }catch(e){
+    document.getElementById('home-destaques').innerHTML=vazio('Erro: '+e.message,'⚠️');
   }
 
   try{
