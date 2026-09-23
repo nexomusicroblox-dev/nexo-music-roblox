@@ -1,32 +1,63 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-tema="nexo">
+<html lang="pt-BR" data-tema="nexo" data-idioma="pt">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nexo Music Roblox</title>
 <style>
 :root{--roxo:#7c3aed;--rosa:#ec4899;--laranja:#f97316;--gradiente:linear-gradient(120deg,#7c3aed 0%,#c026d3 35%,#ec4899 65%,#f97316 100%);--gradiente-suave:linear-gradient(135deg,#fce7f3 0%,#fed7aa 100%);--bg:#f5f3ff;--texto:#1a1a2e;--texto-suave:#6b7280;--card-bg:#ffffff;--borda:#ede9fe;--sombra-card:0 10px 30px rgba(124,58,237,0.08);--radius:22px;--anim:0.25s ease}
-html[data-tema="preto"]{--bg:#0a0a0a;--texto:#f5f5f5;--texto-suave:#aaa;--card-bg:#1a1a1a;--borda:#2a2a2a;--sombra-card:0 10px 30px rgba(0,0,0,0.6)}
-html[data-tema="branco"]{--bg:#fff;--texto:#1a1a1a;--texto-suave:#666;--card-bg:#fafafa;--borda:#e5e5e5}
-html[data-tema="pb"]{--roxo:#000;--rosa:#333;--laranja:#666;--gradiente:linear-gradient(120deg,#000 0%,#666 100%);--gradiente-suave:linear-gradient(135deg,#f0f0f0 0%,#e0e0e0 100%);--bg:#f5f5f5;--card-bg:#fff}
+html[data-tema="preto"]{--bg:#0a0a0f;--texto:#ffffff;--texto-suave:#a0a0b0;--card-bg:#151520;--borda:#252535;--sombra-card:0 10px 30px rgba(124,58,237,0.15);--gradiente-suave:linear-gradient(135deg,rgba(124,58,237,0.25) 0%,rgba(236,72,153,0.2) 100%)}
+html[data-tema="branco"]{--bg:#fafafa;--texto:#1a1a1a;--texto-suave:#737373;--card-bg:#ffffff;--borda:#ebebeb;--sombra-card:0 4px 20px rgba(0,0,0,0.05)}
+html[data-tema="pb"]{--roxo:#000;--rosa:#333;--laranja:#666;--gradiente:linear-gradient(120deg,#000 0%,#666 100%);--gradiente-suave:linear-gradient(135deg,#f0f0f0 0%,#d8d8d8 100%);--bg:#f5f5f5;--texto:#000;--texto-suave:#555;--card-bg:#ffffff;--borda:#000;--sombra-card:0 4px 0 rgba(0,0,0,0.08)}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{font-family:'Inter','Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--texto);line-height:1.55;min-height:100vh;transition:background var(--anim),color var(--anim);font-weight:500}
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 .nexo-header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--borda)}
-html[data-tema="preto"] .nexo-header{background:rgba(20,20,20,0.85)}
-.nexo-header-inner{max-width:1320px;margin:0 auto;padding:18px 32px;display:flex;align-items:center;gap:32px;justify-content:space-between;position:relative}
-.nexo-logo{display:flex;align-items:baseline;gap:6px;font-weight:900;font-size:1.35rem;letter-spacing:-0.5px}
+html[data-tema="preto"] .nexo-header{background:rgba(10,10,15,0.85)}
+html[data-tema="branco"] .nexo-header{background:rgba(250,250,250,0.9)}
+html[data-tema="pb"] .nexo-header{background:rgba(245,245,245,0.95)}
+.nexo-header-inner{max-width:1320px;margin:0 auto;padding:18px 32px;display:flex;align-items:center;gap:24px;justify-content:space-between;position:relative}
+.nexo-logo{display:flex;align-items:baseline;gap:6px;font-weight:900;font-size:1.35rem;letter-spacing:-0.5px;flex-shrink:0}
 .logo-nexo{background:linear-gradient(120deg,#7c3aed 0%,#c026d3 50%,#ec4899 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .logo-music{background:linear-gradient(120deg,#ec4899 0%,#f97316 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.nexo-nav{display:flex;gap:4px;align-items:center;flex-wrap:wrap}
+html[data-tema="pb"] .logo-nexo{background:#000;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+html[data-tema="pb"] .logo-music{background:#333;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nexo-nav{display:flex;gap:4px;align-items:center;flex-wrap:wrap;flex:1;justify-content:center}
 .nexo-nav a{padding:9px 14px;border-radius:12px;font-weight:600;font-size:0.9rem;color:var(--texto-suave);transition:all var(--anim);cursor:pointer}
 .nexo-nav a:hover{color:var(--roxo)}
 .nexo-nav a.ativo{background:#ede9fe;color:#6d28d9}
-html[data-tema="preto"] .nexo-nav a.ativo{background:#2a1a4a;color:#c4b5fd}
+html[data-tema="preto"] .nexo-nav a.ativo{background:rgba(124,58,237,0.2);color:#c4b5fd}
+html[data-tema="branco"] .nexo-nav a.ativo{background:#f0f0f0;color:#1a1a1a}
+html[data-tema="pb"] .nexo-nav a.ativo{background:#000;color:#fff}
 .nexo-nav a.btn-seletivo{background:var(--gradiente);color:#fff;font-weight:700}
+.btn-busca{background:none;border:2px solid var(--borda);width:42px;height:42px;border-radius:12px;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;color:var(--texto-suave);transition:all var(--anim);flex-shrink:0}
+.btn-busca:hover{border-color:var(--roxo);color:var(--roxo);transform:scale(1.05)}
 .menu-toggle{display:none;background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--texto)}
+.busca-fundo{position:fixed;inset:0;background:rgba(0,0,0,0.7);display:none;align-items:flex-start;justify-content:center;z-index:2000;padding:80px 20px 20px;backdrop-filter:blur(6px);animation:fadeIn 0.2s ease}
+.busca-fundo.ativo{display:flex}
+.busca-box{background:var(--card-bg);border-radius:24px;width:100%;max-width:640px;max-height:80vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 30px 80px rgba(0,0,0,0.4);animation:modalBoxIn 0.3s cubic-bezier(0.16,1,0.3,1)}
+.busca-topo{padding:20px 24px;border-bottom:1px solid var(--borda);display:flex;align-items:center;gap:12px}
+.busca-topo .icone{font-size:1.3rem;color:var(--texto-suave)}
+.busca-input{flex:1;border:none;background:transparent;font-size:1.15rem;font-family:inherit;color:var(--texto);outline:none;font-weight:600}
+.busca-input::placeholder{color:var(--texto-suave);opacity:0.7}
+.busca-fechar{background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--texto-suave);padding:6px 10px;border-radius:8px;font-family:inherit;transition:all var(--anim)}
+.busca-fechar:hover{background:var(--bg);color:var(--roxo)}
+.busca-resultados{overflow-y:auto;padding:12px}
+.busca-grupo{margin-bottom:12px}
+.busca-grupo-titulo{font-size:0.75rem;font-weight:900;text-transform:uppercase;letter-spacing:1.2px;color:var(--roxo);padding:8px 12px 6px;display:flex;align-items:center;gap:6px}
+.busca-item{padding:12px 14px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all var(--anim);border:1px solid transparent}
+.busca-item:hover,.busca-item.selecionado{background:var(--gradiente-suave);border-color:rgba(124,58,237,0.2)}
+html[data-tema="preto"] .busca-item:hover,html[data-tema="preto"] .busca-item.selecionado{background:rgba(124,58,237,0.15);border-color:rgba(124,58,237,0.3)}
+.busca-item-emoji{font-size:1.4rem;flex-shrink:0}
+.busca-item-info{flex:1;min-width:0}
+.busca-item-titulo{font-weight:800;font-size:0.95rem;color:var(--texto);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.busca-item-sub{font-size:0.8rem;color:var(--texto-suave);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.busca-vazio{text-align:center;padding:60px 20px;color:var(--texto-suave)}
+.busca-vazio .emoji{font-size:3rem;display:block;margin-bottom:12px;opacity:0.4}
+.busca-rodape{padding:10px 20px;border-top:1px solid var(--borda);font-size:0.75rem;color:var(--texto-suave);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.busca-rodape kbd{background:var(--bg);border:1px solid var(--borda);border-radius:6px;padding:2px 6px;font-family:inherit;font-size:0.7rem;font-weight:700}
 .hero-wrap{max-width:1320px;margin:24px auto 0;padding:0 32px}
 .hero{position:relative;background:var(--gradiente);color:#fff;padding:80px 60px;border-radius:32px;overflow:hidden;min-height:440px;display:flex;flex-direction:column;justify-content:center;isolation:isolate}
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 85% 30%,rgba(255,255,255,0.18) 0%,transparent 45%),radial-gradient(circle at 15% 90%,rgba(255,255,255,0.12) 0%,transparent 40%);z-index:-1}
@@ -36,6 +67,15 @@ html[data-tema="preto"] .nexo-nav a.ativo{background:#2a1a4a;color:#c4b5fd}
 .hero p{font-size:1.15rem;opacity:0.95;max-width:580px;margin-bottom:34px;line-height:1.55}
 .hero-acoes{display:flex;gap:12px;flex-wrap:wrap}
 .hero-marca{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-8deg);font-size:clamp(3rem,12vw,10rem);font-weight:900;color:rgba(255,255,255,0.09);white-space:nowrap;letter-spacing:-3px;pointer-events:none;z-index:-1}
+.hero-contagem{background:rgba(255,255,255,0.15);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.3);border-radius:20px;padding:20px 24px;margin-bottom:26px;width:fit-content;max-width:100%}
+.hero-contagem-badge{font-size:0.7rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;opacity:0.85;margin-bottom:8px;display:block}
+.hero-contagem-titulo{font-size:1.2rem;font-weight:900;letter-spacing:-0.3px;margin-bottom:4px}
+.hero-contagem-data{font-size:0.85rem;opacity:0.85;margin-bottom:14px}
+.hero-contagem-numeros{display:flex;gap:10px;flex-wrap:wrap}
+.hero-contagem-bloco{background:rgba(255,255,255,0.2);border-radius:12px;padding:8px 12px;min-width:60px;text-align:center;backdrop-filter:blur(4px)}
+.hero-contagem-num{font-size:1.6rem;font-weight:900;letter-spacing:-1px;line-height:1;display:block;font-variant-numeric:tabular-nums}
+.hero-contagem-lbl{font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;opacity:0.85;margin-top:2px;display:block}
+.hero-contagem-btn{margin-top:14px;display:inline-flex}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:14px;font-weight:800;font-size:0.95rem;cursor:pointer;border:none;transition:all var(--anim);font-family:inherit}
 .btn:hover{transform:translateY(-2px)}
 .btn-branco{background:#fff;color:#6d28d9;box-shadow:0 8px 20px rgba(0,0,0,0.15)}
@@ -52,12 +92,21 @@ html[data-tema="preto"] .nexo-nav a.ativo{background:#2a1a4a;color:#c4b5fd}
 .secao-titulo{font-size:2rem;font-weight:900;letter-spacing:-0.8px}
 .secao-sub{color:var(--texto-suave);font-size:0.9rem}
 a.secao-sub{color:var(--roxo);font-weight:700;cursor:pointer}
+.filtros-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.chip{padding:9px 18px;border-radius:100px;border:2px solid var(--borda);background:var(--card-bg);color:var(--texto-suave);font-weight:700;font-size:0.85rem;cursor:pointer;transition:all var(--anim);font-family:inherit}
+.chip:hover{border-color:var(--roxo);color:var(--roxo)}
+.chip.ativo{background:var(--gradiente);color:#fff;border-color:transparent;box-shadow:0 4px 12px rgba(124,58,237,0.25)}
+html[data-tema="preto"] .chip.ativo{box-shadow:0 4px 12px rgba(124,58,237,0.4)}
 .grid{display:grid;gap:22px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
 .grid-4{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
 .grid-anuncios{display:grid;gap:22px;grid-template-columns:1fr 1fr}
+.grid-3{display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
 .card-evento,.card-artista,.card-nexotv,.card-funcionario,.card-ingresso,.card-destaque{background:var(--card-bg);border-radius:var(--radius);overflow:hidden;box-shadow:var(--sombra-card);transition:all var(--anim);border:1px solid var(--borda)}
+html[data-tema="pb"] .card-evento,html[data-tema="pb"] .card-artista,html[data-tema="pb"] .card-nexotv,html[data-tema="pb"] .card-funcionario,html[data-tema="pb"] .card-ingresso,html[data-tema="pb"] .card-destaque{border-width:2px}
 .card-evento,.card-artista,.card-nexotv,.card-funcionario,.card-ingresso{cursor:pointer}
 .card-evento:hover,.card-artista:hover,.card-nexotv:hover,.card-funcionario:hover,.card-ingresso:hover,.card-destaque:hover{transform:translateY(-6px);box-shadow:0 22px 45px rgba(124,58,237,0.15);border-color:rgba(124,58,237,0.2)}
+html[data-tema="preto"] .card-evento:hover,html[data-tema="preto"] .card-artista:hover,html[data-tema="preto"] .card-nexotv:hover,html[data-tema="preto"] .card-funcionario:hover,html[data-tema="preto"] .card-ingresso:hover,html[data-tema="preto"] .card-destaque:hover{box-shadow:0 22px 45px rgba(124,58,237,0.3);border-color:rgba(124,58,237,0.4)}
+html[data-tema="pb"] .card-evento:hover,html[data-tema="pb"] .card-artista:hover,html[data-tema="pb"] .card-nexotv:hover,html[data-tema="pb"] .card-funcionario:hover,html[data-tema="pb"] .card-ingresso:hover,html[data-tema="pb"] .card-destaque:hover{box-shadow:6px 6px 0 rgba(0,0,0,0.9);border-color:#000}
 .card-evento img,.card-artista img,.card-nexotv img,.card-funcionario img{width:100%;height:180px;object-fit:cover}
 .card-sem-img{height:180px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;background:var(--gradiente-suave);color:#c084fc}
 .card-body{padding:20px}
@@ -72,8 +121,6 @@ a.secao-sub{color:var(--roxo);font-weight:700;cursor:pointer}
 .destaque-img img{width:100%;height:100%;object-fit:cover}
 .card-destaque h3{font-size:1.15rem;font-weight:900;margin-bottom:8px}
 .card-destaque p{color:var(--texto-suave);font-size:0.88rem}
-
-/* ============ ANÚNCIOS (VÍDEOS) ============ */
 .card-anuncio{background:var(--card-bg);border-radius:var(--radius);overflow:hidden;box-shadow:var(--sombra-card);border:1px solid var(--borda);transition:all var(--anim)}
 .card-anuncio:hover{box-shadow:0 22px 45px rgba(124,58,237,0.15)}
 .anuncio-video{position:relative;width:100%;aspect-ratio:16/9;background:#000;overflow:hidden}
@@ -86,7 +133,6 @@ a.secao-sub{color:var(--roxo);font-weight:700;cursor:pointer}
 .btn-som.mudo{background:var(--borda);color:var(--texto-suave)}
 .anuncio-link{margin-top:14px;display:inline-flex;align-items:center;gap:6px;padding:10px 18px;background:var(--gradiente);color:#fff;border-radius:10px;font-weight:800;font-size:0.85rem;transition:all var(--anim)}
 .anuncio-link:hover{transform:translateY(-2px);opacity:0.92}
-
 .acesso-grid{display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
 .acesso-card{background:var(--card-bg);padding:28px;border-radius:var(--radius);border:1px solid var(--borda);box-shadow:var(--sombra-card);cursor:pointer;transition:all var(--anim)}
 .acesso-card:hover{transform:translateY(-6px);box-shadow:0 22px 45px rgba(124,58,237,0.18)}
@@ -94,8 +140,29 @@ a.secao-sub{color:var(--roxo);font-weight:700;cursor:pointer}
 .acesso-card h3{font-size:1.3rem;font-weight:900;margin-bottom:8px}
 .acesso-card p{color:var(--texto-suave);font-size:0.92rem}
 .badge{display:inline-block;padding:5px 12px;background:linear-gradient(120deg,#ede9fe,#fce7f3);color:#7c3aed;border-radius:8px;font-size:0.72rem;font-weight:800;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px}
+html[data-tema="preto"] .badge{background:linear-gradient(120deg,rgba(124,58,237,0.25),rgba(236,72,153,0.2));color:#c4b5fd}
+html[data-tema="pb"] .badge{background:#000;color:#fff}
 .preco{font-size:1.8rem !important;font-weight:900 !important;background:var(--gradiente);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .cargo{font-weight:800;color:var(--roxo) !important;font-size:0.9rem !important}
+
+/* SOBRE */
+.sobre-hero{position:relative;color:#fff;padding:100px 60px;border-radius:32px;overflow:hidden;min-height:340px;display:flex;flex-direction:column;justify-content:center;isolation:isolate;background:var(--gradiente);background-size:cover;background-position:center}
+.sobre-hero.com-capa::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(124,58,237,0.85) 0%,rgba(236,72,153,0.75) 50%,rgba(249,115,22,0.7) 100%);z-index:-1}
+.sobre-hero h1{font-size:clamp(2.5rem,6vw,4rem);font-weight:900;line-height:1.05;letter-spacing:-2px;margin-bottom:16px;max-width:800px}
+.sobre-hero p{font-size:1.2rem;opacity:0.95;max-width:600px;line-height:1.55}
+.sobre-texto{font-size:1.05rem;line-height:1.8;color:var(--texto);white-space:pre-wrap;word-wrap:break-word}
+.sobre-texto strong{font-weight:900;color:var(--texto)}
+.sobre-texto em{font-style:italic}
+.card-sobre{background:var(--card-bg);border-radius:var(--radius);padding:32px;border:1px solid var(--borda);box-shadow:var(--sombra-card);transition:all var(--anim)}
+.card-sobre:hover{transform:translateY(-4px);box-shadow:0 22px 45px rgba(124,58,237,0.15)}
+.card-sobre .emoji{font-size:2.5rem;display:block;margin-bottom:16px}
+.card-sobre h3{font-size:1.4rem;font-weight:900;margin-bottom:12px;letter-spacing:-0.5px;background:var(--gradiente);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.card-sobre p{color:var(--texto-suave);font-size:0.95rem;line-height:1.7}
+.cta-sobre{background:var(--gradiente);color:#fff;padding:60px 40px;border-radius:32px;text-align:center}
+.cta-sobre h2{font-size:clamp(1.8rem,4vw,2.5rem);font-weight:900;letter-spacing:-1px;margin-bottom:12px}
+.cta-sobre p{font-size:1.05rem;opacity:0.95;margin-bottom:26px;max-width:560px;margin-left:auto;margin-right:auto}
+.cta-sobre .btn{background:#fff;color:#6d28d9;font-weight:800;padding:14px 32px}
+
 .nexo-footer{background:var(--card-bg);margin-top:80px;border-top:1px solid var(--borda);padding:60px 32px 30px}
 .nexo-footer-inner{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:40px}
 .nexo-footer h4{margin-bottom:16px;font-size:1.05rem;font-weight:900}
@@ -108,11 +175,18 @@ a.secao-sub{color:var(--roxo);font-weight:700;cursor:pointer}
 .tema-card.selecionado{border-color:var(--roxo);box-shadow:0 0 0 4px rgba(124,58,237,0.15)}
 .tema-card .emoji{font-size:2rem;display:block;margin-bottom:8px}
 .tema-card .nome{font-weight:800;font-size:0.9rem}
+.idioma-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
+.idioma-card{padding:20px;border-radius:var(--radius);border:3px solid var(--borda);cursor:pointer;text-align:center;transition:all var(--anim);background:var(--card-bg)}
+.idioma-card:hover{border-color:var(--roxo);transform:translateY(-3px)}
+.idioma-card.selecionado{border-color:var(--roxo);box-shadow:0 0 0 4px rgba(124,58,237,0.15)}
+.idioma-card .flag{font-size:2rem;display:block;margin-bottom:8px}
+.idioma-card .nome{font-weight:800;font-size:0.95rem}
 .vazio{text-align:center;padding:60px 20px;color:var(--texto-suave);grid-column:1/-1}
 .vazio .emoji{font-size:3rem;display:block;margin-bottom:12px;opacity:0.5}
 .pagina{display:none}
 .pagina.ativa{display:block;animation:fadeIn 0.4s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes modalBoxIn{from{opacity:0;transform:translateY(30px) scale(0.96)}to{opacity:1;transform:translateY(0) scale(1)}}
 @keyframes skeletonPulse{0%{opacity:1}50%{opacity:0.5}100%{opacity:1}}
 .skeleton{background:linear-gradient(90deg,var(--borda) 0%,var(--bg) 50%,var(--borda) 100%);background-size:200% 100%;animation:skeletonPulse 1.5s ease-in-out infinite;border-radius:12px}
 .skeleton-card{background:var(--card-bg);border-radius:var(--radius);overflow:hidden;border:1px solid var(--borda);box-shadow:var(--sombra-card)}
@@ -129,10 +203,8 @@ a.secao-sub{color:var(--roxo);font-weight:700;cursor:pointer}
 .modo-btn:hover{color:var(--roxo)}
 .modo-btn.ativo{background:var(--gradiente);color:#fff}
 .modal-fundo{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:1000;padding:20px;backdrop-filter:blur(4px);overflow-y:auto}
-.modal-fundo.ativo{display:flex;animation:modalFundoIn 0.25s ease}
-@keyframes modalFundoIn{from{opacity:0}to{opacity:1}}
+.modal-fundo.ativo{display:flex;animation:fadeIn 0.25s ease}
 .modal-box{background:var(--card-bg);border-radius:24px;width:100%;max-width:760px;max-height:90vh;overflow-y:auto;padding:36px;position:relative;margin:auto;animation:modalBoxIn 0.35s cubic-bezier(0.16,1,0.3,1)}
-@keyframes modalBoxIn{from{opacity:0;transform:translateY(30px) scale(0.96)}to{opacity:1;transform:translateY(0) scale(1)}}
 .modal-fechar{position:absolute;top:16px;right:20px;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--texto-suave);font-family:inherit;z-index:2;transition:all var(--anim)}
 .modal-fechar:hover{color:var(--roxo);transform:rotate(90deg)}
 .modal-img-grande{width:100%;height:280px;object-fit:cover;border-radius:18px;margin-bottom:22px;background:var(--gradiente-suave)}
@@ -154,6 +226,7 @@ a.secao-sub{color:var(--roxo);font-weight:700;cursor:pointer}
 .form-campo{margin-bottom:16px}
 .form-campo label{display:block;font-size:0.82rem;font-weight:800;margin-bottom:6px}
 .form-campo input,.form-campo textarea{width:100%;padding:12px 14px;border:2px solid var(--borda);border-radius:10px;font-size:0.95rem;font-family:inherit;background:var(--bg);color:var(--texto);transition:all var(--anim)}
+html[data-tema="preto"] .form-campo input,html[data-tema="preto"] .form-campo textarea{background:#0a0a0f}
 .form-campo input:focus,.form-campo textarea:focus{outline:none;border-color:var(--roxo);box-shadow:0 0 0 4px rgba(124,58,237,0.1)}
 .form-campo textarea{resize:vertical;min-height:90px}
 .form-linha{display:grid;grid-template-columns:1fr 1fr;gap:14px}
@@ -164,7 +237,7 @@ a.secao-sub{color:var(--roxo);font-weight:700;cursor:pointer}
 .btn-topo:hover{transform:translateY(-4px)}
 .animar{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease}
 .animar.visivel{opacity:1;transform:translateY(0)}
-@media (max-width:900px){.nexo-header-inner{padding:14px 20px}.menu-toggle{display:block}.nexo-nav{display:none;width:100%;flex-direction:column;align-items:stretch;margin-top:12px;position:absolute;top:100%;left:0;right:0;background:var(--card-bg);padding:12px;border-bottom:1px solid var(--borda);box-shadow:0 10px 30px rgba(0,0,0,0.08)}.nexo-nav.aberto{display:flex}.nexo-nav a{text-align:center;padding:12px}.hero{padding:50px 28px;border-radius:24px;min-height:380px}.hero-wrap,.container{padding-left:20px;padding-right:20px}.secao-titulo{font-size:1.5rem}.form-linha{grid-template-columns:1fr}.seletor-modo{width:100%}.modo-btn{flex:1;text-align:center}.nexo-footer{padding:40px 20px 20px}.modal-box{padding:24px}.modal-img-grande,.modal-img-sem{height:200px}.modal-titulo-grande{font-size:1.5rem}.btn-topo{bottom:16px;right:16px}.grid-anuncios{grid-template-columns:1fr}}
+@media (max-width:900px){.nexo-header-inner{padding:14px 20px;gap:12px}.menu-toggle{display:block}.nexo-nav{display:none;width:100%;flex-direction:column;align-items:stretch;margin-top:12px;position:absolute;top:100%;left:0;right:0;background:var(--card-bg);padding:12px;border-bottom:1px solid var(--borda);box-shadow:0 10px 30px rgba(0,0,0,0.08)}.nexo-nav.aberto{display:flex}.nexo-nav a{text-align:center;padding:12px}.hero{padding:50px 28px;border-radius:24px;min-height:380px}.hero-wrap,.container{padding-left:20px;padding-right:20px}.secao-titulo{font-size:1.5rem}.form-linha{grid-template-columns:1fr}.seletor-modo{width:100%}.modo-btn{flex:1;text-align:center}.nexo-footer{padding:40px 20px 20px}.modal-box{padding:24px}.modal-img-grande,.modal-img-sem{height:200px}.modal-titulo-grande{font-size:1.5rem}.btn-topo{bottom:16px;right:16px}.grid-anuncios{grid-template-columns:1fr}.busca-fundo{padding:20px 12px}.filtros-chips{overflow-x:auto;flex-wrap:nowrap;padding-bottom:6px}.chip{white-space:nowrap}.hero-contagem{padding:16px 18px}.hero-contagem-num{font-size:1.3rem}.hero-contagem-bloco{min-width:50px;padding:6px 10px}.sobre-hero{padding:60px 28px;border-radius:24px}.sobre-hero h1{letter-spacing:-1px}}
 </style>
 </head>
 <body>
@@ -177,15 +250,17 @@ a.secao-sub{color:var(--roxo);font-weight:700;cursor:pointer}
     </a>
     <button class="menu-toggle" onclick="document.querySelector('.nexo-nav').classList.toggle('aberto')">☰</button>
     <nav class="nexo-nav">
-      <a onclick="mostrarPagina('home')" data-pag="home" class="ativo">Início</a>
-      <a onclick="mostrarPagina('artistas')" data-pag="artistas">Artistas</a>
-      <a onclick="mostrarPagina('funcionarios')" data-pag="funcionarios">Funcionários</a>
-      <a onclick="mostrarPagina('nexotv')" data-pag="nexotv">Nexo TV</a>
-      <a onclick="mostrarPagina('eventos')" data-pag="eventos">Eventos</a>
-      <a onclick="mostrarPagina('ingressos')" data-pag="ingressos">Ingressos</a>
-      <a onclick="mostrarPagina('config')" data-pag="config">⚙️ Configurações</a>
-      <a href="https://nexomusicroblox-dev.github.io/nexo-processo-seletivo/" target="_blank" class="btn-seletivo">📝 Trabalhe Conosco</a>
+      <a onclick="mostrarPagina('home')" data-pag="home" class="ativo" data-i18n="menu.home">Início</a>
+      <a onclick="mostrarPagina('artistas')" data-pag="artistas" data-i18n="menu.artistas">Artistas</a>
+      <a onclick="mostrarPagina('funcionarios')" data-pag="funcionarios" data-i18n="menu.funcionarios">Funcionários</a>
+      <a onclick="mostrarPagina('nexotv')" data-pag="nexotv" data-i18n="menu.nexotv">Nexo TV</a>
+      <a onclick="mostrarPagina('eventos')" data-pag="eventos" data-i18n="menu.eventos">Eventos</a>
+      <a onclick="mostrarPagina('ingressos')" data-pag="ingressos" data-i18n="menu.ingressos">Ingressos</a>
+      <a onclick="mostrarPagina('sobre')" data-pag="sobre" data-i18n="menu.sobre">📄 Sobre</a>
+      <a onclick="mostrarPagina('config')" data-pag="config" data-i18n="menu.config">⚙️ Configurações</a>
+      <a href="https://nexomusicroblox-dev.github.io/nexo-processo-seletivo/" target="_blank" class="btn-seletivo" data-i18n="menu.trabalhe">📝 Trabalhe Conosco</a>
     </nav>
+    <button class="btn-busca" onclick="abrirBusca()" title="Buscar (tecla /)">🔍</button>
   </div>
 </header>
 
@@ -195,43 +270,94 @@ a.secao-sub{color:var(--roxo);font-weight:700;cursor:pointer}
   <div class="hero-wrap">
     <div class="hero">
       <span class="hero-marca">NEXO MUSIC</span>
-      <span class="hero-badge">NEXO MUSIC • EM CONSTRUÇÃO</span>
-      <h1>Conectando música.</h1>
-      <p>Uma nova experiência para artistas, público, contratantes e toda a equipe Nexo.</p>
+      <span class="hero-badge" data-i18n="home.badge">NEXO MUSIC • EM CONSTRUÇÃO</span>
+      <h1 data-i18n="home.titulo">Conectando música.</h1>
+      <p data-i18n="home.subtitulo">Uma nova experiência para artistas, público, contratantes e toda a equipe Nexo.</p>
+      <div id="contagem-regressiva" class="hero-contagem" style="display:none;"></div>
       <div class="hero-acoes">
-        <button class="btn btn-branco" onclick="mostrarPagina('artistas')">🎤 Conhecer artistas</button>
-        <button class="btn btn-vidro" onclick="mostrarPagina('nexotv')">📺 Nexo TV</button>
+        <button class="btn btn-branco" onclick="mostrarPagina('artistas')" data-i18n="home.btnArtistas">🎤 Conhecer artistas</button>
+        <button class="btn btn-vidro" onclick="mostrarPagina('nexotv')" data-i18n="home.btnNexotv">📺 Nexo TV</button>
       </div>
     </div>
   </div>
   <div class="container">
     <div class="secao" id="secao-destaques">
-      <div class="secao-cabecalho"><h2 class="secao-titulo">Destaques</h2><span class="secao-sub">Conteúdo editável pelo administrador</span></div>
+      <div class="secao-cabecalho"><h2 class="secao-titulo" data-i18n="home.destaques">Destaques</h2><span class="secao-sub" data-i18n="home.destaquesSub">Conteúdo editável pelo administrador</span></div>
       <div id="home-destaques" class="grid grid-4"><div class="skeleton-card skeleton-destaque"><div class="skeleton skeleton-img"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div><div class="skeleton-card skeleton-destaque"><div class="skeleton skeleton-img"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div><div class="skeleton-card skeleton-destaque"><div class="skeleton skeleton-img"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div><div class="skeleton-card skeleton-destaque"><div class="skeleton skeleton-img"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div>
     </div>
     <div class="secao" id="secao-anuncios" style="display:none;">
-      <div class="secao-cabecalho"><h2 class="secao-titulo">📹 Anúncios</h2><span class="secao-sub">Novidades e promoções</span></div>
+      <div class="secao-cabecalho"><h2 class="secao-titulo" data-i18n="home.anuncios">📹 Anúncios</h2><span class="secao-sub" data-i18n="home.anunciosSub">Novidades e promoções</span></div>
       <div id="home-anuncios" class="grid-anuncios"></div>
     </div>
     <div class="secao">
-      <div class="secao-cabecalho"><h2 class="secao-titulo">Acesso rápido</h2></div>
+      <div class="secao-cabecalho"><h2 class="secao-titulo" data-i18n="home.acessoRapido">Acesso rápido</h2></div>
       <div class="acesso-grid">
-        <div class="acesso-card animar" onclick="mostrarPagina('artistas')"><span class="acesso-emoji">🎤</span><h3>Artistas</h3><p>Conheça artistas ou solicite uma contratação.</p></div>
-        <div class="acesso-card animar" onclick="window.open('https://nexomusicroblox-dev.github.io/nexo-processo-seletivo/','_blank')"><span class="acesso-emoji">💼</span><h3>Trabalhe Conosco</h3><p>Acesse os processos seletivos.</p></div>
-        <div class="acesso-card animar" onclick="mostrarPagina('config')"><span class="acesso-emoji">📱</span><h3>Redes Sociais</h3><p>Acompanhe a Nexo nas plataformas oficiais.</p></div>
+        <div class="acesso-card animar" onclick="mostrarPagina('artistas')"><span class="acesso-emoji">🎤</span><h3 data-i18n="home.cardArtistas">Artistas</h3><p data-i18n="home.cardArtistasSub">Conheça artistas ou solicite uma contratação.</p></div>
+        <div class="acesso-card animar" onclick="window.open('https://nexomusicroblox-dev.github.io/nexo-processo-seletivo/','_blank')"><span class="acesso-emoji">💼</span><h3 data-i18n="home.cardTrabalhe">Trabalhe Conosco</h3><p data-i18n="home.cardTrabalheSub">Acesse os processos seletivos.</p></div>
+        <div class="acesso-card animar" onclick="mostrarPagina('config')"><span class="acesso-emoji">📱</span><h3 data-i18n="home.cardRedes">Redes Sociais</h3><p data-i18n="home.cardRedesSub">Acompanhe a Nexo nas plataformas oficiais.</p></div>
       </div>
     </div>
     <div class="secao">
-      <div class="secao-cabecalho"><h2 class="secao-titulo">🎤 Artistas</h2><a class="secao-sub" onclick="mostrarPagina('artistas')">Ver todos →</a></div>
+      <div class="secao-cabecalho"><h2 class="secao-titulo" data-i18n="home.secaoArtistas">🎤 Artistas</h2><a class="secao-sub" onclick="mostrarPagina('artistas')" data-i18n="home.verTodos">Ver todos →</a></div>
       <div id="home-artistas" class="grid"><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div><div class="skeleton skeleton-line curta"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div><div class="skeleton skeleton-line curta"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div><div class="skeleton skeleton-line curta"></div></div></div></div>
     </div>
     <div class="secao">
-      <div class="secao-cabecalho"><h2 class="secao-titulo">🎪 Próximos Eventos</h2><a class="secao-sub" onclick="mostrarPagina('eventos')">Ver todos →</a></div>
-      <div id="home-eventos" class="grid"><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div><div class="skeleton skeleton-line curta"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div><div class="skeleton skeleton-line curta"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div><div class="skeleton skeleton-line curta"></div></div></div></div>
+      <div class="secao-cabecalho"><h2 class="secao-titulo" data-i18n="home.secaoEventos">🎪 Próximos Eventos</h2><a class="secao-sub" onclick="mostrarPagina('eventos')" data-i18n="home.verTodos">Ver todos →</a></div>
+      <div id="home-eventos" class="grid"><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div></div>
     </div>
     <div class="secao">
-      <div class="secao-cabecalho"><h2 class="secao-titulo">📺 Nexo TV</h2><a class="secao-sub" onclick="mostrarPagina('nexotv')">Ver tudo →</a></div>
-      <div id="home-nexotv" class="grid"><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div></div>
+      <div class="secao-cabecalho"><h2 class="secao-titulo" data-i18n="home.secaoNexotv">📺 Nexo TV</h2><a class="secao-sub" onclick="mostrarPagina('nexotv')" data-i18n="home.verTudo">Ver tudo →</a></div>
+      <div id="home-nexotv" class="grid"><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="pagina" id="pag-sobre">
+  <div class="hero-wrap">
+    <div id="sobre-hero" class="sobre-hero">
+      <h1 id="sobre-titulo">Sobre a Nexo</h1>
+      <p id="sobre-subtitulo">Conheça nossa história</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="secao" id="secao-sobre-texto" style="display:none;">
+      <div class="card-sobre">
+        <div id="sobre-texto-principal" class="sobre-texto"></div>
+      </div>
+    </div>
+    <div class="secao" id="secao-sobre-mvv" style="display:none;">
+      <div class="grid-3">
+        <div class="card-sobre" id="card-missao" style="display:none;">
+          <span class="emoji">🎯</span>
+          <h3 id="missao-titulo">Missão</h3>
+          <p id="missao-texto"></p>
+        </div>
+        <div class="card-sobre" id="card-visao" style="display:none;">
+          <span class="emoji">🔭</span>
+          <h3 id="visao-titulo">Visão</h3>
+          <p id="visao-texto"></p>
+        </div>
+        <div class="card-sobre" id="card-valores" style="display:none;">
+          <span class="emoji">💎</span>
+          <h3 id="valores-titulo">Valores</h3>
+          <p id="valores-texto"></p>
+        </div>
+      </div>
+    </div>
+    <div class="secao" id="secao-sobre-equipe" style="display:none;">
+      <div class="secao-cabecalho"><h2 class="secao-titulo" data-i18n="sobre.equipe">👥 Nossa Equipe</h2></div>
+      <div id="sobre-equipe" class="grid"></div>
+    </div>
+    <div class="secao" id="secao-sobre-redes" style="display:none;">
+      <div class="secao-cabecalho"><h2 class="secao-titulo" data-i18n="sobre.redes">📱 Redes Sociais</h2></div>
+      <div id="sobre-redes" class="grid grid-4"></div>
+    </div>
+    <div class="secao" id="secao-sobre-cta" style="display:none;">
+      <div class="cta-sobre">
+        <h2 id="cta-titulo">Vem fazer parte da Nexo!</h2>
+        <p id="cta-subtitulo">Estamos sempre buscando talentos</p>
+        <a id="cta-botao" href="#" class="btn" target="_blank">Trabalhe Conosco</a>
+      </div>
     </div>
   </div>
 </section>
@@ -240,17 +366,22 @@ a.secao-sub{color:var(--roxo);font-weight:700;cursor:pointer}
   <div class="hero-wrap">
     <div class="hero" style="min-height:280px;">
       <span class="hero-marca">ARTISTAS</span>
-      <span class="hero-badge">NEXO MUSIC</span>
-      <h1 style="font-size:clamp(2rem,5vw,3.5rem);">Artistas</h1>
-      <p>Conheça os artistas da Nexo Music Roblox.</p>
+      <span class="hero-badge" data-i18n="artistas.badge">NEXO MUSIC</span>
+      <h1 style="font-size:clamp(2rem,5vw,3.5rem);" data-i18n="menu.artistas">Artistas</h1>
+      <p data-i18n="artistas.subtitulo">Conheça os artistas da Nexo Music Roblox.</p>
     </div>
   </div>
   <div class="container">
     <div class="seletor-modo">
-      <button class="modo-btn ativo" id="btnVisitante" onclick="mudarModo('visitante')">👀 Visitante</button>
-      <button class="modo-btn" id="btnContratante" onclick="mudarModo('contratante')">🎤 Contratante</button>
+      <button class="modo-btn ativo" id="btnVisitante" onclick="mudarModo('visitante')" data-i18n="artistas.visitante">👀 Visitante</button>
+      <button class="modo-btn" id="btnContratante" onclick="mudarModo('contratante')" data-i18n="artistas.contratante">🎤 Contratante</button>
     </div>
     <div id="aviso-modo" class="secao-sub" style="margin-bottom:20px;"></div>
+    <div class="filtros-chips" id="filtros-artistas">
+      <button class="chip ativo" data-filtro="todos" onclick="aplicarFiltro('artistas', 'todos')" data-i18n="filtro.todos">Todos</button>
+      <button class="chip" data-filtro="az" onclick="aplicarFiltro('artistas', 'az')">A-Z</button>
+      <button class="chip" data-filtro="za" onclick="aplicarFiltro('artistas', 'za')">Z-A</button>
+    </div>
     <div id="lista-artistas" class="grid"><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div><div class="skeleton skeleton-line curta"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div><div class="skeleton skeleton-line curta"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div><div class="skeleton skeleton-line curta"></div></div></div></div>
   </div>
 </section>
@@ -259,71 +390,112 @@ a.secao-sub{color:var(--roxo);font-weight:700;cursor:pointer}
   <div class="hero-wrap">
     <div class="hero" style="min-height:280px;">
       <span class="hero-marca">EVENTOS</span>
-      <span class="hero-badge">AGENDA</span>
-      <h1 style="font-size:clamp(2rem,5vw,3.5rem);">Eventos</h1>
-      <p>Próximos eventos no Roblox.</p>
+      <span class="hero-badge" data-i18n="eventos.badge">AGENDA</span>
+      <h1 style="font-size:clamp(2rem,5vw,3.5rem);" data-i18n="menu.eventos">Eventos</h1>
+      <p data-i18n="eventos.subtitulo">Próximos eventos no Roblox.</p>
     </div>
   </div>
-  <div class="container"><div id="lista-eventos" class="grid"><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div></div></div>
+  <div class="container">
+    <div class="filtros-chips" id="filtros-eventos">
+      <button class="chip ativo" data-filtro="todos" onclick="aplicarFiltro('eventos', 'todos')" data-i18n="filtro.todos">Todos</button>
+      <button class="chip" data-filtro="proximos" onclick="aplicarFiltro('eventos', 'proximos')" data-i18n="eventos.proximos">Próximos</button>
+      <button class="chip" data-filtro="passados" onclick="aplicarFiltro('eventos', 'passados')" data-i18n="eventos.passados">Passados</button>
+      <button class="chip" data-filtro="mes" onclick="aplicarFiltro('eventos', 'mes')" data-i18n="eventos.mes">Este mês</button>
+    </div>
+    <div id="lista-eventos" class="grid"><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div></div>
+  </div>
 </section>
 
 <section class="pagina" id="pag-ingressos">
   <div class="hero-wrap">
     <div class="hero" style="min-height:280px;">
       <span class="hero-marca">INGRESSOS</span>
-      <span class="hero-badge">GARANTA SEU LUGAR</span>
-      <h1 style="font-size:clamp(2rem,5vw,3.5rem);">Ingressos</h1>
-      <p>Escolha seu ingresso pros próximos eventos.</p>
+      <span class="hero-badge" data-i18n="ingressos.badge">GARANTA SEU LUGAR</span>
+      <h1 style="font-size:clamp(2rem,5vw,3.5rem);" data-i18n="menu.ingressos">Ingressos</h1>
+      <p data-i18n="ingressos.subtitulo">Escolha seu ingresso pros próximos eventos.</p>
     </div>
   </div>
-  <div class="container"><div id="lista-ingressos" class="grid"><div class="skeleton-card"><div class="skeleton-body"><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div><div class="skeleton-card"><div class="skeleton-body"><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div></div></div>
+  <div class="container">
+    <div class="filtros-chips" id="filtros-ingressos">
+      <button class="chip ativo" data-filtro="todos" onclick="aplicarFiltro('ingressos', 'todos')" data-i18n="filtro.todos">Todos</button>
+      <button class="chip" data-filtro="barato" onclick="aplicarFiltro('ingressos', 'barato')" data-i18n="ingressos.barato">Mais baratos</button>
+      <button class="chip" data-filtro="caro" onclick="aplicarFiltro('ingressos', 'caro')" data-i18n="ingressos.caro">Mais caros</button>
+      <button class="chip" data-filtro="disponivel" onclick="aplicarFiltro('ingressos', 'disponivel')" data-i18n="ingressos.disponivel">Disponíveis</button>
+    </div>
+    <div id="lista-ingressos" class="grid"><div class="skeleton-card"><div class="skeleton-body"><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div><div class="skeleton-card"><div class="skeleton-body"><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div></div>
+  </div>
 </section>
 
 <section class="pagina" id="pag-nexotv">
   <div class="hero-wrap">
     <div class="hero" style="min-height:280px;">
       <span class="hero-marca">NEXO TV</span>
-      <span class="hero-badge">CONTEÚDO</span>
-      <h1 style="font-size:clamp(2rem,5vw,3.5rem);">Nexo TV</h1>
-      <p>Notícias, bastidores e conteúdos especiais.</p>
+      <span class="hero-badge" data-i18n="nexotv.badge">CONTEÚDO</span>
+      <h1 style="font-size:clamp(2rem,5vw,3.5rem);" data-i18n="menu.nexotv">Nexo TV</h1>
+      <p data-i18n="nexotv.subtitulo">Notícias, bastidores e conteúdos especiais.</p>
     </div>
   </div>
-  <div class="container"><div id="lista-nexotv" class="grid"><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div></div></div>
+  <div class="container">
+    <div class="filtros-chips" id="filtros-nexotv">
+      <button class="chip ativo" data-filtro="todos" onclick="aplicarFiltro('nexotv', 'todos')" data-i18n="filtro.todos">Todos</button>
+      <button class="chip" data-filtro="noticia" onclick="aplicarFiltro('nexotv', 'noticia')" data-i18n="nexotv.noticia">Notícias</button>
+      <button class="chip" data-filtro="entrevista" onclick="aplicarFiltro('nexotv', 'entrevista')" data-i18n="nexotv.entrevista">Entrevistas</button>
+      <button class="chip" data-filtro="bastidores" onclick="aplicarFiltro('nexotv', 'bastidores')" data-i18n="nexotv.bastidores">Bastidores</button>
+      <button class="chip" data-filtro="lancamento" onclick="aplicarFiltro('nexotv', 'lancamento')" data-i18n="nexotv.lancamento">Lançamentos</button>
+      <button class="chip" data-filtro="evento" onclick="aplicarFiltro('nexotv', 'evento')" data-i18n="nexotv.evento">Eventos</button>
+    </div>
+    <div id="lista-nexotv" class="grid"><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line curta"></div><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line media"></div></div></div></div>
+  </div>
 </section>
 
 <section class="pagina" id="pag-funcionarios">
   <div class="hero-wrap">
     <div class="hero" style="min-height:280px;">
       <span class="hero-marca">EQUIPE</span>
-      <span class="hero-badge">EQUIPE</span>
-      <h1 style="font-size:clamp(2rem,5vw,3.5rem);">Funcionários</h1>
-      <p>A equipe por trás da Nexo.</p>
+      <span class="hero-badge" data-i18n="funcionarios.badge">EQUIPE</span>
+      <h1 style="font-size:clamp(2rem,5vw,3.5rem);" data-i18n="menu.funcionarios">Funcionários</h1>
+      <p data-i18n="funcionarios.subtitulo">A equipe por trás da Nexo.</p>
     </div>
   </div>
-  <div class="container"><div id="lista-funcionarios" class="grid"><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line curta"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line curta"></div></div></div></div></div>
+  <div class="container">
+    <div class="filtros-chips" id="filtros-funcionarios">
+      <button class="chip ativo" data-filtro="todos" onclick="aplicarFiltro('funcionarios', 'todos')" data-i18n="filtro.todos">Todos</button>
+      <button class="chip" data-filtro="az" onclick="aplicarFiltro('funcionarios', 'az')">A-Z</button>
+      <button class="chip" data-filtro="za" onclick="aplicarFiltro('funcionarios', 'za')">Z-A</button>
+    </div>
+    <div id="lista-funcionarios" class="grid"><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line curta"></div></div></div><div class="skeleton-card"><div class="skeleton skeleton-img"></div><div class="skeleton-body"><div class="skeleton skeleton-line titulo"></div><div class="skeleton skeleton-line curta"></div></div></div></div>
+  </div>
 </section>
 
 <section class="pagina" id="pag-config">
   <div class="hero-wrap">
     <div class="hero" style="min-height:280px;">
       <span class="hero-marca">CONFIG</span>
-      <span class="hero-badge">PERSONALIZE</span>
-      <h1 style="font-size:clamp(2rem,5vw,3.5rem);">Configurações</h1>
-      <p>Ajuste tema, redes e preferências.</p>
+      <span class="hero-badge" data-i18n="config.badge">PERSONALIZE</span>
+      <h1 style="font-size:clamp(2rem,5vw,3.5rem);" data-i18n="menu.config">⚙️ Configurações</h1>
+      <p data-i18n="config.subtitulo">Ajuste tema, redes e preferências.</p>
     </div>
   </div>
   <div class="container">
     <div class="secao">
-      <div class="secao-cabecalho"><h2 class="secao-titulo">🎨 Tema</h2><span class="secao-sub">Salvo no seu dispositivo</span></div>
+      <div class="secao-cabecalho"><h2 class="secao-titulo" data-i18n="config.tema">🎨 Tema</h2><span class="secao-sub" data-i18n="config.temaSub">Salvo no seu dispositivo</span></div>
       <div class="tema-grid">
-        <div class="tema-card" data-tema="nexo" onclick="trocarTema('nexo')"><span class="emoji">💜</span><span class="nome">Padrão Nexo</span></div>
-        <div class="tema-card" data-tema="preto" onclick="trocarTema('preto')"><span class="emoji">🖤</span><span class="nome">Preto</span></div>
-        <div class="tema-card" data-tema="branco" onclick="trocarTema('branco')"><span class="emoji">🤍</span><span class="nome">Branco</span></div>
-        <div class="tema-card" data-tema="pb" onclick="trocarTema('pb')"><span class="emoji">⚫⚪</span><span class="nome">Preto e Branco</span></div>
+        <div class="tema-card" data-tema="nexo" onclick="trocarTema('nexo')"><span class="emoji">💜</span><span class="nome" data-i18n="config.temaNexo">Padrão Nexo</span></div>
+        <div class="tema-card" data-tema="preto" onclick="trocarTema('preto')"><span class="emoji">🖤</span><span class="nome" data-i18n="config.temaPreto">Preto</span></div>
+        <div class="tema-card" data-tema="branco" onclick="trocarTema('branco')"><span class="emoji">🤍</span><span class="nome" data-i18n="config.temaBranco">Branco</span></div>
+        <div class="tema-card" data-tema="pb" onclick="trocarTema('pb')"><span class="emoji">⚫⚪</span><span class="nome" data-i18n="config.temaPb">Preto e Branco</span></div>
       </div>
     </div>
     <div class="secao">
-      <div class="secao-cabecalho"><h2 class="secao-titulo">📱 Nossas redes</h2><span class="secao-sub">Editável pelo administrador</span></div>
+      <div class="secao-cabecalho"><h2 class="secao-titulo" data-i18n="config.idioma">🌍 Idioma</h2><span class="secao-sub" data-i18n="config.idiomaSub">Salvo no seu dispositivo</span></div>
+      <div class="idioma-grid">
+        <div class="idioma-card" data-idioma="pt" onclick="trocarIdioma('pt')"><span class="flag">🇧🇷</span><span class="nome">Português</span></div>
+        <div class="idioma-card" data-idioma="en" onclick="trocarIdioma('en')"><span class="flag">🇺🇸</span><span class="nome">English</span></div>
+        <div class="idioma-card" data-idioma="es" onclick="trocarIdioma('es')"><span class="flag">🇪🇸</span><span class="nome">Español</span></div>
+      </div>
+    </div>
+    <div class="secao">
+      <div class="secao-cabecalho"><h2 class="secao-titulo" data-i18n="config.redes">📱 Nossas redes</h2><span class="secao-sub" data-i18n="config.redesSub">Editável pelo administrador</span></div>
       <div id="lista-redes" class="grid grid-4"><div class="skeleton-card skeleton-destaque"><div class="skeleton skeleton-img"></div><div class="skeleton skeleton-line titulo"></div></div><div class="skeleton-card skeleton-destaque"><div class="skeleton skeleton-img"></div><div class="skeleton skeleton-line titulo"></div></div><div class="skeleton-card skeleton-destaque"><div class="skeleton skeleton-img"></div><div class="skeleton skeleton-line titulo"></div></div></div>
     </div>
   </div>
@@ -333,17 +505,18 @@ a.secao-sub{color:var(--roxo);font-weight:700;cursor:pointer}
 
 <footer class="nexo-footer">
   <div class="nexo-footer-inner">
-    <div><h4>Nexo Music Roblox</h4><p>Música, eventos e Roblox num só lugar. 🎶</p></div>
-    <div><h4>Redes Sociais</h4><div id="footer-redes"><span>Carregando...</span></div></div>
+    <div><h4>Nexo Music Roblox</h4><p data-i18n="footer.tagline">Música, eventos e Roblox num só lugar. 🎶</p></div>
+    <div><h4 data-i18n="footer.redes">Redes Sociais</h4><div id="footer-redes"><span data-i18n="carregando">Carregando...</span></div></div>
     <div>
-      <h4>Links</h4>
-      <a onclick="mostrarPagina('artistas')">Artistas</a>
-      <a onclick="mostrarPagina('eventos')">Eventos</a>
-      <a onclick="mostrarPagina('ingressos')">Ingressos</a>
-      <a href="https://nexomusicroblox-dev.github.io/nexo-processo-seletivo/" target="_blank">Trabalhe Conosco</a>
+      <h4 data-i18n="footer.links">Links</h4>
+      <a onclick="mostrarPagina('artistas')" data-i18n="menu.artistas">Artistas</a>
+      <a onclick="mostrarPagina('eventos')" data-i18n="menu.eventos">Eventos</a>
+      <a onclick="mostrarPagina('ingressos')" data-i18n="menu.ingressos">Ingressos</a>
+      <a onclick="mostrarPagina('sobre')" data-i18n="menu.sobre">Sobre</a>
+      <a href="https://nexomusicroblox-dev.github.io/nexo-processo-seletivo/" target="_blank" data-i18n="footer.trabalhe">Trabalhe Conosco</a>
     </div>
   </div>
-  <div class="footer-base">© <span id="ano"></span> Nexo Music Roblox — Todos os direitos reservados</div>
+  <div class="footer-base">© <span id="ano"></span> Nexo Music Roblox — <span data-i18n="footer.direitos">Todos os direitos reservados</span></div>
 </footer>
 
 <div class="modal-fundo" id="modalFundo">
@@ -353,10 +526,118 @@ a.secao-sub{color:var(--roxo);font-weight:700;cursor:pointer}
   </div>
 </div>
 
+<div class="busca-fundo" id="buscaFundo">
+  <div class="busca-box">
+    <div class="busca-topo">
+      <span class="icone">🔍</span>
+      <input type="text" id="buscaInput" class="busca-input" placeholder="Buscar..." autocomplete="off" oninput="onBuscaInput(this.value)" data-i18n-placeholder="busca.placeholder">
+      <button class="busca-fechar" onclick="fecharBusca()">✕</button>
+    </div>
+    <div class="busca-resultados" id="buscaResultados"></div>
+    <div class="busca-rodape">
+      <span><kbd>Enter</kbd> <span data-i18n="busca.abrir">abrir</span> · <kbd>Esc</kbd> <span data-i18n="busca.fechar">fechar</span></span>
+      <span><span data-i18n="busca.atalho">Atalho:</span> <kbd>/</kbd></span>
+    </div>
+  </div>
+</div>
+
 <button class="btn-topo" id="btnTopo" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 <script>
 const API_URL = 'https://script.google.com/macros/s/AKfycbzZnvlJ6QVOdUyuFrHONxaksEBSiJuiTtZeJ6yUQqYkZCO1jEEok3UgoQc-ZG7sDbGg/exec';
 const CACHE_TTL = 5 * 60 * 1000;
+const BUSCA_DEBOUNCE_MS = 150;
+const BUSCA_MAX_POR_GRUPO = 6;
+
+const TRADUCOES = {
+  pt: {
+    'menu.home': 'Início','menu.artistas': 'Artistas','menu.funcionarios': 'Funcionários','menu.nexotv': 'Nexo TV','menu.eventos': 'Eventos','menu.ingressos': 'Ingressos','menu.sobre': '📄 Sobre','menu.config': '⚙️ Configurações','menu.trabalhe': '📝 Trabalhe Conosco',
+    'home.badge': 'NEXO MUSIC • EM CONSTRUÇÃO','home.titulo': 'Conectando música.','home.subtitulo': 'Uma nova experiência para artistas, público, contratantes e toda a equipe Nexo.','home.btnArtistas': '🎤 Conhecer artistas','home.btnNexotv': '📺 Nexo TV','home.destaques': 'Destaques','home.destaquesSub': 'Conteúdo editável pelo administrador','home.anuncios': '📹 Anúncios','home.anunciosSub': 'Novidades e promoções','home.acessoRapido': 'Acesso rápido','home.cardArtistas': 'Artistas','home.cardArtistasSub': 'Conheça artistas ou solicite uma contratação.','home.cardTrabalhe': 'Trabalhe Conosco','home.cardTrabalheSub': 'Acesse os processos seletivos.','home.cardRedes': 'Redes Sociais','home.cardRedesSub': 'Acompanhe a Nexo nas plataformas oficiais.','home.secaoArtistas': '🎤 Artistas','home.secaoEventos': '🎪 Próximos Eventos','home.secaoNexotv': '📺 Nexo TV','home.verTodos': 'Ver todos →','home.verTudo': 'Ver tudo →',
+    'artistas.badge': 'NEXO MUSIC','artistas.subtitulo': 'Conheça os artistas da Nexo Music Roblox.','artistas.visitante': '👀 Visitante','artistas.contratante': '🎤 Contratante',
+    'eventos.badge': 'AGENDA','eventos.subtitulo': 'Próximos eventos no Roblox.','eventos.proximos': 'Próximos','eventos.passados': 'Passados','eventos.mes': 'Este mês',
+    'ingressos.badge': 'GARANTA SEU LUGAR','ingressos.subtitulo': 'Escolha seu ingresso pros próximos eventos.','ingressos.barato': 'Mais baratos','ingressos.caro': 'Mais caros','ingressos.disponivel': 'Disponíveis',
+    'nexotv.badge': 'CONTEÚDO','nexotv.subtitulo': 'Notícias, bastidores e conteúdos especiais.','nexotv.noticia': 'Notícias','nexotv.entrevista': 'Entrevistas','nexotv.bastidores': 'Bastidores','nexotv.lancamento': 'Lançamentos','nexotv.evento': 'Eventos',
+    'funcionarios.badge': 'EQUIPE','funcionarios.subtitulo': 'A equipe por trás da Nexo.',
+    'config.badge': 'PERSONALIZE','config.subtitulo': 'Ajuste tema, redes e preferências.','config.tema': '🎨 Tema','config.temaSub': 'Salvo no seu dispositivo','config.temaNexo': 'Padrão Nexo','config.temaPreto': 'Preto','config.temaBranco': 'Branco','config.temaPb': 'Preto e Branco','config.idioma': '🌍 Idioma','config.idiomaSub': 'Salvo no seu dispositivo','config.redes': '📱 Nossas redes','config.redesSub': 'Editável pelo administrador',
+    'filtro.todos': 'Todos','busca.placeholder': 'Buscar artistas, eventos, publicações...','busca.abrir': 'abrir','busca.fechar': 'fechar','busca.atalho': 'Atalho:',
+    'footer.tagline': 'Música, eventos e Roblox num só lugar. 🎶','footer.redes': 'Redes Sociais','footer.links': 'Links','footer.trabalhe': 'Trabalhe Conosco','footer.direitos': 'Todos os direitos reservados',
+    'carregando': 'Carregando...',
+    'modo.visitante.msg': '👀 Você está no modo <strong>Visitante</strong>. Explore os artistas livremente.','modo.contratante.msg': '🎤 Você está no modo <strong>Contratante</strong>. Clique em um artista para solicitar uma contratação.',
+    'vazio.artistas': 'Nenhum artista cadastrado ainda','vazio.artistas.filtro': 'Nenhum artista nesse filtro','vazio.eventos': 'Nenhum evento cadastrado ainda','vazio.eventos.filtro': 'Nenhum evento nesse filtro','vazio.ingressos': 'Nenhum ingresso cadastrado','vazio.ingressos.filtro': 'Nenhum ingresso nesse filtro','vazio.nexotv': 'Sem publicações ainda','vazio.nexotv.filtro': 'Nenhuma publicação nesse filtro','vazio.funcionarios': 'Nenhum funcionário cadastrado','vazio.funcionarios.filtro': 'Nenhum funcionário nesse filtro','vazio.redes': 'Nenhuma rede cadastrada','vazio.destaques': 'Nenhum destaque cadastrado ainda. Adicione em ✨ Destaques no admin.','vazio.busca': 'Nenhum resultado encontrado pra',
+    'modal.solicitar': '🎤 Solicitar contratação','modal.artista': 'Artista:','modal.nome': 'Nome do contratante *','modal.email': 'Email *','modal.instagram': 'Instagram do evento / contratante','modal.empresa': 'Empresa organizadora','modal.nomeEvento': 'Nome do evento *','modal.data': 'Data do evento *','modal.hora': 'Hora do evento','modal.linkMapa': 'Link do mapa do Roblox (se já tiver)','modal.detalhes': 'Detalhes / observações','modal.enviar': '📩 Enviar solicitação','modal.enviando': 'Enviando...','modal.sucesso': '✅ Solicitação enviada! Entraremos em contato. 🎉','modal.comprar': 'Comprar ingresso','modal.semBio': 'Sem biografia cadastrada.','modal.semDesc': 'Sem descrição cadastrada.','modal.disponiveis': 'disponíveis','modal.lote': 'Lote:','modal.disp': 'Disp.:','modal.abrirRoblox': '🎮 Abrir mapa no Roblox','modal.adicionarCal': '📅 Adicionar ao calendário','modal.assistir': '▶️ Assistir vídeo','modal.saibaMais': 'Saiba mais →',
+    'contagem.proximoEvento': '🎪 PRÓXIMO EVENTO',
+    'sobre.equipe': '👥 Nossa Equipe','sobre.redes': '📱 Redes Sociais',
+  },
+  en: {
+    'menu.home': 'Home','menu.artistas': 'Artists','menu.funcionarios': 'Staff','menu.nexotv': 'Nexo TV','menu.eventos': 'Events','menu.ingressos': 'Tickets','menu.sobre': '📄 About','menu.config': '⚙️ Settings','menu.trabalhe': '📝 Work With Us',
+    'home.badge': 'NEXO MUSIC • UNDER CONSTRUCTION','home.titulo': 'Connecting music.','home.subtitulo': 'A new experience for artists, audiences, contractors and the entire Nexo team.','home.btnArtistas': '🎤 Meet artists','home.btnNexotv': '📺 Nexo TV','home.destaques': 'Highlights','home.destaquesSub': 'Content editable by the administrator','home.anuncios': '📹 Ads','home.anunciosSub': 'News and promotions','home.acessoRapido': 'Quick access','home.cardArtistas': 'Artists','home.cardArtistasSub': 'Meet artists or request a booking.','home.cardTrabalhe': 'Work With Us','home.cardTrabalheSub': 'Access our hiring processes.','home.cardRedes': 'Social Media','home.cardRedesSub': 'Follow Nexo on our official platforms.','home.secaoArtistas': '🎤 Artists','home.secaoEventos': '🎪 Upcoming Events','home.secaoNexotv': '📺 Nexo TV','home.verTodos': 'See all →','home.verTudo': 'See everything →',
+    'artistas.badge': 'NEXO MUSIC','artistas.subtitulo': 'Meet the artists of Nexo Music Roblox.','artistas.visitante': '👀 Visitor','artistas.contratante': '🎤 Contractor',
+    'eventos.badge': 'SCHEDULE','eventos.subtitulo': 'Upcoming events on Roblox.','eventos.proximos': 'Upcoming','eventos.passados': 'Past','eventos.mes': 'This month',
+    'ingressos.badge': 'GRAB YOUR SPOT','ingressos.subtitulo': 'Choose your ticket for the upcoming events.','ingressos.barato': 'Cheapest','ingressos.caro': 'Most expensive','ingressos.disponivel': 'Available',
+    'nexotv.badge': 'CONTENT','nexotv.subtitulo': 'News, backstage and special content.','nexotv.noticia': 'News','nexotv.entrevista': 'Interviews','nexotv.bastidores': 'Backstage','nexotv.lancamento': 'Releases','nexotv.evento': 'Events',
+    'funcionarios.badge': 'TEAM','funcionarios.subtitulo': 'The team behind Nexo.',
+    'config.badge': 'CUSTOMIZE','config.subtitulo': 'Adjust theme, social and preferences.','config.tema': '🎨 Theme','config.temaSub': 'Saved on your device','config.temaNexo': 'Nexo Default','config.temaPreto': 'Dark','config.temaBranco': 'Light','config.temaPb': 'Black & White','config.idioma': '🌍 Language','config.idiomaSub': 'Saved on your device','config.redes': '📱 Our social media','config.redesSub': 'Editable by the administrator',
+    'filtro.todos': 'All','busca.placeholder': 'Search artists, events, posts...','busca.abrir': 'open','busca.fechar': 'close','busca.atalho': 'Shortcut:',
+    'footer.tagline': 'Music, events and Roblox all in one place. 🎶','footer.redes': 'Social Media','footer.links': 'Links','footer.trabalhe': 'Work With Us','footer.direitos': 'All rights reserved',
+    'carregando': 'Loading...',
+    'modo.visitante.msg': '👀 You are in <strong>Visitor</strong> mode. Explore the artists freely.','modo.contratante.msg': '🎤 You are in <strong>Contractor</strong> mode. Click on an artist to request a booking.',
+    'vazio.artistas': 'No artists registered yet','vazio.artistas.filtro': 'No artists in this filter','vazio.eventos': 'No events registered yet','vazio.eventos.filtro': 'No events in this filter','vazio.ingressos': 'No tickets registered','vazio.ingressos.filtro': 'No tickets in this filter','vazio.nexotv': 'No posts yet','vazio.nexotv.filtro': 'No posts in this filter','vazio.funcionarios': 'No staff registered','vazio.funcionarios.filtro': 'No staff in this filter','vazio.redes': 'No social media registered','vazio.destaques': 'No highlights registered yet. Add them in ✨ Highlights on admin.','vazio.busca': 'No results found for',
+    'modal.solicitar': '🎤 Request booking','modal.artista': 'Artist:','modal.nome': 'Contractor name *','modal.email': 'Email *','modal.instagram': 'Event / contractor Instagram','modal.empresa': 'Organizing company','modal.nomeEvento': 'Event name *','modal.data': 'Event date *','modal.hora': 'Event time','modal.linkMapa': 'Roblox map link (if available)','modal.detalhes': 'Details / notes','modal.enviar': '📩 Send request','modal.enviando': 'Sending...','modal.sucesso': '✅ Request sent! We will contact you. 🎉','modal.comprar': 'Buy ticket','modal.semBio': 'No bio registered.','modal.semDesc': 'No description registered.','modal.disponiveis': 'available','modal.lote': 'Batch:','modal.disp': 'Avail.:','modal.abrirRoblox': '🎮 Open map on Roblox','modal.adicionarCal': '📅 Add to calendar','modal.assistir': '▶️ Watch video','modal.saibaMais': 'Learn more →',
+    'contagem.proximoEvento': '🎪 NEXT EVENT',
+    'sobre.equipe': '👥 Our Team','sobre.redes': '📱 Social Media',
+  },
+  es: {
+    'menu.home': 'Inicio','menu.artistas': 'Artistas','menu.funcionarios': 'Empleados','menu.nexotv': 'Nexo TV','menu.eventos': 'Eventos','menu.ingressos': 'Entradas','menu.sobre': '📄 Sobre','menu.config': '⚙️ Ajustes','menu.trabalhe': '📝 Trabaja con Nosotros',
+    'home.badge': 'NEXO MUSIC • EN CONSTRUCCIÓN','home.titulo': 'Conectando música.','home.subtitulo': 'Una nueva experiencia para artistas, público, contratantes y todo el equipo Nexo.','home.btnArtistas': '🎤 Conocer artistas','home.btnNexotv': '📺 Nexo TV','home.destaques': 'Destacados','home.destaquesSub': 'Contenido editable por el administrador','home.anuncios': '📹 Anuncios','home.anunciosSub': 'Novedades y promociones','home.acessoRapido': 'Acceso rápido','home.cardArtistas': 'Artistas','home.cardArtistasSub': 'Conoce artistas o solicita una contratación.','home.cardTrabalhe': 'Trabaja con Nosotros','home.cardTrabalheSub': 'Accede a los procesos de selección.','home.cardRedes': 'Redes Sociales','home.cardRedesSub': 'Sigue a Nexo en nuestras plataformas oficiales.','home.secaoArtistas': '🎤 Artistas','home.secaoEventos': '🎪 Próximos Eventos','home.secaoNexotv': '📺 Nexo TV','home.verTodos': 'Ver todos →','home.verTudo': 'Ver todo →',
+    'artistas.badge': 'NEXO MUSIC','artistas.subtitulo': 'Conoce a los artistas de Nexo Music Roblox.','artistas.visitante': '👀 Visitante','artistas.contratante': '🎤 Contratante',
+    'eventos.badge': 'AGENDA','eventos.subtitulo': 'Próximos eventos en Roblox.','eventos.proximos': 'Próximos','eventos.passados': 'Pasados','eventos.mes': 'Este mes',
+    'ingressos.badge': 'ASEGURA TU LUGAR','ingressos.subtitulo': 'Elige tu entrada para los próximos eventos.','ingressos.barato': 'Más baratos','ingressos.caro': 'Más caros','ingressos.disponivel': 'Disponibles',
+    'nexotv.badge': 'CONTENIDO','nexotv.subtitulo': 'Noticias, backstage y contenido especial.','nexotv.noticia': 'Noticias','nexotv.entrevista': 'Entrevistas','nexotv.bastidores': 'Backstage','nexotv.lancamento': 'Lanzamientos','nexotv.evento': 'Eventos',
+    'funcionarios.badge': 'EQUIPO','funcionarios.subtitulo': 'El equipo detrás de Nexo.',
+    'config.badge': 'PERSONALIZA','config.subtitulo': 'Ajusta tema, redes y preferencias.','config.tema': '🎨 Tema','config.temaSub': 'Guardado en tu dispositivo','config.temaNexo': 'Predeterminado Nexo','config.temaPreto': 'Oscuro','config.temaBranco': 'Claro','config.temaPb': 'Blanco y Negro','config.idioma': '🌍 Idioma','config.idiomaSub': 'Guardado en tu dispositivo','config.redes': '📱 Nuestras redes','config.redesSub': 'Editable por el administrador',
+    'filtro.todos': 'Todos','busca.placeholder': 'Buscar artistas, eventos, publicaciones...','busca.abrir': 'abrir','busca.fechar': 'cerrar','busca.atalho': 'Atajo:',
+    'footer.tagline': 'Música, eventos y Roblox en un solo lugar. 🎶','footer.redes': 'Redes Sociales','footer.links': 'Enlaces','footer.trabalhe': 'Trabaja con Nosotros','footer.direitos': 'Todos los derechos reservados',
+    'carregando': 'Cargando...',
+    'modo.visitante.msg': '👀 Estás en modo <strong>Visitante</strong>. Explora a los artistas libremente.','modo.contratante.msg': '🎤 Estás en modo <strong>Contratante</strong>. Haz clic en un artista para solicitar una contratación.',
+    'vazio.artistas': 'Aún no hay artistas registrados','vazio.artistas.filtro': 'Ningún artista en este filtro','vazio.eventos': 'Aún no hay eventos registrados','vazio.eventos.filtro': 'Ningún evento en este filtro','vazio.ingressos': 'No hay entradas registradas','vazio.ingressos.filtro': 'Ninguna entrada en este filtro','vazio.nexotv': 'Aún no hay publicaciones','vazio.nexotv.filtro': 'Ninguna publicación en este filtro','vazio.funcionarios': 'No hay empleados registrados','vazio.funcionarios.filtro': 'Ningún empleado en este filtro','vazio.redes': 'No hay redes registradas','vazio.destaques': 'Aún no hay destacados. Añádelos en ✨ Destacados del admin.','vazio.busca': 'No se encontraron resultados para',
+    'modal.solicitar': '🎤 Solicitar contratación','modal.artista': 'Artista:','modal.nome': 'Nombre del contratante *','modal.email': 'Correo electrónico *','modal.instagram': 'Instagram del evento / contratante','modal.empresa': 'Empresa organizadora','modal.nomeEvento': 'Nombre del evento *','modal.data': 'Fecha del evento *','modal.hora': 'Hora del evento','modal.linkMapa': 'Enlace del mapa de Roblox (si ya tienes)','modal.detalhes': 'Detalles / observaciones','modal.enviar': '📩 Enviar solicitud','modal.enviando': 'Enviando...','modal.sucesso': '✅ ¡Solicitud enviada! Nos pondremos en contacto. 🎉','modal.comprar': 'Comprar entrada','modal.semBio': 'Sin biografía registrada.','modal.semDesc': 'Sin descripción registrada.','modal.disponiveis': 'disponibles','modal.lote': 'Lote:','modal.disp': 'Disp.:','modal.abrirRoblox': '🎮 Abrir mapa en Roblox','modal.adicionarCal': '📅 Añadir al calendario','modal.assistir': '▶️ Ver video','modal.saibaMais': 'Saber más →',
+    'contagem.proximoEvento': '🎪 PRÓXIMO EVENTO',
+    'sobre.equipe': '👥 Nuestro Equipo','sobre.redes': '📱 Redes Sociales',
+  }
+};
+
+let idiomaAtual = localStorage.getItem('nexo_idioma') || 'pt';
+function t(chave){ return (TRADUCOES[idiomaAtual] && TRADUCOES[idiomaAtual][chave]) || (TRADUCOES.pt[chave]) || chave; }
+
+function aplicarTraducoes(){
+  document.documentElement.dataset.idioma = idiomaAtual;
+  document.documentElement.lang = idiomaAtual === 'pt' ? 'pt-BR' : idiomaAtual;
+  document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t(el.dataset.i18n); });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { el.placeholder = t(el.dataset.i18nPlaceholder); });
+  document.querySelectorAll('.idioma-card').forEach(c => { c.classList.toggle('selecionado', c.dataset.idioma === idiomaAtual); });
+  const aviso = document.getElementById('aviso-modo');
+  if (aviso) {
+    if (modoAtual === 'visitante') aviso.innerHTML = t('modo.visitante.msg');
+    else aviso.innerHTML = t('modo.contratante.msg');
+  }
+  if (eventoContagemAtual) {
+    const el = document.getElementById('contagem-regressiva');
+    if (el && el.style.display !== 'none') {
+      const badge = el.querySelector('.hero-contagem-badge');
+      if (badge) badge.textContent = t('contagem.proximoEvento');
+    }
+  }
+}
+
+function trocarIdioma(idioma){
+  idiomaAtual = idioma;
+  localStorage.setItem('nexo_idioma', idioma);
+  aplicarTraducoes();
+  if (artistasCache.length) renderizarArtistas();
+  if (eventosCache.length) renderizarEventos();
+  if (ingressosCache.length) renderizarIngressos();
+  if (nexotvCache.length) renderizarNexotv();
+  if (funcionariosCache.length) renderizarFuncionarios();
+}
 
 let modoAtual = 'visitante';
 let artistasCache = [];
@@ -364,22 +645,59 @@ let eventosCache = [];
 let nexotvCache = [];
 let funcionariosCache = [];
 let ingressosCache = [];
+let destaquesCache = [];
+let sobreCache = {};
+
+let filtrosAtivos = { artistas: 'todos', eventos: 'todos', ingressos: 'todos', nexotv: 'todos', funcionarios: 'todos' };
+
+let indiceBusca = [];
+let indiceBuscaPronto = false;
+
+let buscaDebounceTimer = null;
+let buscaResultadosCache = [];
+let buscaIndexSelecionado = -1;
+
+let contagemInterval = null;
+let eventoContagemAtual = null;
 
 const REDE_ICONE = {'nexo music roblox':'📷','nexo vision':'📸','youtube':'▶️','tiktok':'🎵','instagram':'📷','facebook':'📘','twitter':'🐦','x':'✖️','discord':'💬','whatsapp':'💚','spotify':'🎧','twitch':'🎮'};
 function iconeRede(nome){return REDE_ICONE[(nome||'').toLowerCase().trim()]||'🔗';}
 
-(function(){const t=localStorage.getItem('nexo_tema')||'nexo';document.documentElement.dataset.tema=t;setTimeout(()=>{document.querySelectorAll('.tema-card').forEach(c=>{c.classList.toggle('selecionado',c.dataset.tema===t)})},100);})();
-function trocarTema(t){document.documentElement.dataset.tema=t;localStorage.setItem('nexo_tema',t);document.querySelectorAll('.tema-card').forEach(c=>c.classList.toggle('selecionado',c.dataset.tema===t));}
+(function(){
+  const tema = localStorage.getItem('nexo_tema')||'nexo';
+  document.documentElement.dataset.tema=tema;
+  setTimeout(()=>{
+    document.querySelectorAll('.tema-card').forEach(c=>c.classList.toggle('selecionado',c.dataset.tema===tema));
+    document.querySelectorAll('.idioma-card').forEach(c=>c.classList.toggle('selecionado',c.dataset.idioma===idiomaAtual));
+  },100);
+})();
+function trocarTema(tm){
+  document.documentElement.dataset.tema=tm;
+  localStorage.setItem('nexo_tema',tm);
+  document.querySelectorAll('.tema-card').forEach(c=>c.classList.toggle('selecionado',c.dataset.tema===tm));
+}
 
 function mostrarPagina(nome){
   document.querySelectorAll('.pagina').forEach(p=>p.classList.remove('ativa'));
-  document.getElementById('pag-'+nome).classList.add('ativa');
+  const el = document.getElementById('pag-'+nome);
+  if (el) el.classList.add('ativa');
   document.querySelectorAll('.nexo-nav a[data-pag]').forEach(a=>{a.classList.toggle('ativo',a.dataset.pag===nome)});
   document.querySelector('.nexo-nav')?.classList.remove('aberto');
+  if (filtrosAtivos[nome]) resetarFiltro(nome);
+  if (nome === 'sobre') renderizarSobre();
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
-/* ============ API COM CACHE ============ */
+function resetarFiltro(aba){
+  filtrosAtivos[aba] = 'todos';
+  document.querySelectorAll(`#filtros-${aba} .chip`).forEach(c => { c.classList.toggle('ativo', c.dataset.filtro === 'todos'); });
+  if (aba === 'artistas') renderizarArtistas();
+  else if (aba === 'eventos') renderizarEventos();
+  else if (aba === 'ingressos') renderizarIngressos();
+  else if (aba === 'nexotv') renderizarNexotv();
+  else if (aba === 'funcionarios') renderizarFuncionarios();
+}
+
 async function apiGet(acao,params={}){
   const chave = 'nexo_cache_' + acao + '_' + JSON.stringify(params);
   try{
@@ -389,14 +707,12 @@ async function apiGet(acao,params={}){
       if(Date.now() - parsed.ts < CACHE_TTL) return parsed.dados;
     }
   }catch(e){}
-
   const url=new URL(API_URL);
   url.searchParams.set('acao',acao);
   Object.entries(params).forEach(([k,v])=>url.searchParams.set(k,v));
   const r=await fetch(url.toString());
   const j=await r.json();
   if(!j.ok)throw new Error(j.erro||'Erro');
-
   try{ localStorage.setItem(chave, JSON.stringify({ ts: Date.now(), dados: j.dados })); }catch(e){}
   return j.dados;
 }
@@ -408,7 +724,17 @@ async function apiPost(acao,dados={}){
 }
 
 const vazio=(msg,emoji='📭')=>`<div class="vazio"><span class="emoji">${emoji}</span><p>${msg}</p></div>`;
-function escapar(s){return String(s||'').replace(/"/g,'&quot;').replace(/</g,'&lt;');}
+function escapar(s){return String(s||'').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function normalizar(txt){ return String(txt||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+
+function markdownBasico(texto){
+  if (!texto) return '';
+  let html = escapar(texto);
+  html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
+  html = html.replace(/\n/g, '<br>');
+  return html;
+}
 
 function youtubeEmbed(url, opts){
   if(!url)return '';
@@ -431,11 +757,7 @@ function normalizarData(data){
   const s=String(data).trim();
   if(/^\d{4}-\d{2}-\d{2}/.test(s)) return s.substring(0,10);
   const mBr=s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{2,4})/);
-  if(mBr){
-    let [,dia,mes,ano]=mBr;
-    if(ano.length===2)ano='20'+ano;
-    return `${ano}-${mes.padStart(2,'0')}-${dia.padStart(2,'0')}`;
-  }
+  if(mBr){ let [,dia,mes,ano]=mBr; if(ano.length===2)ano='20'+ano; return `${ano}-${mes.padStart(2,'0')}-${dia.padStart(2,'0')}`; }
   return '';
 }
 
@@ -458,7 +780,6 @@ function gerarLinkCalendario(ev){
   return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${titulo}&dates=${inicio}/${fimStr}&details=${desc}&location=${local}`;
 }
 
-/* ============ CARDS ============ */
 const cardDestaque=d=>`
   <article class="card-destaque animar">
     ${d.imagem?`<div class="destaque-img"><img src="${d.imagem}" alt="${escapar(d.titulo||'')}" loading="lazy"></div>`:`<div class="destaque-img">ESPAÇO PARA BANNER / FOTO</div>`}
@@ -472,19 +793,14 @@ const cardAnuncio=(a, idx)=>{
   return `
   <article class="card-anuncio">
     <div class="anuncio-video">
-      <iframe
-        id="iframe-anuncio-${idx}"
-        src="${youtubeEmbedId(a.youtube_id, { autoplay: true, mute: true, loop: true, controls: true })}"
-        allow="autoplay; encrypted-media; picture-in-picture"
-        allowfullscreen>
-      </iframe>
+      <iframe id="iframe-anuncio-${idx}" src="${youtubeEmbedId(a.youtube_id, { autoplay: true, mute: true, loop: true, controls: true })}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
     </div>
     <div class="anuncio-info">
       <div class="anuncio-info-topo">
         <h3>${a.titulo||'Anúncio'}</h3>
         <button class="btn-som mudo" id="btn-som-${idx}" onclick="toggleSomAnuncio(${idx}, this)" title="Ativar som">🔇</button>
       </div>
-      ${temLink ? `<a href="${a.link_destino}" target="_blank" class="anuncio-link">Saiba mais →</a>` : ''}
+      ${temLink ? `<a href="${a.link_destino}" target="_blank" class="anuncio-link">${t('modal.saibaMais')}</a>` : ''}
     </div>
   </article>`;
 };
@@ -497,7 +813,7 @@ const cardEvento=e=>`
       <p class="card-meta">📅 ${e.data||'—'} · ⏰ ${e.hora||'—'}</p>
       <p class="card-meta">📍 ${e.local||'—'}</p>
       <p>${(e.descricao||'').substring(0,100)}${(e.descricao||'').length>100?'...':''}</p>
-      <span class="ver-perfil">Ver detalhes →</span>
+      <span class="ver-perfil">${t('home.verTodos')}</span>
     </div>
   </article>`;
 
@@ -507,7 +823,7 @@ const cardArtista=a=>`
     <div class="card-body">
       <h3>${a.nome}</h3>
       <p>${(a.bio||'').substring(0,120)}${(a.bio||'').length>120?'...':''}</p>
-      <span class="ver-perfil">Ver perfil completo →</span>
+      <span class="ver-perfil">${t('home.verTodos')}</span>
     </div>
   </article>`;
 
@@ -515,10 +831,10 @@ const cardNexoTV=n=>`
   <article class="card-nexotv animar" onclick="abrirNexoTV(${n.id})">
     ${n.imagem?`<img src="${n.imagem}" alt="${escapar(n.titulo)}" loading="lazy">`:`<div class="card-sem-img">📺</div>`}
     <div class="card-body">
-      <span class="badge">${n.tipo||'notícia'}</span>
+      <span class="badge">${n.tipo||t('nexotv.noticia')}</span>
       <h3>${n.titulo}</h3>
       <p>${(n.descricao||'').substring(0,120)}${(n.descricao||'').length>120?'...':''}</p>
-      <span class="ver-perfil">Ler mais →</span>
+      <span class="ver-perfil">${t('home.verTudo')}</span>
     </div>
   </article>`;
 
@@ -529,7 +845,6 @@ const cardFuncionario=f=>`
       <h3>${f.nome}</h3>
       <p class="cargo">${f.cargo||''} ${f.setor?'· '+f.setor:''}</p>
       <p>${(f.bio||'').substring(0,100)}${(f.bio||'').length>100?'...':''}</p>
-      <span class="ver-perfil">Ver perfil →</span>
     </div>
   </article>`;
 
@@ -539,8 +854,7 @@ const cardIngresso=i=>`
       <span class="badge">${i.categoria||'ingresso'}</span>
       <h3>${i.nome}</h3>
       <p class="preco">R$ ${Number(i.preco||0).toFixed(2).replace('.',',')}</p>
-      <p>Lote: ${i.lote||'—'} · Disp.: ${(i.qtd_total||0)-(i.qtd_vendida||0)}</p>
-      <span class="ver-perfil">Ver detalhes →</span>
+      <p>${t('modal.lote')} ${i.lote||'—'} · ${t('modal.disp')} ${(i.qtd_total||0)-(i.qtd_vendida||0)}</p>
     </div>
   </article>`;
 
@@ -549,16 +863,334 @@ const cardRede=r=>{
   return `<div class="acesso-card animar" onclick="window.open('${r.url}','_blank')"><span class="acesso-emoji">${iconeRede(r.nome)}</span><h3>${r.nome}</h3><p>${handle}</p></div>`;
 };
 
-/* ============ SOM DOS ANÚNCIOS ============ */
+/* ============ SOBRE ============ */
+function renderizarSobre(){
+  const s = sobreCache || {};
+
+  // Hero
+  const hero = document.getElementById('sobre-hero');
+  const titulo = document.getElementById('sobre-titulo');
+  const subtitulo = document.getElementById('sobre-subtitulo');
+
+  if (titulo) titulo.textContent = s.titulo_hero || 'Sobre a Nexo';
+  if (subtitulo) subtitulo.textContent = s.subtitulo_hero || 'Conheça nossa história';
+
+  if (hero) {
+    if (s.capa) {
+      hero.classList.add('com-capa');
+      hero.style.backgroundImage = `url('${s.capa}')`;
+    } else {
+      hero.classList.remove('com-capa');
+      hero.style.backgroundImage = '';
+    }
+  }
+
+  // Texto principal
+  const secTexto = document.getElementById('secao-sobre-texto');
+  const elTexto = document.getElementById('sobre-texto-principal');
+  if (s.texto_principal && s.texto_principal.trim()) {
+    elTexto.innerHTML = markdownBasico(s.texto_principal);
+    secTexto.style.display = '';
+  } else {
+    secTexto.style.display = 'none';
+  }
+
+  // Missão / Visão / Valores
+  const secMVV = document.getElementById('secao-sobre-mvv');
+  let temMVV = false;
+
+  if (s.missao_titulo || s.missao_texto) {
+    document.getElementById('card-missao').style.display = '';
+    document.getElementById('missao-titulo').textContent = s.missao_titulo || 'Missão';
+    document.getElementById('missao-texto').innerHTML = markdownBasico(s.missao_texto || '');
+    temMVV = true;
+  } else {
+    document.getElementById('card-missao').style.display = 'none';
+  }
+
+  if (s.visao_titulo || s.visao_texto) {
+    document.getElementById('card-visao').style.display = '';
+    document.getElementById('visao-titulo').textContent = s.visao_titulo || 'Visão';
+    document.getElementById('visao-texto').innerHTML = markdownBasico(s.visao_texto || '');
+    temMVV = true;
+  } else {
+    document.getElementById('card-visao').style.display = 'none';
+  }
+
+  if (s.valores_titulo || s.valores_texto) {
+    document.getElementById('card-valores').style.display = '';
+    document.getElementById('valores-titulo').textContent = s.valores_titulo || 'Valores';
+    document.getElementById('valores-texto').innerHTML = markdownBasico(s.valores_texto || '');
+    temMVV = true;
+  } else {
+    document.getElementById('card-valores').style.display = 'none';
+  }
+
+  secMVV.style.display = temMVV ? '' : 'none';
+
+  // Equipe
+  const secEquipe = document.getElementById('secao-sobre-equipe');
+  const elEquipe = document.getElementById('sobre-equipe');
+  if (funcionariosCache && funcionariosCache.length) {
+    elEquipe.innerHTML = funcionariosCache.map(cardFuncionario).join('');
+    secEquipe.style.display = '';
+    ativarAnimacoes();
+  } else {
+    secEquipe.style.display = 'none';
+  }
+
+  // Redes
+  const secRedes = document.getElementById('secao-sobre-redes');
+  const elRedes = document.getElementById('sobre-redes');
+  if (redesCache && redesCache.length) {
+    elRedes.innerHTML = redesCache.map(cardRede).join('');
+    secRedes.style.display = '';
+    ativarAnimacoes();
+  } else {
+    secRedes.style.display = 'none';
+  }
+
+  // CTA
+  const secCTA = document.getElementById('secao-sobre-cta');
+  const elCTATitulo = document.getElementById('cta-titulo');
+  const elCTASub = document.getElementById('cta-subtitulo');
+  const elCTABtn = document.getElementById('cta-botao');
+
+  if (s.cta_titulo || s.cta_subtitulo || s.cta_botao_texto) {
+    elCTATitulo.textContent = s.cta_titulo || 'Vem fazer parte da Nexo!';
+    elCTASub.textContent = s.cta_subtitulo || '';
+    if (s.cta_botao_texto && s.cta_botao_link) {
+      elCTABtn.textContent = s.cta_botao_texto;
+      elCTABtn.href = s.cta_botao_link;
+      elCTABtn.style.display = '';
+    } else {
+      elCTABtn.style.display = 'none';
+    }
+    secCTA.style.display = '';
+  } else {
+    secCTA.style.display = 'none';
+  }
+}
+
+/* ============ RESTO DAS FUNÇÕES ============ */
+function aplicarFiltro(aba, filtro){
+  filtrosAtivos[aba] = filtro;
+  document.querySelectorAll(`#filtros-${aba} .chip`).forEach(c => { c.classList.toggle('ativo', c.dataset.filtro === filtro); });
+  if (aba === 'artistas') renderizarArtistas();
+  else if (aba === 'eventos') renderizarEventos();
+  else if (aba === 'ingressos') renderizarIngressos();
+  else if (aba === 'nexotv') renderizarNexotv();
+  else if (aba === 'funcionarios') renderizarFuncionarios();
+}
+
+function filtrarArtistas(){
+  let lista = [...artistasCache];
+  const f = filtrosAtivos.artistas;
+  if (f === 'az') lista.sort((a,b) => (a.nome||'').localeCompare(b.nome||'', 'pt-BR'));
+  else if (f === 'za') lista.sort((a,b) => (b.nome||'').localeCompare(a.nome||'', 'pt-BR'));
+  return lista;
+}
+function filtrarEventos(){
+  let lista = [...eventosCache];
+  const f = filtrosAtivos.eventos;
+  const hoje = new Date(); hoje.setHours(0,0,0,0);
+  const mesAtual = hoje.getMonth();
+  const anoAtual = hoje.getFullYear();
+  if (f === 'proximos') {
+    lista = lista.filter(e => { const dt = normalizarData(e.data); return dt && new Date(dt+'T23:59:59') >= hoje; });
+    lista.sort((a,b) => (normalizarData(a.data)||'').localeCompare(normalizarData(b.data)||''));
+  } else if (f === 'passados') {
+    lista = lista.filter(e => { const dt = normalizarData(e.data); return dt && new Date(dt+'T23:59:59') < hoje; });
+    lista.sort((a,b) => (normalizarData(b.data)||'').localeCompare(normalizarData(a.data)||''));
+  } else if (f === 'mes') {
+    lista = lista.filter(e => {
+      const dt = normalizarData(e.data); if (!dt) return false;
+      const d = new Date(dt+'T12:00:00');
+      return d.getMonth() === mesAtual && d.getFullYear() === anoAtual;
+    });
+    lista.sort((a,b) => (normalizarData(a.data)||'').localeCompare(normalizarData(b.data)||''));
+  }
+  return lista;
+}
+function filtrarIngressos(){
+  let lista = [...ingressosCache];
+  const f = filtrosAtivos.ingressos;
+  if (f === 'barato') lista.sort((a,b) => Number(a.preco||0) - Number(b.preco||0));
+  else if (f === 'caro') lista.sort((a,b) => Number(b.preco||0) - Number(a.preco||0));
+  else if (f === 'disponivel') lista = lista.filter(i => (Number(i.qtd_total||0) - Number(i.qtd_vendida||0)) > 0);
+  return lista;
+}
+function filtrarNexoTV(){
+  let lista = [...nexotvCache];
+  const f = filtrosAtivos.nexotv;
+  if (f !== 'todos') lista = lista.filter(n => String(n.tipo||'').toLowerCase() === f);
+  return lista;
+}
+function filtrarFuncionarios(){
+  let lista = [...funcionariosCache];
+  const f = filtrosAtivos.funcionarios;
+  if (f === 'az') lista.sort((a,b) => (a.nome||'').localeCompare(b.nome||'', 'pt-BR'));
+  else if (f === 'za') lista.sort((a,b) => (b.nome||'').localeCompare(a.nome||'', 'pt-BR'));
+  return lista;
+}
+
+function renderizarArtistas(){
+  const el = document.getElementById('lista-artistas');
+  const lista = filtrarArtistas();
+  if (!artistasCache.length) { el.innerHTML = vazio(t('vazio.artistas'),'🎤'); return; }
+  if (!lista.length) { el.innerHTML = vazio(t('vazio.artistas.filtro'),'🎤'); return; }
+  el.innerHTML = lista.map(cardArtista).join('');
+  ativarAnimacoes();
+}
+function renderizarEventos(){
+  const el = document.getElementById('lista-eventos');
+  const lista = filtrarEventos();
+  if (!eventosCache.length) { el.innerHTML = vazio(t('vazio.eventos'),'🎪'); return; }
+  if (!lista.length) { el.innerHTML = vazio(t('vazio.eventos.filtro'),'🎪'); return; }
+  el.innerHTML = lista.map(cardEvento).join('');
+  ativarAnimacoes();
+}
+function renderizarIngressos(){
+  const el = document.getElementById('lista-ingressos');
+  const lista = filtrarIngressos();
+  if (!ingressosCache.length) { el.innerHTML = vazio(t('vazio.ingressos'),'🎟️'); return; }
+  if (!lista.length) { el.innerHTML = vazio(t('vazio.ingressos.filtro'),'🎟️'); return; }
+  el.innerHTML = lista.map(cardIngresso).join('');
+  ativarAnimacoes();
+}
+function renderizarNexotv(){
+  const el = document.getElementById('lista-nexotv');
+  const lista = filtrarNexoTV();
+  if (!nexotvCache.length) { el.innerHTML = vazio(t('vazio.nexotv'),'📺'); return; }
+  if (!lista.length) { el.innerHTML = vazio(t('vazio.nexotv.filtro'),'📺'); return; }
+  el.innerHTML = lista.map(cardNexoTV).join('');
+  ativarAnimacoes();
+}
+function renderizarFuncionarios(){
+  const el = document.getElementById('lista-funcionarios');
+  const lista = filtrarFuncionarios();
+  if (!funcionariosCache.length) { el.innerHTML = vazio(t('vazio.funcionarios'),'👥'); return; }
+  if (!lista.length) { el.innerHTML = vazio(t('vazio.funcionarios.filtro'),'👥'); return; }
+  el.innerHTML = lista.map(cardFuncionario).join('');
+  ativarAnimacoes();
+}
+
+function montarIndiceBusca(){
+  const itens = [];
+  (artistasCache || []).forEach(a => itens.push({tipo:'artista', emoji:'🎤', titulo:a.nome, subtitulo:(a.bio||'').substring(0,60), busca:normalizar(a.nome + ' ' + (a.bio||'')), acao:() => { fecharBusca(); abrirArtista(a.id); }}));
+  (eventosCache || []).forEach(ev => itens.push({tipo:'evento', emoji:'🎪', titulo:ev.nome, subtitulo:`📅 ${ev.data||'—'} · 📍 ${ev.local||'—'}`, busca:normalizar(ev.nome + ' ' + (ev.descricao||'') + ' ' + (ev.local||'')), acao:() => { fecharBusca(); abrirEvento(ev.id); }}));
+  (nexotvCache || []).forEach(n => itens.push({tipo:'nexotv', emoji:'📺', titulo:n.titulo, subtitulo:`${n.tipo||''} · ${(n.descricao||'').substring(0,50)}`, busca:normalizar(n.titulo + ' ' + (n.descricao||'') + ' ' + (n.autor||'')), acao:() => { fecharBusca(); abrirNexoTV(n.id); }}));
+  (funcionariosCache || []).forEach(f => itens.push({tipo:'funcionario', emoji:'👤', titulo:f.nome, subtitulo:`${f.cargo||''} ${f.setor?'· '+f.setor:''}`, busca:normalizar(f.nome + ' ' + (f.cargo||'') + ' ' + (f.setor||'') + ' ' + (f.bio||'')), acao:() => { fecharBusca(); abrirFuncionario(f.id); }}));
+  (ingressosCache || []).forEach(i => itens.push({tipo:'ingresso', emoji:'🎟️', titulo:i.nome, subtitulo:`R$ ${Number(i.preco||0).toFixed(2).replace('.',',')} · ${i.categoria||''}`, busca:normalizar(i.nome + ' ' + (i.categoria||'') + ' ' + (i.beneficios||'')), acao:() => { fecharBusca(); abrirIngresso(i.id); }}));
+  (destaquesCache || []).forEach(d => itens.push({tipo:'destaque', emoji:'✨', titulo:d.titulo, subtitulo:(d.subtitulo||'').substring(0,60), busca:normalizar(d.titulo + ' ' + (d.subtitulo||'')), acao:() => { fecharBusca(); mostrarPagina('home'); }}));
+  indiceBusca = itens;
+  indiceBuscaPronto = true;
+}
+
+function onBuscaInput(valor){
+  if (buscaDebounceTimer) clearTimeout(buscaDebounceTimer);
+  buscaDebounceTimer = setTimeout(() => { buscaDebounceTimer = null; renderBusca(valor); }, BUSCA_DEBOUNCE_MS);
+}
+
+function renderBusca(termo){
+  const container = document.getElementById('buscaResultados');
+  if (!indiceBuscaPronto) montarIndiceBusca();
+  const tt = normalizar(termo).trim();
+  let resultados;
+  if (!tt) resultados = indiceBusca.slice(0, 12);
+  else {
+    const filtrados = indiceBusca.filter(item => item.busca.includes(tt));
+    filtrados.sort((a,b) => {
+      const aTit = normalizar(a.titulo), bTit = normalizar(b.titulo);
+      const aStarts = aTit.startsWith(tt) ? 2 : aTit.includes(tt) ? 1 : 0;
+      const bStarts = bTit.startsWith(tt) ? 2 : bTit.includes(tt) ? 1 : 0;
+      return bStarts - aStarts;
+    });
+    resultados = filtrados;
+  }
+  buscaResultadosCache = resultados;
+  buscaIndexSelecionado = resultados.length > 0 ? 0 : -1;
+  if (resultados.length === 0) {
+    container.innerHTML = `<div class="busca-vazio"><span class="emoji">🔍</span><p>${t('vazio.busca')} <strong>"${escapar(termo)}"</strong>.</p></div>`;
+    return;
+  }
+  const grupos = {};
+  const ordem = ['artista','evento','nexotv','funcionario','ingresso','destaque'];
+  const rotulos = {artista:t('menu.artistas'),evento:t('menu.eventos'),nexotv:t('menu.nexotv'),funcionario:t('menu.funcionarios'),ingresso:t('menu.ingressos'),destaque:t('home.destaques')};
+  const emojis = {artista:'🎤',evento:'🎪',nexotv:'📺',funcionario:'👤',ingresso:'🎟️',destaque:'✨'};
+  resultados.forEach((item, idx) => {
+    if (!grupos[item.tipo]) grupos[item.tipo] = [];
+    grupos[item.tipo].push({ ...item, idx });
+  });
+  let html = '';
+  ordem.forEach(tipo => {
+    if (!grupos[tipo]) return;
+    html += `<div class="busca-grupo"><div class="busca-grupo-titulo">${emojis[tipo]} ${rotulos[tipo]}</div>`;
+    grupos[tipo].slice(0, BUSCA_MAX_POR_GRUPO).forEach(item => {
+      const sel = item.idx === buscaIndexSelecionado ? 'selecionado' : '';
+      html += `<div class="busca-item ${sel}" data-idx="${item.idx}" onclick="abrirResultadoBusca(buscaResultadosCache[${item.idx}])"><span class="busca-item-emoji">${item.emoji}</span><div class="busca-item-info"><div class="busca-item-titulo">${escapar(item.titulo)}</div><div class="busca-item-sub">${escapar(item.subtitulo)}</div></div></div>`;
+    });
+    html += `</div>`;
+  });
+  container.innerHTML = html;
+}
+
+function abrirBusca(){
+  document.getElementById('buscaFundo').classList.add('ativo');
+  document.body.style.overflow='hidden';
+  const input = document.getElementById('buscaInput');
+  input.value = '';
+  if (!indiceBuscaPronto) montarIndiceBusca();
+  renderBusca('');
+  setTimeout(()=>input.focus(), 100);
+}
+function fecharBusca(){
+  document.getElementById('buscaFundo').classList.remove('ativo');
+  document.body.style.overflow='';
+  buscaIndexSelecionado = -1;
+  if (buscaDebounceTimer) { clearTimeout(buscaDebounceTimer); buscaDebounceTimer = null; }
+}
+document.getElementById('buscaFundo').addEventListener('click', e => {
+  if (e.target.id === 'buscaFundo') fecharBusca();
+});
+
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+    if (e.key === 'Escape') { fecharBusca(); return; }
+    if (e.target.id === 'buscaInput') {
+      if (e.key === 'ArrowDown') { e.preventDefault(); navegarBusca(1); }
+      if (e.key === 'ArrowUp') { e.preventDefault(); navegarBusca(-1); }
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        if (buscaResultadosCache[buscaIndexSelecionado]) abrirResultadoBusca(buscaResultadosCache[buscaIndexSelecionado]);
+        else if (buscaResultadosCache.length > 0) abrirResultadoBusca(buscaResultadosCache[0]);
+      }
+    }
+    return;
+  }
+  if (e.key === '/') { e.preventDefault(); abrirBusca(); }
+  if (e.key === 'Escape') { fecharBusca(); fecharModal(); }
+});
+
+function navegarBusca(direcao){
+  if (buscaResultadosCache.length === 0) return;
+  buscaIndexSelecionado += direcao;
+  if (buscaIndexSelecionado < 0) buscaIndexSelecionado = buscaResultadosCache.length - 1;
+  if (buscaIndexSelecionado >= buscaResultadosCache.length) buscaIndexSelecionado = 0;
+  document.querySelectorAll('.busca-item').forEach(el => {
+    const idx = Number(el.dataset.idx);
+    el.classList.toggle('selecionado', idx === buscaIndexSelecionado);
+  });
+  const el = document.querySelector('.busca-item.selecionado');
+  if (el) el.scrollIntoView({block:'nearest',behavior:'smooth'});
+}
+function abrirResultadoBusca(item){ if (!item || !item.acao) return; item.acao(); }
+
 function toggleSomAnuncio(idx, btn){
   const iframe = document.getElementById('iframe-anuncio-' + idx);
   if(!iframe) return;
   const estaMudo = btn.classList.contains('mudo');
-  iframe.contentWindow.postMessage(JSON.stringify({
-    event: 'command',
-    func: estaMudo ? 'unMute' : 'mute',
-    args: []
-  }), '*');
+  iframe.contentWindow.postMessage(JSON.stringify({event:'command',func:estaMudo?'unMute':'mute',args:[]}), '*');
   btn.classList.toggle('mudo');
   btn.textContent = estaMudo ? '🔊' : '🔇';
   btn.title = estaMudo ? 'Mutar' : 'Ativar som';
@@ -569,8 +1201,8 @@ function mudarModo(modo){
   document.getElementById('btnVisitante').classList.toggle('ativo',modo==='visitante');
   document.getElementById('btnContratante').classList.toggle('ativo',modo==='contratante');
   const aviso=document.getElementById('aviso-modo');
-  if(modo==='visitante'){aviso.innerHTML='👀 Você está no modo <strong>Visitante</strong>. Explore os artistas livremente.';}
-  else{aviso.innerHTML='🎤 Você está no modo <strong>Contratante</strong>. Clique em um artista para solicitar uma contratação.';}
+  if(modo==='visitante') aviso.innerHTML=t('modo.visitante.msg');
+  else aviso.innerHTML=t('modo.contratante.msg');
   renderizarArtistas();
 }
 
@@ -585,35 +1217,29 @@ function fecharModal(){
   document.body.style.overflow='';
 }
 document.getElementById('modalFundo').addEventListener('click',e=>{if(e.target.id==='modalFundo')fecharModal();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')fecharModal();});
 
 function abrirArtista(id){
-  const a=artistasCache.find(x=>x.id==id);
-  if(!a)return;
+  const a=artistasCache.find(x=>x.id==id); if(!a)return;
   const redes=[];
   if(a.instagram)redes.push(`<a href="${a.instagram}" target="_blank">📷 Instagram</a>`);
   if(a.youtube)redes.push(`<a href="${a.youtube}" target="_blank">▶️ YouTube</a>`);
   if(a.tiktok)redes.push(`<a href="${a.tiktok}" target="_blank">🎵 TikTok</a>`);
-  const botaoContratar=modoAtual==='contratante'?`<button class="btn btn-primario" style="margin-top:20px;width:100%;" onclick="abrirFormContratacao(${a.id})">🎤 Solicitar contratação</button>`:'';
-  const html=`
+  const botaoContratar=modoAtual==='contratante'?`<button class="btn btn-primario" style="margin-top:20px;width:100%;" onclick="abrirFormContratacao(${a.id})">${t('modal.solicitar')}</button>`:'';
+  abrirModal(`
     ${a.foto?`<img src="${a.foto}" class="modal-img-grande" alt="${escapar(a.nome)}">`:`<div class="modal-img-sem">🎤</div>`}
     <h2 class="modal-titulo-grande">${a.nome}</h2>
-    <div class="modal-descricao">${a.bio||'Sem biografia cadastrada.'}</div>
+    <div class="modal-descricao">${a.bio||t('modal.semBio')}</div>
     ${redes.length?`<div class="modal-redes">${redes.join('')}</div>`:''}
     ${a.musicas?`<div class="modal-section"><h4>🎵 Músicas</h4><div class="info">${a.musicas}</div></div>`:''}
     ${a.videos?`<div class="modal-section"><h4>🎬 Vídeos</h4><div class="info">${a.videos}</div></div>`:''}
-    ${botaoContratar}
-  `;
-  abrirModal(html);
+    ${botaoContratar}`);
 }
 
 function abrirEvento(id){
-  const e=eventosCache.find(x=>x.id==id);
-  if(!e)return;
-  let linkCal='';
-  try{ linkCal=gerarLinkCalendario(e); }catch(err){ linkCal=''; }
+  const e=eventosCache.find(x=>x.id==id); if(!e)return;
+  let linkCal=''; try{ linkCal=gerarLinkCalendario(e); }catch(err){ linkCal=''; }
   const ingressosVinculados=ingressosCache.filter(i=>String(i.evento_id)===String(e.id));
-  const html=`
+  abrirModal(`
     ${e.imagem?`<img src="${e.imagem}" class="modal-img-grande" alt="${escapar(e.nome)}">`:`<div class="modal-img-sem">🎪</div>`}
     <h2 class="modal-titulo-grande">${e.nome}</h2>
     <div class="modal-meta-linha">
@@ -621,101 +1247,79 @@ function abrirEvento(id){
       ${e.hora?`<span class="modal-meta-item">⏰ ${e.hora}</span>`:''}
       ${e.local?`<span class="modal-meta-item">📍 ${e.local}</span>`:''}
     </div>
-    <div class="modal-descricao">${e.descricao||'Sem descrição cadastrada.'}</div>
+    <div class="modal-descricao">${e.descricao||t('modal.semDesc')}</div>
     ${e.artistas_ids?`<div class="modal-section"><h4>🎤 Artistas participantes</h4><div class="info">${e.artistas_ids}</div></div>`:''}
-    ${ingressosVinculados.length?`
-      <div class="modal-section">
-        <h4>🎟️ Ingressos disponíveis</h4>
-        <div class="info">${ingressosVinculados.map(i=>`<strong>${i.nome}</strong> — R$ ${Number(i.preco||0).toFixed(2).replace('.',',')} · ${i.categoria||'—'} · ${(i.qtd_total||0)-(i.qtd_vendida||0)} disponíveis`).join('<br>')}</div>
-      </div>`:''}
+    ${ingressosVinculados.length?`<div class="modal-section"><h4>🎟️ ${t('menu.ingressos')}</h4><div class="info">${ingressosVinculados.map(i=>`<strong>${i.nome}</strong> — R$ ${Number(i.preco||0).toFixed(2).replace('.',',')} · ${i.categoria||'—'} · ${(i.qtd_total||0)-(i.qtd_vendida||0)} ${t('modal.disponiveis')}`).join('<br>')}</div></div>`:''}
     <div class="modal-acoes">
-      ${e.link_roblox?`<a href="${e.link_roblox}" target="_blank" class="btn btn-roblox">🎮 Abrir mapa no Roblox</a>`:''}
-      ${linkCal?`<a href="${linkCal}" target="_blank" class="btn btn-calendario">📅 Adicionar ao calendário</a>`:''}
-    </div>
-  `;
-  abrirModal(html);
+      ${e.link_roblox?`<a href="${e.link_roblox}" target="_blank" class="btn btn-roblox">${t('modal.abrirRoblox')}</a>`:''}
+      ${linkCal?`<a href="${linkCal}" target="_blank" class="btn btn-calendario">${t('modal.adicionarCal')}</a>`:''}
+    </div>`);
 }
 
 function abrirNexoTV(id){
-  const n=nexotvCache.find(x=>x.id==id);
-  if(!n)return;
+  const n=nexotvCache.find(x=>x.id==id); if(!n)return;
   const embed=youtubeEmbed(n.video_url, { autoplay: false, mute: false, loop: false, controls: true });
-  const html=`
+  abrirModal(`
     ${embed?`<div class="modal-video"><iframe src="${embed}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>`:''}
     ${!embed&&n.imagem?`<img src="${n.imagem}" class="modal-img-grande" alt="${escapar(n.titulo)}">`:''}
     ${!embed&&!n.imagem?`<div class="modal-img-sem">📺</div>`:''}
-    <span class="badge">${n.tipo||'notícia'}</span>
+    <span class="badge">${n.tipo||t('nexotv.noticia')}</span>
     <h2 class="modal-titulo-grande" style="margin-top:8px;">${n.titulo}</h2>
-    <div class="modal-meta-linha">
-      ${n.autor?`<span class="modal-meta-item">✍️ ${n.autor}</span>`:''}
-    </div>
-    <div class="modal-descricao">${n.descricao||'Sem descrição.'}</div>
-    ${n.video_url&&!embed?`<div class="modal-acoes"><a href="${n.video_url}" target="_blank" class="btn btn-primario">▶️ Assistir vídeo</a></div>`:''}
-  `;
-  abrirModal(html);
+    <div class="modal-meta-linha">${n.autor?`<span class="modal-meta-item">✍️ ${n.autor}</span>`:''}</div>
+    <div class="modal-descricao">${n.descricao||t('modal.semDesc')}</div>
+    ${n.video_url&&!embed?`<div class="modal-acoes"><a href="${n.video_url}" target="_blank" class="btn btn-primario">${t('modal.assistir')}</a></div>`:''}`);
 }
 
 function abrirFuncionario(id){
-  const f=funcionariosCache.find(x=>x.id==id);
-  if(!f)return;
-  const html=`
+  const f=funcionariosCache.find(x=>x.id==id); if(!f)return;
+  abrirModal(`
     ${f.foto?`<img src="${f.foto}" class="modal-img-grande" alt="${escapar(f.nome)}">`:`<div class="modal-img-sem">👤</div>`}
     <h2 class="modal-titulo-grande">${f.nome}</h2>
     <div class="modal-meta-linha">
       ${f.cargo?`<span class="modal-meta-item">💼 ${f.cargo}</span>`:''}
       ${f.setor?`<span class="modal-meta-item">🏢 ${f.setor}</span>`:''}
     </div>
-    <div class="modal-descricao">${f.bio||'Sem biografia cadastrada.'}</div>
+    <div class="modal-descricao">${f.bio||t('modal.semBio')}</div>
     ${f.instagram?`<div class="modal-redes"><a href="${f.instagram}" target="_blank">📷 Instagram</a></div>`:''}
-    ${f.outras_info?`<div class="modal-section"><h4>ℹ️ Outras informações</h4><div class="info">${f.outras_info}</div></div>`:''}
-  `;
-  abrirModal(html);
+    ${f.outras_info?`<div class="modal-section"><h4>ℹ️ Info</h4><div class="info">${f.outras_info}</div></div>`:''}`);
 }
 
 function abrirIngresso(id){
-  const i=ingressosCache.find(x=>x.id==id);
-  if(!i)return;
+  const i=ingressosCache.find(x=>x.id==id); if(!i)return;
   const disp=(i.qtd_total||0)-(i.qtd_vendida||0);
-  const html=`
+  abrirModal(`
     <span class="badge">${i.categoria||'ingresso'}</span>
     <h2 class="modal-titulo-grande" style="margin-top:8px;">${i.nome}</h2>
     <div class="modal-meta-linha">
       <span class="modal-meta-item" style="font-size:1.2rem;">💰 R$ ${Number(i.preco||0).toFixed(2).replace('.',',')}</span>
       ${i.lote?`<span class="modal-meta-item">🏷️ ${i.lote}</span>`:''}
-      <span class="modal-meta-item">🎫 ${disp} disponíveis</span>
+      <span class="modal-meta-item">🎫 ${disp} ${t('modal.disponiveis')}</span>
     </div>
     ${i.beneficios?`<div class="modal-section"><h4>✨ Benefícios</h4><div class="info">${i.beneficios}</div></div>`:''}
     ${i.regras?`<div class="modal-section"><h4>📋 Regras</h4><div class="info">${i.regras}</div></div>`:''}
-    <div class="modal-acoes">
-      <a class="btn btn-primario" href="#" onclick="alert('Em breve: compra 🎟️');return false;">Comprar ingresso</a>
-    </div>
-  `;
-  abrirModal(html);
+    <div class="modal-acoes"><a class="btn btn-primario" href="#" onclick="alert('Em breve');return false;">${t('modal.comprar')}</a></div>`);
 }
 
 function abrirFormContratacao(idArtista){
-  const a=artistasCache.find(x=>x.id==idArtista);
-  if(!a)return;
-  const html=`
-    <h2 style="font-size:1.5rem;font-weight:900;margin-bottom:6px;letter-spacing:-0.3px;">🎤 Solicitar contratação</h2>
-    <p style="color:var(--texto-suave);font-size:0.9rem;margin-bottom:24px;">Artista: <strong>${a.nome}</strong></p>
+  const a=artistasCache.find(x=>x.id==idArtista); if(!a)return;
+  abrirModal(`
+    <h2 style="font-size:1.5rem;font-weight:900;margin-bottom:6px;letter-spacing:-0.3px;">${t('modal.solicitar')}</h2>
+    <p style="color:var(--texto-suave);font-size:0.9rem;margin-bottom:24px;">${t('modal.artista')} <strong>${a.nome}</strong></p>
     <form id="formContratacao" onsubmit="enviarContratacao(event, ${a.id})">
-      <div class="form-campo"><label>Nome do contratante *</label><input name="contratante_nome" required></div>
-      <div class="form-campo"><label>Email *</label><input type="email" name="email" required></div>
-      <div class="form-campo"><label>Instagram do evento / contratante</label><input name="instagram" placeholder="@seu_insta"></div>
-      <div class="form-campo"><label>Empresa organizadora</label><input name="empresa" placeholder="Nome da empresa (opcional)"></div>
-      <div class="form-campo"><label>Nome do evento *</label><input name="nome_evento" required></div>
+      <div class="form-campo"><label>${t('modal.nome')}</label><input name="contratante_nome" required></div>
+      <div class="form-campo"><label>${t('modal.email')}</label><input type="email" name="email" required></div>
+      <div class="form-campo"><label>${t('modal.instagram')}</label><input name="instagram" placeholder="@seu_insta"></div>
+      <div class="form-campo"><label>${t('modal.empresa')}</label><input name="empresa"></div>
+      <div class="form-campo"><label>${t('modal.nomeEvento')}</label><input name="nome_evento" required></div>
       <div class="form-linha">
-        <div class="form-campo"><label>Data do evento *</label><input type="date" name="data_evento" required></div>
-        <div class="form-campo"><label>Hora do evento</label><input type="time" name="hora"></div>
+        <div class="form-campo"><label>${t('modal.data')}</label><input type="date" name="data_evento" required></div>
+        <div class="form-campo"><label>${t('modal.hora')}</label><input type="time" name="hora"></div>
       </div>
-      <div class="form-campo"><label>Link do mapa do Roblox (se já tiver)</label><input name="local_mapa" placeholder="https://www.roblox.com/games/..."></div>
-      <div class="form-campo"><label>Detalhes / observações</label><textarea name="detalhes"></textarea></div>
-      <button type="submit" class="btn btn-primario" style="width:100%;margin-top:8px;">📩 Enviar solicitação</button>
+      <div class="form-campo"><label>${t('modal.linkMapa')}</label><input name="local_mapa" placeholder="https://www.roblox.com/games/..."></div>
+      <div class="form-campo"><label>${t('modal.detalhes')}</label><textarea name="detalhes"></textarea></div>
+      <button type="submit" class="btn btn-primario" style="width:100%;margin-top:8px;">${t('modal.enviar')}</button>
       <div id="msgForm"></div>
-    </form>
-  `;
-  abrirModal(html);
+    </form>`);
 }
 
 async function enviarContratacao(ev,idArtista){
@@ -723,26 +1327,105 @@ async function enviarContratacao(ev,idArtista){
   const form=ev.target;
   const btn=form.querySelector('button[type="submit"]');
   const msg=document.getElementById('msgForm');
-  btn.disabled=true;btn.textContent='Enviando...';msg.innerHTML='';
+  btn.disabled=true;btn.textContent=t('modal.enviando');msg.innerHTML='';
   try{
     const dados={artista_id:idArtista};
     new FormData(form).forEach((v,k)=>dados[k]=v);
     await apiPost('solicitar_contratacao',dados);
     msg.className='msg-sucesso';
-    msg.innerHTML='✅ Solicitação enviada! Entraremos em contato. 🎉';
+    msg.innerHTML=t('modal.sucesso');
     form.querySelectorAll('input, textarea, button').forEach(el=>el.disabled=true);
   }catch(e){
     msg.className='msg-erro-form';
-    msg.textContent='❌ Erro: '+e.message;
-    btn.disabled=false;btn.textContent='📩 Enviar solicitação';
+    msg.textContent='❌ '+e.message;
+    btn.disabled=false;btn.textContent=t('modal.enviar');
   }
 }
 
-function renderizarArtistas(){
-  const el=document.getElementById('lista-artistas');
-  if(!artistasCache.length){el.innerHTML=vazio('Nenhum artista cadastrado ainda','🎤');return;}
-  el.innerHTML=artistasCache.map(cardArtista).join('');
-  ativarAnimacoes();
+/* ============ CONTAGEM REGRESSIVA ============ */
+function iniciarContagem(evento){
+  if (contagemInterval) clearInterval(contagemInterval);
+  eventoContagemAtual = evento;
+  const el = document.getElementById('contagem-regressiva');
+  if (!el) return;
+  const dt = normalizarData(evento.data);
+  if (!dt) { el.style.display = 'none'; return; }
+  const hora = (evento.hora || '20:00').toString();
+  const [hh, mm] = hora.split(':').map(x => String(x).padStart(2, '0'));
+  const dataAlvo = new Date(dt + 'T' + (hh || '20') + ':' + (mm || '00') + ':00');
+  if (isNaN(dataAlvo.getTime())) { el.style.display = 'none'; return; }
+  const dataFormatada = formatarDataBonita(evento.data);
+  el.innerHTML = `
+    <span class="hero-contagem-badge">${t('contagem.proximoEvento')}</span>
+    <div class="hero-contagem-titulo">${evento.nome || 'Evento'}</div>
+    <div class="hero-contagem-data">📅 ${dataFormatada}${evento.hora ? ' · ⏰ ' + evento.hora : ''}</div>
+    <div class="hero-contagem-numeros" id="contagem-numeros"></div>
+    ${evento.link_roblox ? `<a href="${evento.link_roblox}" target="_blank" class="btn btn-branco hero-contagem-btn">${t('modal.abrirRoblox')}</a>` : ''}
+  `;
+  el.style.display = '';
+  atualizarNumerosContagem();
+  contagemInterval = setInterval(atualizarNumerosContagem, 1000);
+}
+
+function atualizarNumerosContagem(){
+  if (!eventoContagemAtual) return;
+  const el = document.getElementById('contagem-numeros');
+  if (!el) return;
+  const dt = normalizarData(eventoContagemAtual.data);
+  if (!dt) return;
+  const hora = (eventoContagemAtual.hora || '20:00').toString();
+  const [hh, mm] = hora.split(':').map(x => String(x).padStart(2, '0'));
+  const dataAlvo = new Date(dt + 'T' + (hh || '20') + ':' + (mm || '00') + ':00');
+  if (isNaN(dataAlvo.getTime())) return;
+  const agora = new Date();
+  let diff = dataAlvo.getTime() - agora.getTime();
+  if (diff < 0) {
+    const box = document.getElementById('contagem-regressiva');
+    if (box) box.style.display = 'none';
+    if (contagemInterval) { clearInterval(contagemInterval); contagemInterval = null; }
+    return;
+  }
+  const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const horas = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutos = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const segundos = Math.floor((diff % (1000 * 60)) / 1000);
+  const partes = [];
+  if (dias > 0) partes.push({ num: dias, lbl: dias === 1 ? 'dia' : 'dias' });
+  partes.push({ num: horas, lbl: horas === 1 ? 'hora' : 'horas' });
+  partes.push({ num: minutos, lbl: minutos === 1 ? 'min' : 'mins' });
+  partes.push({ num: segundos, lbl: segundos === 1 ? 'seg' : 'segs' });
+  el.innerHTML = partes.map(p => `
+    <div class="hero-contagem-bloco">
+      <span class="hero-contagem-num">${String(p.num).padStart(2, '0')}</span>
+      <span class="hero-contagem-lbl">${p.lbl}</span>
+    </div>
+  `).join('');
+}
+
+function formatarDataBonita(data){
+  const dt = normalizarData(data);
+  if (!dt) return data;
+  const [ano, mes, dia] = dt.split('-');
+  const meses = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+  return `${parseInt(dia)} de ${meses[parseInt(mes) - 1]} de ${ano}`;
+}
+
+function escolherEventoProximo(){
+  if (!eventosCache || !eventosCache.length) return null;
+  const agora = new Date();
+  const futuros = eventosCache
+    .map(e => {
+      const dt = normalizarData(e.data);
+      if (!dt) return null;
+      const hora = (e.hora || '20:00').toString();
+      const [hh, mm] = hora.split(':').map(x => String(x).padStart(2, '0'));
+      const alvo = new Date(dt + 'T' + (hh || '20') + ':' + (mm || '00') + ':00');
+      if (isNaN(alvo.getTime())) return null;
+      return { evento: e, data: alvo };
+    })
+    .filter(x => x && x.data.getTime() > agora.getTime())
+    .sort((a, b) => a.data.getTime() - b.data.getTime());
+  return futuros.length > 0 ? futuros[0].evento : null;
 }
 
 function ativarAnimacoes(){
@@ -756,28 +1439,22 @@ window.addEventListener('scroll',()=>{
   document.getElementById('btnTopo').classList.toggle('visivel',window.scrollY>400);
 });
 
-/* ============ RENDER ANÚNCIOS NA HOME ============ */
 function renderizarAnuncios(lista){
   const secao = document.getElementById('secao-anuncios');
   const grid = document.getElementById('home-anuncios');
-  if(!lista || !lista.length){
-    secao.style.display = 'none';
-    return;
-  }
+  if(!lista || !lista.length){ secao.style.display = 'none'; return; }
   const slot1 = lista.find(a => String(a.slot) === '1' && String(a.ativo).toUpperCase() === 'SIM');
   const slot2 = lista.find(a => String(a.slot) === '2' && String(a.ativo).toUpperCase() === 'SIM');
   const ativos = [slot1, slot2].filter(x => x);
-  if(ativos.length === 0){
-    secao.style.display = 'none';
-    return;
-  }
+  if(ativos.length === 0){ secao.style.display = 'none'; return; }
   secao.style.display = '';
   grid.innerHTML = ativos.map((a, i) => cardAnuncio(a, i)).join('');
 }
 
-/* ============ CARREGAMENTO PARALELO ============ */
 async function carregarTudo(){
-  document.getElementById('ano').textContent=new Date().getFullYear();
+  aplicarTraducoes();
+  const anoEl = document.getElementById('ano');
+  if (anoEl) anoEl.textContent = new Date().getFullYear();
   mudarModo('visitante');
 
   const promessas = {
@@ -788,7 +1465,8 @@ async function carregarTudo(){
     eventos:      apiGet('listar_eventos').catch(e => ({ erro: e.message })),
     nexotv:       apiGet('listar_nexotv').catch(e => ({ erro: e.message })),
     ingressos:    apiGet('listar_ingressos').catch(e => ({ erro: e.message })),
-    funcionarios: apiGet('listar_funcionarios').catch(e => ({ erro: e.message }))
+    funcionarios: apiGet('listar_funcionarios').catch(e => ({ erro: e.message })),
+    sobre:        apiGet('listar_sobre').catch(e => ({ erro: e.message }))
   };
 
   const r = await Promise.all(Object.values(promessas));
@@ -797,72 +1475,77 @@ async function carregarTudo(){
 
   if(dados.redes.erro){
     document.getElementById('footer-redes').innerHTML='<span>Erro</span>';
-    document.getElementById('lista-redes').innerHTML=vazio('Erro: '+dados.redes.erro,'⚠️');
+    document.getElementById('lista-redes').innerHTML=vazio('Erro','⚠️');
   } else {
-    const redes = dados.redes;
-    const html = redes.length ? redes.map(rd=>`<a href="${rd.url}" target="_blank">${iconeRede(rd.nome)} ${rd.nome}</a>`).join('') : '<span>Em breve</span>';
+    redesCache = dados.redes;
+    const html = redesCache.length ? redesCache.map(rd=>`<a href="${rd.url}" target="_blank">${iconeRede(rd.nome)} ${rd.nome}</a>`).join('') : '<span>—</span>';
     document.getElementById('footer-redes').innerHTML = html;
-    document.getElementById('lista-redes').innerHTML = redes.length ? redes.map(cardRede).join('') : vazio('Nenhuma rede cadastrada','🔗');
+    document.getElementById('lista-redes').innerHTML = redesCache.length ? redesCache.map(cardRede).join('') : vazio(t('vazio.redes'),'🔗');
   }
 
   if(dados.destaques.erro){
-    document.getElementById('home-destaques').innerHTML = vazio('Erro: '+dados.destaques.erro,'⚠️');
+    document.getElementById('home-destaques').innerHTML = vazio('Erro','⚠️');
   } else {
-    const d = dados.destaques;
-    document.getElementById('home-destaques').innerHTML = d.length ? d.map(cardDestaque).join('') : vazio('Nenhum destaque cadastrado ainda. Adicione em ✨ Destaques no admin.','✨');
+    destaquesCache = dados.destaques;
+    document.getElementById('home-destaques').innerHTML = destaquesCache.length ? destaquesCache.map(cardDestaque).join('') : vazio(t('vazio.destaques'),'✨');
   }
 
   if(!dados.anuncios.erro) renderizarAnuncios(dados.anuncios);
   else document.getElementById('secao-anuncios').style.display = 'none';
 
   if(dados.artistas.erro){
-    document.getElementById('home-artistas').innerHTML=vazio('Erro: '+dados.artistas.erro,'⚠️');
-    document.getElementById('lista-artistas').innerHTML=vazio('Erro: '+dados.artistas.erro,'⚠️');
+    document.getElementById('home-artistas').innerHTML=vazio('Erro','⚠️');
+    document.getElementById('lista-artistas').innerHTML=vazio('Erro','⚠️');
   } else {
-    const artistas = dados.artistas;
-    artistasCache = artistas;
-    document.getElementById('home-artistas').innerHTML = artistas.length ? artistas.slice(0,3).map(cardArtista).join('') : vazio('Nenhum artista cadastrado ainda','🎤');
+    artistasCache = dados.artistas;
+    document.getElementById('home-artistas').innerHTML = artistasCache.length ? artistasCache.slice(0,3).map(cardArtista).join('') : vazio(t('vazio.artistas'),'🎤');
     renderizarArtistas();
   }
 
   if(dados.eventos.erro){
-    document.getElementById('home-eventos').innerHTML=vazio('Erro: '+dados.eventos.erro,'⚠️');
-    document.getElementById('lista-eventos').innerHTML=vazio('Erro: '+dados.eventos.erro,'⚠️');
+    document.getElementById('home-eventos').innerHTML=vazio('Erro','⚠️');
+    document.getElementById('lista-eventos').innerHTML=vazio('Erro','⚠️');
   } else {
-    const eventos = dados.eventos;
-    eventosCache = eventos;
-    document.getElementById('home-eventos').innerHTML = eventos.length ? eventos.slice(0,3).map(cardEvento).join('') : vazio('Nenhum evento cadastrado ainda','🎪');
-    document.getElementById('lista-eventos').innerHTML = eventos.length ? eventos.map(cardEvento).join('') : vazio('Nenhum evento cadastrado ainda','🎪');
+    eventosCache = dados.eventos;
+    document.getElementById('home-eventos').innerHTML = eventosCache.length ? eventosCache.slice(0,3).map(cardEvento).join('') : vazio(t('vazio.eventos'),'🎪');
+    renderizarEventos();
+    const proximoEvento = escolherEventoProximo();
+    if (proximoEvento) iniciarContagem(proximoEvento);
+    else { const el = document.getElementById('contagem-regressiva'); if (el) el.style.display = 'none'; }
   }
 
   if(dados.nexotv.erro){
-    document.getElementById('home-nexotv').innerHTML=vazio('Erro: '+dados.nexotv.erro,'⚠️');
-    document.getElementById('lista-nexotv').innerHTML=vazio('Erro: '+dados.nexotv.erro,'⚠️');
+    document.getElementById('home-nexotv').innerHTML=vazio('Erro','⚠️');
+    document.getElementById('lista-nexotv').innerHTML=vazio('Erro','⚠️');
   } else {
-    const tv = dados.nexotv;
-    nexotvCache = tv;
-    document.getElementById('home-nexotv').innerHTML = tv.length ? tv.slice(0,3).map(cardNexoTV).join('') : vazio('Sem publicações ainda','📺');
-    document.getElementById('lista-nexotv').innerHTML = tv.length ? tv.map(cardNexoTV).join('') : vazio('Sem publicações ainda','📺');
+    nexotvCache = dados.nexotv;
+    document.getElementById('home-nexotv').innerHTML = nexotvCache.length ? nexotvCache.slice(0,3).map(cardNexoTV).join('') : vazio(t('vazio.nexotv'),'📺');
+    renderizarNexotv();
   }
 
   if(dados.ingressos.erro){
-    document.getElementById('lista-ingressos').innerHTML=vazio('Erro: '+dados.ingressos.erro,'⚠️');
+    document.getElementById('lista-ingressos').innerHTML=vazio('Erro','⚠️');
   } else {
-    const ing = dados.ingressos;
-    ingressosCache = ing;
-    document.getElementById('lista-ingressos').innerHTML = ing.length ? ing.map(cardIngresso).join('') : vazio('Nenhum ingresso cadastrado','🎟️');
+    ingressosCache = dados.ingressos;
+    renderizarIngressos();
   }
 
   if(dados.funcionarios.erro){
-    document.getElementById('lista-funcionarios').innerHTML=vazio('Erro: '+dados.funcionarios.erro,'⚠️');
+    document.getElementById('lista-funcionarios').innerHTML=vazio('Erro','⚠️');
   } else {
-    const func = dados.funcionarios;
-    funcionariosCache = func;
-    document.getElementById('lista-funcionarios').innerHTML = func.length ? func.map(cardFuncionario).join('') : vazio('Nenhum funcionário cadastrado','👥');
+    funcionariosCache = dados.funcionarios;
+    renderizarFuncionarios();
+  }
+
+  if(!dados.sobre.erro){
+    sobreCache = dados.sobre || {};
   }
 
   ativarAnimacoes();
+  montarIndiceBusca();
 }
+
+let redesCache = [];
 
 carregarTudo();
 </script>
